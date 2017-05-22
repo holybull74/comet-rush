@@ -1,0 +1,23 @@
+{
+  "name": "comet-rush",
+  "homepage": "https://github.com/holybull74/comet-rush",
+  "authors": [
+    "Kenneth Scott <kenneth.scott@georgebrown.ca>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "EaselJS": "^0.8.2",
+    "TweenJS": "^0.6.2",
+    "SoundJS": "^0.6.2",
+    "PreloadJS": "^0.6.2"
+  }
+}
