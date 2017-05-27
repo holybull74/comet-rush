@@ -115,22 +115,7 @@
 		}
 	}
 
-    //Main
-	initGame();
-	
-	var idInt =	setInterval(update, 33.34);
-	
-	function initGame() {
-		generateMap();
-	}
     
-	function update() {
-		scrollMap();
-		handleInput();
-		handleInputLav();
-		collisionCheck();
-		render();
-	}
 
 	
 
