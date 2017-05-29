@@ -65,8 +65,56 @@
 	}
 
 	function jump() {
-		player.y -= 100;
-		n++;
+		if ((player.y == 600) || (player.y == 500)) { player.y -= 100; }
+	}
+
+	function back() {
+		if ((player.y == 500) || (player.y == 400)) {
+			player.y += 100;
+		}
+		for (var c = 0; c < map[1].length; c++) {
+			if (map[1][c].aRock === true) {
+
+				if ((player.x < map[1][c].x + SIZE) && (player.x + player.width > map[1][c].x)) {
+					if ((player.y < map[1][c].y + SIZE) && (player.y + player.height > map[1][c].y)) {
+						player.y = 500;
+					}
+				}
+
+			}
+			if (map[0][c].aRock === true) {
+				if ((player.x < map[0][c].x + SIZE) && (player.x + player.width > map[0][c].x)) {
+					if ((player.y < map[0][c].y + SIZE) && (player.y + player.height > map[0][c].y))
+						player.y = 400;
+					handleInput()
+					{
+						if (leftPressed == true) {
+							player.img = images[2];
+							player.dir = 1;
+							player.idle = false;
+							if (player.x > 0) {
+								player.x -= 5;
+							}
+						}
+						else if (rightPressed == true) {
+							player.img = images[3];
+							player.dir = -1;
+							player.idle = false;
+							if ((player.x < 300) || (end == true && player.x < 1300)) {
+								player.x += 5;
+							}
+						}
+						else {
+							player.idle = true;
+							if (player.dir == 1)
+								player.img = images[0];
+							else
+								player.img = images[1];
+						}
+					}
+				}
+			}
+		}
 	}
 
 	function onKeyUp(event) {
@@ -82,13 +130,7 @@
 				jumpPressed = false;
 				back();
 				break;
-
 		}
-	}
-
-	function back() {
-		player.y += n * 100;
-		n = 0;
 	}
 
 	function handleInput() {
@@ -114,12 +156,6 @@
 				player.img = images[1];
 		}
 	}
-
-    
-
-	
-
-	
 
 	function animate() {
 		currentFrame++;
