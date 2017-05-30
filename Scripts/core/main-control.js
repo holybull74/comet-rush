@@ -1,14 +1,14 @@
 // IIFE - Immediately Invoked Function Expression
 
 
-   // (function () {
+    (function () {
         console.log("Executing script");
         //Canvas
         var stage = document.getElementById("stage");
         var canvas = document.getElementById("myCanvas");
         canvas.width = 1400;
         canvas.height = 900;
-        var surface = canvas.getContext("2d");
+        surface = canvas.getContext("2d");
 
         //Main
         initGame();
@@ -22,8 +22,9 @@
 
         function update() {
             scrollMap();
-            collisionCheck();
+            /*collisionCheck();*/
             handleInput();
+            fireWalker.move();
             render();
         }
-   // })();
+    })();

@@ -37,4 +37,8 @@
 			surface.drawImage(player.img,
 				frameIndex*100, 0, 100, 100,		// Source rectangle.
 				player.x, player.y, 100, 100);	// Dest rectangle.
+		console.log("FireWalker Image: " + fireWalker.img);
+		surface.drawImage(	fireWalker.img,
+							fireWalker.sourceX, fireWalker.sourceY, fireWalker.size, fireWalker.size,
+							fireWalker.x, fireWalker.y, fireWalker.size, fireWalker.size);
 	}
