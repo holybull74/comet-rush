@@ -2,6 +2,9 @@
 	var leftPressed = false;
 	var rightPressed = false;
 	var jumpPressed = false;
+	var onGround = true;
+    var jumpVal = 250;
+
     
 	var isPressed=false;
 	var end=false;
@@ -34,6 +37,7 @@
 			for (var row = 0; row < map.length; row++) {
 				for (var col = 0; col < map[0].length; col++) {
 					map[row][col].x -= 5;
+					//console.log ("map x " + map[1][5].x);
 					if (map[map.length - 1][map[0].length - 1].x == 1300) {
 						end = true;
 						break;
@@ -47,73 +51,101 @@
 		switch (event.keyCode) {
 			case 65: // A
 			case 37: //LEFT
-				if (leftPressed == false)
-					leftPressed = true;
+				if (leftPressed == false) {
+                    leftPressed = true;
+                }
 				break;
 			case 68: // D
 			case 39: //RIGHT
-				isPressed = true;
-				if (rightPressed == false)
-					rightPressed = true;
+				//isPressed = true;
+				if (rightPressed == false ) {
+                    rightPressed = true;
+                    isPressed = true;
+                }
 				break;
 			case 32:
-				if (jumpPressed == false)
-					jumpPressed = true;
-				jump();
+				if (jumpPressed == false) {
+                    jumpPressed = true;
+                    jump();
+                }
 				break;
 		}
 	}
 
 	function jump() {
-		if ((player.y == 600) || (player.y == 500)) { player.y -= 100; }
+		//if ((player.y == 600) || (player.y == 500))// change
+		{
+			player.y -= jumpVal;
+			onGround = false;
+		}
 	}
 
-	function back() {
-		if ((player.y == 500) || (player.y == 400)) {
-			player.y += 100;
-		}
-		for (var c = 0; c < map[1].length; c++) {
-			if (map[1][c].aRock === true) {
+	function collision()
+	{
 
-				if ((player.x < map[1][c].x + SIZE) && (player.x + player.width > map[1][c].x)) {
-					if ((player.y < map[1][c].y + SIZE) && (player.y + player.height > map[1][c].y)) {
-						player.y = 500;
+		for (var r =0; r < map.length ; r++)
+		{
+			for (var c =0 ; c < map[0].length ; c ++) {
+
+				if (map[r][c].aRock === true && (player.y + SIZE > map[r][c].y)) {
+					if ((player.x + SIZE - 20) >= (map[r][c].x) && ((player.x + SIZE - 20) <= map[r][c].x + SIZE))
+					{// Check if we are within Y's range top and bottom
+
+						if (player.y + SIZE > map[r][c].y && (player.y + 20 <= map[r][c].y + SIZE - 20)  )
+						{
+							isPressed = false;
+							rightPressed = false;
+						}
 					}
-				}
 
-			}
-			if (map[0][c].aRock === true) {
-				if ((player.x < map[0][c].x + SIZE) && (player.x + player.width > map[0][c].x)) {
-					if ((player.y < map[0][c].y + SIZE) && (player.y + player.height > map[0][c].y))
-						player.y = 400;
-					handleInput()
+					if ((player.x + 10 >= (map[r][c].x)) && (player.x + 10 <= (map[r][c].x + SIZE)))
 					{
-						if (leftPressed == true) {
-							player.img = images[2];
-							player.dir = 1;
-							player.idle = false;
-							if (player.x > 0) {
-								player.x -= 5;
-							}
-						}
-						else if (rightPressed == true) {
-							player.img = images[3];
-							player.dir = -1;
-							player.idle = false;
-							if ((player.x < 300) || (end == true && player.x < 1300)) {
-								player.x += 5;
-							}
-						}
-						else {
-							player.idle = true;
-							if (player.dir == 1)
-								player.img = images[0];
-							else
-								player.img = images[1];
+						if (player.y + SIZE > map[r][c].y &&  (player.y + 20 <= map[r][c].y + SIZE - 20) )
+						{
+							leftPressed = false;
 						}
 					}
 				}
+
+				if (map[r][c].aRock === true)
+				{
+					if (((player.x + SIZE - 20) >= (map[r][c].x ) || ((player.x + 10) >= (map[r][c].x ) && (player.x + 10) <= (map[r][c].x + SIZE))))
+					{// Check if we are within Y's range top and bottom
+
+						if (player.y + SIZE >= map[r][c].y && player.y + SIZE <= map[r][c].y)
+						{
+							console.log("on ground true");
+							onGround = true;
+						}
+					}
+				}
+				if (map[r][c].empty === true)
+				{
+
+					if (((player.x + SIZE - 20) >= (map[r][c].x + SIZE/2 )))
+					{// Check if we are within Y's range top and bottom
+
+						if (player.y + SIZE >= map[r][c].y)
+						{
+							console.log("on ground false");
+							onGround = false;
+						}
+					}
+				}
+
+
+
+
 			}
+		}
+
+	}
+
+	function back()
+	{
+		if (!onGround)
+		{
+			player.y += 10;
 		}
 	}
 
@@ -128,7 +160,6 @@
 				rightPressed = false; break;
 			case 32:
 				jumpPressed = false;
-				back();
 				break;
 		}
 	}
@@ -139,14 +170,16 @@
 			player.dir = 1;
 			player.idle = false;
 			if (player.x > 0)
-			{ player.x += -5; }
+			{
+				player.x -= 5;
+			}
 		}
 		else if (rightPressed == true) {
 			player.img = images[3];
 			player.dir = -1;
 			player.idle = false;
 			if (player.x < 300 || (end == true && player.x < 1300))
-			{ player.x += +5; }
+			{ player.x += 5; }
 		}
 		else {
 			player.idle = true;

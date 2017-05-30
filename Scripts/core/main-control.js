@@ -21,10 +21,13 @@
         }
 
         function update() {
+
+            collision();
             scrollMap();
-            /*collisionCheck();*/
             handleInput();
             fireWalker.move();
+            back();
+
             render();
         }
     })();

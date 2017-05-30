@@ -28,17 +28,45 @@
 						frameLavaIndex*100, 0, 100, 100,
 						map[3][col].x, map[3][col].y, 100, 100);
 				}
+
+				if ( map[row][col].aRock === true)
+				{
+					surface.beginPath();
+					surface.lineWidth = "3";
+					surface.strokeStyle = "red";
+					surface.rect( map[row][col].x, map[row][col].y , SIZE , SIZE);
+					surface.stroke();
+
+				}
+
 			}
 		}
 
-		if (player.idle == true)
+		if (player.idle == true){
+
 			surface.drawImage(player.img, player.x, player.y);
+
+		}
+
+
+
+
 		else
 			surface.drawImage(player.img,
 				frameIndex*100, 0, 100, 100,		// Source rectangle.
 				player.x, player.y, 100, 100);	// Dest rectangle.
-		console.log("FireWalker Image: " + fireWalker.img);
+		//console.log("FireWalker Image: " + fireWalker.img);
 		surface.drawImage(	fireWalker.img,
 							fireWalker.sourceX, fireWalker.sourceY, fireWalker.size, fireWalker.size,
 							fireWalker.x, fireWalker.y, fireWalker.size, fireWalker.size);
+
+
+		surface.beginPath();
+		surface.lineWidth = "3";
+		surface.strokeStyle = "green";
+		surface.rect( player.x + 10 ,player.y + 20 , SIZE - 20 , SIZE);
+		surface.stroke();
+
+
+
 	}

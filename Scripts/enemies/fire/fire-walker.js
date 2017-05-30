@@ -1,5 +1,5 @@
 //Fire-walker
-console.log("Executing Fire Walker Script");
+//console.log("Executing Fire Walker Script");
 var fireWalker = {
     img: null,
     size: 100,
@@ -12,7 +12,7 @@ var fireWalker = {
     x: 0,
     y: 600,
     updateAnimation: function() {
-        console.log("current frame: " + this.currentFrame + "frame index: " + this.frameIndex + "sourceX: " + this.sourceX);
+       // console.log("current frame: " + this.currentFrame + "frame index: " + this.frameIndex + "sourceX: " + this.sourceX);
         if (this.dir == 0){
             this.img = fireWalkerImg[0];
             this.currentFrame++;
@@ -37,7 +37,7 @@ var fireWalker = {
         }
     },
     move: function() {
-        console.log("Firewalker x : " + this.x + "Direction: " + this.dir)
+      //  console.log("Firewalker x : " + this.x + "Direction: " + this.dir)
         if (this.dir == 0) {
             this.x += 5;
             if (this.x >= 400)
