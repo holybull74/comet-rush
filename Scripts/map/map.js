@@ -1,76 +1,76 @@
 //Map
- 	const SIZE=100;
-	const ROWS = 4; 
-	const COLS = 72;
+const SIZE=100;
+const ROWS = 4;
+const COLS = 72;
 
-    //Canvas
-    var stage = document.getElementById("stage");
-    canvas = document.getElementById("myCanvas");
-    canvas.width = 1400;
-    canvas.height = 900;
-    surface = canvas.getContext("2d");
+//Canvas
+var stage = document.getElementById("stage");
+canvas = document.getElementById("myCanvas");
+canvas.width = 1400;
+canvas.height = 900;
+surface = canvas.getContext("2d");
 
-	var frameLavaIndex = 0; 	// Index of the sprite to display via drawImage.
-	var currentLavaFrame = 0; 	// Counter for the frames.
-	var maxLavaFrames = 1; 		// The number of frames a single sprite is drawn.
+var frameLavaIndex = 0; 	// Index of the sprite to display via drawImage.
+var currentLavaFrame = 0; 	// Counter for the frames.
+var maxLavaFrames = 1; 		// The number of frames a single sprite is drawn.
 
-	var frameBackgroundIndex = 0; 	// Index of the sprite to display via drawImage.
-	var currentBackgroundFrame = 0; 	// Counter for the frames.
-	var maxBackgroundFrames = 5; 		// The number of frames a single sprite is drawn.
+var frameBackgroundIndex = 0; 	// Index of the sprite to display via drawImage.
+var currentBackgroundFrame = 0; 	// Counter for the frames.
+var maxBackgroundFrames = 5; 		// The number of frames a single sprite is drawn.
 
-	var topLeft = new Image();
-    topLeft.src = "./Assets/TopLeft.png";
+var topLeft = new Image();
+topLeft.src = "./Assets/TopLeft.png";
 
-    var botLeft = new Image();
-    botLeft.src = "./Assets/BottLeft.png";
+var botLeft = new Image();
+botLeft.src = "./Assets/BottLeft.png";
 
-    var topMid = new Image();
-    topMid.src = "./Assets/TopMid.png";
+var topMid = new Image();
+topMid.src = "./Assets/TopMid.png";
 
-    var center = new Image();
-    center.src = "./Assets/Center.png";
+var center = new Image();
+center.src = "./Assets/Center.png";
 
-    var topRight = new Image();
-    topRight.src = "./Assets/TopRigth.png";
+var topRight = new Image();
+topRight.src = "./Assets/TopRigth.png";
 
-    var botRight = new Image();
-    botRight.src = "./Assets/BottRight.png";
+var botRight = new Image();
+botRight.src = "./Assets/BottRight.png";
 
-    var lavaTop = new Image();
-    lavaTop.src = "./Assets/lavaTop.png";
+var lavaTop = new Image();
+lavaTop.src = "./Assets/lavaTop.png";
 
-    var lavaBot = new Image();
-    lavaBot.src = "./Assets/lavaBot.png";
+var lavaBot = new Image();
+lavaBot.src = "./Assets/lavaBot.png";
 
-	var leftCorner = new Image();
-    leftCorner.src = "./Assets/leftCorner.png";
+var leftCorner = new Image();
+leftCorner.src = "./Assets/leftCorner.png";
 
-	var rightCorner = new Image();
-    rightCorner.src = "./Assets/rightCorner.png";
+var rightCorner = new Image();
+rightCorner.src = "./Assets/rightCorner.png";
 
-	var middle = new Image();
-    middle.src = "./Assets/middle.png";
+var middle = new Image();
+middle.src = "./Assets/middle.png";
 
-	var rightPlatform = new Image();
-    rightPlatform.src = "./Assets/rightPlatform.png";
+var rightPlatform = new Image();
+rightPlatform.src = "./Assets/rightPlatform.png";
 
-	var leftPlatform = new Image();
-    leftPlatform.src = "./Assets/leftPlatform.png";
+var leftPlatform = new Image();
+leftPlatform.src = "./Assets/leftPlatform.png";
 
-	var centerCorners= new Image();
-    centerCorners.src = "./Assets/centerCorners.png";
+var centerCorners= new Image();
+centerCorners.src = "./Assets/centerCorners.png";
 
-	var black = new Image();
-    black.src = "./Assets/black.png";
+var black = new Image();
+black.src = "./Assets/black.png";
 
-	var background = new Image();
-	background.src = "./Assets/backgroundSprite.png";
+var background = new Image();
+background.src = "./Assets/backgroundSprite.png";
 
-    var rightSideWithCorner = new Image();
-    rightSideWithCorner.src = "./Assets/rightSideWithCorner.png";
+var rightSideWithCorner = new Image();
+rightSideWithCorner.src = "./Assets/rightSideWithCorner.png";
 
-    var singlePlatform = new Image();
-    singlePlatform.src = "./Assets/singlePlatform.png";
+var singlePlatform = new Image();
+singlePlatform.src = "./Assets/singlePlatform.png";
 
 var map =[
     [0,0,0,0,0,0,11,0,0,16,0,0,0,0,0,0,0,0,0,0,0,0,0,14,13,0,1,5,0,0,0,16,0,0,0,0,0,0,0,0,0,0,0,11,0,0,16,0,0,0,0,0,0,0,0,0,0,0,16,0,0,16,0,0,0,0,0,0,0,0,0,0],
@@ -79,7 +79,7 @@ var map =[
     [2,4,4,4,4,4,6,8,8,8,8,8,2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,6,8,8,8,8,8,8,2,4,4,4,4,4,4,4,4,6,8,8,8,8,2,4,4,4,4,4,4,4,6,8,8,8,8,8,8,8,8,8,8,8,2,4,4,6]
 ];
 
-	var idInt2 =setInterval(update2, 350);
+var idInt2 =setInterval(update2, 350);
 
 function generateMap()
 {
@@ -170,29 +170,32 @@ function generateMap()
     }
 }
 
-	function update2() {
-		animateLava();
-        animateBackground();
-	}
+function update2()
+{
+    animateLava();
+    animateBackground();
+}
 
-	function animateLava() {
-		currentLavaFrame++;
-		if (currentLavaFrame == maxLavaFrames) {
-			frameLavaIndex++;
-			currentLavaFrame = 0;
-			if (frameLavaIndex == 2)
-				frameLavaIndex = 0;
-		}
-	}
+function animateLava()
+{
+    currentLavaFrame++;
+    if (currentLavaFrame == maxLavaFrames)
+    {
+        frameLavaIndex++;
+        currentLavaFrame = 0;
+        if (frameLavaIndex == 2)
+            frameLavaIndex = 0;
+    }
+}
 
-	function animateBackground()
-	{
-		currentBackgroundFrame++;
-		if (currentBackgroundFrame == maxBackgroundFrames)
-		{
-			frameBackgroundIndex++;
-			currentBackgroundFrame = 0;
-			if (frameBackgroundIndex == 6)
-				frameBackgroundIndex = 0;
-		}
-	}
+function animateBackground()
+{
+    currentBackgroundFrame++;
+    if (currentBackgroundFrame == maxBackgroundFrames)
+    {
+        frameBackgroundIndex++;
+        currentBackgroundFrame = 0;
+        if (frameBackgroundIndex == 6)
+            frameBackgroundIndex = 0;
+    }
+}

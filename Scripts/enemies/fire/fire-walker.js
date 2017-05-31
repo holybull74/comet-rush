@@ -27,7 +27,8 @@ var fireWalker = {
         else {
             this.img = fireWalkerImg[1];
             this.currentFrame++;
-            if (this.currentFrame == this.maxFrames){
+            if (this.currentFrame == this.maxFrames)
+            {
                 this.frameIndex++;
                 this.currentFrame = 0;
                 if (this.frameIndex == 4)
@@ -36,9 +37,11 @@ var fireWalker = {
             }
         }
     },
-    move: function() {
+    move: function()
+    {
       //  console.log("Firewalker x : " + this.x + "Direction: " + this.dir)
-        if (this.dir == 0) {
+        if (this.dir == 0)
+        {
             this.x += 5;
             if (this.x >= 400)
                 this.dir = 1;
@@ -61,7 +64,8 @@ fireWalkerImg[1].src = "./Assets/fireEnemySpriteSheet-l.png";
     updateAnimation();
 //}
 
-function updateAnimation() {
+function updateAnimation()
+{
     setTimeout(updateAnimation, 100);
     fireWalker.updateAnimation();
 }
