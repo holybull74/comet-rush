@@ -8,7 +8,7 @@ var stage = document.getElementById("stage");
 canvas = document.getElementById("myCanvas");
 canvas.width = 1400;
 canvas.height = 900;
-surface = canvas.getContext("2d");
+var surface = canvas.getContext("2d");
 
 var frameLavaIndex = 0; 	// Index of the sprite to display via drawImage.
 var currentLavaFrame = 0; 	// Counter for the frames.
