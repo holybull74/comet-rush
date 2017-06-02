@@ -3,16 +3,18 @@ var leftPressed = false;
 var rightPressed = false;
 var jumpPressed = false;
 var onGround = true;
-var jumpVal = 250;
+var jumpVal = 0;
+var jumpPeak = false;
     
 var isPressed=false;
 var end=false;
 	
-var images = [new Image(), new Image(), new Image(), new Image()];
-images[0].src = "./Assets/idle-l.png";
-images[1].src = "./Assets/idle-r.png";
-images[2].src = "./Assets/run-l.png";
-images[3].src = "./Assets/run-r.png";
+var images = [new Image(), new Image(), new Image(), new Image(), new Image()];
+images[0].src = "./Assets/MainCharacterIdle.png";
+images[1].src = "./Assets/run-l.png";
+images[2].src = "./Assets/run-r.png";
+images[3].src = "./Assets/mainCharacterJump.png";
+images[4].src = "./Assets/mainCharacterJumpLeft.png";
 
 var player = {img:null, x:300, y:600, dir:1, idle:true, width:100, height:100};
 	
@@ -29,7 +31,10 @@ var n=0;
 
 function update3()
 {
-	animate();
+	if(onGround && !jumpPressed)
+	{
+		animate();
+	}
 }
 
 function scrollMap()
@@ -40,7 +45,7 @@ function scrollMap()
 		{
 			for (var col = 0; col < map[0].length; col++)
 			{
-				map[row][col].x -= 5;
+				map[row][col].x -= 8;
 				//console.log ("map x " + map[1][5].x);
 				if (map[map.length - 1][map[0].length - 1].x == 1300)
 				{
@@ -73,8 +78,20 @@ function onKeyDown(event)
 			}
 			break;
 		case 32:
-			if (jumpPressed == false)
+			if (jumpPressed == false && onGround)                      
 			{
+				player.idle = false;
+
+				if(player.dir === 1)
+				{
+					player.img = images[4];
+				}
+				else if(player.dir === -1)
+				{
+					player.img = images[3];
+				}
+				
+				onGround = false;
 				jumpPressed = true;
 				jump();
 			}
@@ -84,11 +101,17 @@ function onKeyDown(event)
 
 function jump()
 {
-	//if ((player.y == 600) || (player.y == 500))// change
-	{
-		player.y -= jumpVal;
-		onGround = false;
-	}
+	if(jumpVal === 200)
+		{	
+
+			jumpPeak = true;		
+			return;
+		}
+	    animate();
+		player.y -= 12;
+		jumpVal += 10;
+		
+		setTimeout(jump, 15);
 }
 
 function collision()
@@ -124,7 +147,9 @@ function collision()
 					if (player.y + SIZE >= map[r][c].y && player.y + SIZE <= map[r][c].y)
 					{
 						console.log("on ground true");
+						jumpPeak = false;				
 						onGround = true;
+						jumpVal = 0;
 					}
 				}
 			}
@@ -136,6 +161,7 @@ function collision()
 					if (player.y + SIZE >= map[r][c].y)
 					{
 						console.log("on ground false");
+						jumpPeak = true;
 						onGround = false;
 					}
 				}
@@ -146,8 +172,9 @@ function collision()
 
 function back()
 {
-	if (!onGround)
+	if (!onGround && jumpPeak )
 	{
+		frameIndex = 2;
 		player.y += 10;
 	}
 }
@@ -171,42 +198,57 @@ function onKeyUp(event)
 
 function handleInput()
 {
-	if (leftPressed == true)
+	if (leftPressed == true && onGround && !rightPressed)
 	{
-		player.img = images[2];
-		player.dir = 1;
-		player.idle = false;
-		if (player.x > 0)
-		{
-			player.x -= 5;
-		}
+			player.idle = false;
+			player.img = images[1];
+			player.dir = 1;		
+			if (player.x > 0)
+			{
+				player.x -= 8;
+			}
 	}
-	else if (rightPressed == true)
+   if (rightPressed == true && onGround && !leftPressed)
 	{
-		player.img = images[3];
-		player.dir = -1;
-		player.idle = false;
-		if (player.x < 300 || (end == true && player.x < 1300))
-			{ player.x += 5; }
+			player.idle = false;
+			player.img = images[2];
+			player.dir = -1;
+			
+		   	if (player.x < 300 || (end == true && player.x < 1300))
+				{ player.x += 8; }
 	}
-	else
+  if (onGround && !rightPressed && !leftPressed || rightPressed && leftPressed && onGround )
 		{
 			player.idle = true;
-			if (player.dir == 1)
-				player.img = images[0];
-			else
-				player.img = images[1];
+			player.img = images[0];
 		}
+
+ if(rightPressed && !onGround)
+ {
+	if (player.x < 300 || (end == true && player.x < 1300))
+	{ player.x += 8; }
+	 
+ }
+
+ if(leftPressed && !onGround)
+ {
+	 if (player.x > 0)
+	 {
+		player.x -= 8;
+	 }
+	 
+ }
+
 }
 
 function animate()
 {
-	currentFrame++;
-	if (currentFrame == maxFrames)
+	if (currentFrame === maxFrames)
 	{
 		frameIndex++;
 		currentFrame = 0;
 		if (frameIndex == 4)
 			frameIndex = 0;
 	}
+	currentFrame++;
 }

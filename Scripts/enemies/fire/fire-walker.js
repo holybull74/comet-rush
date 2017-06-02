@@ -43,28 +43,28 @@ var fireWalker = {
         console.log("Player x: " + player.x + " Firewalker x: " + this.x + " Total Scroll: " + this.scrollCount + " Spawnpoint: " + this.spawnPoint);
         if (rightPressed == true) {
             if (player.x >= 300 || (end == true && player.x > 1300)) {
-                this.scrollCount += 5;
+                this.scrollCount += 8;
                 if (this.dir == 0) {
                     this.x += 0;
-                    this.spawnPoint -= 5;
+                    this.spawnPoint -= 8;
                     if (this.x >= this.spawnPoint + 300)
                         this.dir = 1;
                 }
                 else {
                     this.x -= 10;
-                    this.spawnPoint -= 5;
+                    this.spawnPoint -= 9;
                     if (this.x < this.spawnPoint)
                         this.dir = 0
                 }
             }
             else {
                 if (this.dir == 0) {
-                    this.x += 5;
-                    if (this.x >= this.spawnPoint + 300)
+                    this.x += 8;
+                    if (this.x >= this.spawnPoint + 295)
                         this.dir = 1;
                 }
                 else {
-                    this.x -= 5;
+                    this.x -= 8;
                     if (this.x < this.spawnPoint)
                         this.dir = 0
                 }
@@ -72,12 +72,12 @@ var fireWalker = {
         }
         else if (rightPressed == false){
             if (this.dir == 0) {
-                this.x += 5;
+                this.x += 8;
                 if (this.x >= this.spawnPoint + 300)
                     this.dir = 1;
             }
             else {
-                this.x -= 5;
+                this.x -= 8;
                 if (this.x < this.spawnPoint)
                     this.dir = 0
             }
