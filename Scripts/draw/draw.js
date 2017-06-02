@@ -24,7 +24,7 @@ function render()
 					map[3][col].x, map[3][col].y, 100, 100);
 			}
 
-			if (map[row][col].aRock === true)
+			/*if (map[row][col].aRock === true)
 			{
 				surface.beginPath();
 				surface.lineWidth = "3";
@@ -32,7 +32,7 @@ function render()
 				surface.rect( map[row][col].x, map[row][col].y , SIZE , SIZE);
 				surface.stroke();
 
-			}
+			}*/
 
 		}
 	}
@@ -48,11 +48,11 @@ function render()
 
 
 
-		surface.beginPath();
+		/*surface.beginPath();
 		surface.lineWidth = "3";
 		surface.strokeStyle = "green";
 		surface.rect( player.x + 10 ,player.y + 20 , SIZE - 20 , SIZE);
-		surface.stroke();
+		surface.stroke();*/
 
 
 
