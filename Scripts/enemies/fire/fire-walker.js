@@ -40,46 +40,104 @@ var fireWalker = {
         }
     },
     move: function () {
-        console.log("Player x: " + player.x + " Firewalker x: " + this.x + " Total Scroll: " + this.scrollCount + " Spawnpoint: " + this.spawnPoint);
+        console.log("Player x: " + player.x + " Firewalker x: " + this.x + " Total Scroll: " + this.scrollCount + " Direction: " + this.dir);
         if (rightPressed == true) {
             if (player.x >= 300 || (end == true && player.x > 1300)) {
                 this.scrollCount += 8;
                 if (this.dir == 0) {
                     this.x += 0;
-                    this.spawnPoint -= 8;
-                    if (this.x >= this.spawnPoint + 300)
-                        this.dir = 1;
+                    //this.spawnPoint -= 8;
+                    for (var r =0; r < map.length ; r++) {
+		                for (var c =0 ; c < map[0].length ; c ++) {
+			                if (map[r][c].aRock === true && ((this.x + this.size > map[r][c].x) && (this.x + this.size <= map[r][c].x + 20))) {
+                                if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
+                                    console.log("Firewalker hit right wall");
+                                    //if (this.x >= this.spawnPoint + 300)
+                                    this.dir = 1;
+                                }        
+                            }
+                        }
+                    }
                 }
                 else {
-                    this.x -= 10;
-                    this.spawnPoint -= 9;
-                    if (this.x < this.spawnPoint)
-                        this.dir = 0
+                    this.x -= 16;
+                    //this.spawnPoint -= 8;
+                    for (var r =0; r < map.length ; r++) {
+		                for (var c =0 ; c < map[0].length ; c ++) {
+			                if (map[r][c].aRock === true && ((this.x < map[r][c].x + SIZE) && (this.x >= map[r][c].x + SIZE - 20))) {
+                                if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
+                                    console.log("Firewalker hit left wall");
+                                    //if (this.x >= this.spawnPoint + 300)
+                                    this.dir = 0;
+                                }     
+                            }
+                        }
+                    }
                 }
             }
             else {
                 if (this.dir == 0) {
                     this.x += 8;
-                    if (this.x >= this.spawnPoint + 295)
-                        this.dir = 1;
+                    //if (this.x >= this.spawnPoint + 295)
+                    for (var r =0; r < map.length ; r++) {
+		                for (var c =0 ; c < map[0].length ; c ++) {
+			                if (map[r][c].aRock === true && ((this.x + this.size > map[r][c].x) && (this.x + this.size <= map[r][c].x + 20))) {
+                                if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
+                                    console.log("Firewalker hit right wall");
+                                    //if (this.x >= this.spawnPoint + 300)
+                                    this.dir = 1;
+                                }                      
+                            }
+                        }
+                    }
                 }
                 else {
                     this.x -= 8;
-                    if (this.x < this.spawnPoint)
-                        this.dir = 0
+                    //if (this.x < this.spawnPoint)
+                    for (var r =0; r < map.length ; r++) {
+		                for (var c =0 ; c < map[0].length ; c ++) {
+			                if (map[r][c].aRock === true && ((this.x < map[r][c].x + SIZE) && (this.x >= map[r][c].x + SIZE - 20))) {
+                                if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
+                                    console.log("Firewalker hit left wall");
+                                    //if (this.x >= this.spawnPoint + 300)
+                                    this.dir = 0;
+                                }           
+                            }
+                        }
+                    }
                 }
             }        
         }
         else if (rightPressed == false){
             if (this.dir == 0) {
                 this.x += 8;
-                if (this.x >= this.spawnPoint + 300)
-                    this.dir = 1;
+                //if (this.x >= this.spawnPoint + 300)
+                for (var r = 0; r < map.length; r++) {
+                    for (var c = 0; c < map[0].length; c++) {
+                        if (map[r][c].aRock === true && ((this.x + this.size > map[r][c].x) && (this.x + this.size <= map[r][c].x + 20))) {
+                            if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
+                                console.log("Firewalker hit right wall");
+                                //if (this.x >= this.spawnPoint + 300)
+                                this.dir = 1;
+                            }              
+                        }
+                    }
+                }
             }
             else {
                 this.x -= 8;
-                if (this.x < this.spawnPoint)
-                    this.dir = 0
+                //if (this.x < this.spawnPoint)
+                for (var r = 0; r < map.length; r++) {
+                    for (var c = 0; c < map[0].length; c++) {
+                        if (map[r][c].aRock === true && ((this.x < map[r][c].x + SIZE) && (this.x >= map[r][c].x + SIZE - 20))) {
+                            if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
+                                console.log("Firewalker hit left wall");
+                                //if (this.x >= this.spawnPoint + 300)
+                                this.dir = 0;
+                            }
+                        }
+                    }
+                }
             }
         }
     }
