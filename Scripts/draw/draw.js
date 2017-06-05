@@ -1,9 +1,11 @@
-//Draw
+//Drawing every game object on canvas
 
 function render()
 {
 	surface.clearRect(0, 0, canvas.width, canvas.height);
+	//Drawing Background...
 	surface.drawImage(background, frameBackgroundIndex*1400, 0, 1400, 900, 0, 0, 1400, 900);
+	//Drawing Map
 	for (var row = 0; row < map.length; row++)
 	{
 		for (var col = 0; col < map[0].length; col++)
@@ -36,11 +38,12 @@ function render()
 
 		}
 	}
-
+	//Drawing Player
 	surface.drawImage(player.img,
             frameIndex * 100, 0, 100, 100,		// Source rectangle.
             player.x, player.y, 100, 100);	// Dest rectangle.
 			
+	//Drawing FireWalker
         //console.log("FireWalker Image: " + fireWalker.img);
         surface.drawImage(fireWalker.img,
             fireWalker.sourceX, fireWalker.sourceY, fireWalker.size, fireWalker.size,

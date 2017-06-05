@@ -12,7 +12,7 @@
     //surface = canvas.getContext("2d");
     //Main
     initGame();
-
+	//A set interval to check everything....
     var idInt = setInterval(update, 33.34);
 
     function initGame()

@@ -6,9 +6,10 @@ var onGround = true;
 var jumpVal = 0;
 var jumpPeak = false;
     
-var isPressed=false;
-var end=false;
+var isPressed=false; // any key is Pressed
+var end=false; 
 	
+//Array for all player images.....
 var images = [new Image(), new Image(), new Image(), new Image(), new Image()];
 images[0].src = "./Assets/MainCharacterIdle.png";
 images[1].src = "./Assets/run-l.png";
@@ -16,22 +17,24 @@ images[2].src = "./Assets/run-r.png";
 images[3].src = "./Assets/mainCharacterJump.png";
 images[4].src = "./Assets/mainCharacterJumpLeft.png";
 
+//creating Player object.....
 var player = {img:null, x:300, y:600, dir:1, idle:true, width:100, height:100};
 	
-var frameIndex = 0; 	// Index of the sprite to display via drawImage.
-var currentFrame = 0; 	// Counter for the frames.
-var maxFrames = 3; 		// The number of frames a single sprite is drawn.
+var frameIndex = 0; 	// Index of the player sprite to display via drawImage.
+var currentFrame = 0; 	// Counter for the player frames.
+var maxFrames = 3; 		// The number of frames in a single player sprite is drawn.
 
 window.addEventListener("keydown", onKeyDown);
 window.addEventListener("keyup", onKeyUp);
 
+//A set interval to animate the player images....
 var idInt3 = setInterval(update3, 70);
 
 var n=0;
 
 function update3()
 {
-	if(onGround && !jumpPressed)
+	if(onGround && !jumpPressed)//if the player on the ground & he is not jumping....
 	{
 		animate();
 	}
@@ -39,6 +42,7 @@ function update3()
 
 function scrollMap()
 {
+	//Scroll the map if player.x>= 300 & isPressed == True
 	if (isPressed && player.x >= 300)
 	{
 		for (var row = 0; row < map.length; row++)
@@ -47,6 +51,7 @@ function scrollMap()
 			{
 				map[row][col].x -= 8;
 				//console.log ("map x " + map[1][5].x);
+				//if the end of the map reaches on the screen change the end varialbe to true and stop scrolling.....
 				if (map[map.length - 1][map[0].length - 1].x == 1300)
 				{
 					end = true;
@@ -107,13 +112,14 @@ function jump()
 			jumpPeak = true;		
 			return;
 		}
-	    animate();
+	    animate();//animation for jump 
 		player.y -= 12;
 		jumpVal += 10;
 		
 		setTimeout(jump, 15);
 }
 
+//Collision between map element & player
 function collision()
 {
 	for (var r =0; r < map.length ; r++)
@@ -172,7 +178,7 @@ function collision()
 
 function back()
 {
-	if (!onGround && jumpPeak )
+	if (!onGround && jumpPeak )//if the palyer is in the air bring him down
 	{
 		frameIndex = 2;
 		player.y += 10;
@@ -196,6 +202,7 @@ function onKeyUp(event)
 	}
 }
 
+//To set the right image from Array images for the player with the right key
 function handleInput()
 {
 	if (leftPressed == true && onGround && !rightPressed)
@@ -241,6 +248,7 @@ function handleInput()
 
 }
 
+//Animating the player images....
 function animate()
 {
 	if (currentFrame === maxFrames)

@@ -10,14 +10,15 @@ canvas.width = 1400;
 canvas.height = 900;
 var surface = canvas.getContext("2d");
 
-var frameLavaIndex = 0; 	// Index of the sprite to display via drawImage.
-var currentLavaFrame = 0; 	// Counter for the frames.
-var maxLavaFrames = 1; 		// The number of frames a single sprite is drawn.
+var frameLavaIndex = 0; 	// Index of the Lava sprite to display via drawImage.
+var currentLavaFrame = 0; 	// Counter for the Lava frames.
+var maxLavaFrames = 1; 		// The number of frames in a single Lava sprite is drawn.
 
-var frameBackgroundIndex = 0; 	// Index of the sprite to display via drawImage.
-var currentBackgroundFrame = 0; 	// Counter for the frames.
-var maxBackgroundFrames = 5; 		// The number of frames a single sprite is drawn.
+var frameBackgroundIndex = 0; 	// Index of the Background sprite to display via drawImage.
+var currentBackgroundFrame = 0; 	// Counter for the Backgroundframes.
+var maxBackgroundFrames = 5; 		// The number of frames a single Background sprite is drawn.
 
+//crating objects for all map tiles
 var topLeft = new Image();
 topLeft.src = "./Assets/TopLeft.png";
 
@@ -72,6 +73,7 @@ rightSideWithCorner.src = "./Assets/rightSideWithCorner.png";
 var singlePlatform = new Image();
 singlePlatform.src = "./Assets/singlePlatform.png";
 
+//Creating the map
 var map =[
     [0,0,0,0,0,0,11,0,0,16,0,0,0,0,0,0,0,0,0,0,0,0,0,14,13,0,1,5,0,0,14,13,0,0,0,0,0,0,0,0,0,0,0,11,0,0,16,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,1,15,0,0,0,0,0,1,5,0,0,0,0,0,0,0,11,0,0,0,0,2,6,0,0,0,0,0,0,0,0,0,11,0,0,0,1,3,15,0,0,0,0,1,5,0,0,0,0,0,0,0,0,16,0,0,16,0,0,14,13,0,0,0,0,0,0],
@@ -79,6 +81,7 @@ var map =[
     [2,4,4,4,4,4,6,8,8,8,8,8,2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,6,8,8,8,8,8,8,2,4,4,4,4,4,4,4,4,6,8,8,8,8,2,4,4,4,4,4,4,4,6,8,8,8,8,8,8,8,8,8,8,8,2,4,4,6]
 ];
 
+//A set interval to unimate Lava & Background
 var idInt2 =setInterval(update2, 350);
 
 function generateMap()
@@ -91,9 +94,9 @@ function generateMap()
             var tempTile = {};
             tempTile.x=col*SIZE;
             tempTile.y=(5+row)*SIZE;
-            tempTile.aRock=false;
-            tempTile.empty=false;
-            tempTile.lava=false;
+            tempTile.aRock=false; //If the image is a tile
+            tempTile.empty=false; //If there is an empty image
+            tempTile.lava=false; // If the image is lava
             switch(map[row][col])
             {
                 case 0:
@@ -178,6 +181,7 @@ function update2()
 
 function animateLava()
 {
+	//To animate the Lava top & botom images 
     currentLavaFrame++;
     if (currentLavaFrame == maxLavaFrames)
     {
@@ -190,6 +194,7 @@ function animateLava()
 
 function animateBackground()
 {
+	//To animate the Background image 
     currentBackgroundFrame++;
     if (currentBackgroundFrame == maxBackgroundFrames)
     {
