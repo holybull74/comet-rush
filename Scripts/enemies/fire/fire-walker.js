@@ -40,7 +40,7 @@ var fireWalker = {
         }
     },
     move: function () {
-        console.log("Player x: " + player.x + " Firewalker x: " + this.x + " Total Scroll: " + this.scrollCount + " Direction: " + this.dir);
+       // console.log("Player x: " + player.x + " Firewalker x: " + this.x + " Total Scroll: " + this.scrollCount + " Direction: " + this.dir);
         if (rightPressed == true) {
             if (player.x >= 300 || (end == true && player.x > 1300)) {
                 this.scrollCount += 8;
@@ -51,7 +51,7 @@ var fireWalker = {
 		                for (var c =0 ; c < map[0].length ; c ++) {
 			                if (map[r][c].aRock === true && ((this.x + this.size > map[r][c].x) && (this.x + this.size <= map[r][c].x + 20))) {
                                 if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
-                                    console.log("Firewalker hit right wall");
+                                    //console.log("Firewalker hit right wall");
                                     //if (this.x >= this.spawnPoint + 300)
                                     this.dir = 1;
                                 }        
@@ -66,7 +66,7 @@ var fireWalker = {
 		                for (var c =0 ; c < map[0].length ; c ++) {
 			                if (map[r][c].aRock === true && ((this.x < map[r][c].x + SIZE) && (this.x >= map[r][c].x + SIZE - 20))) {
                                 if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
-                                    console.log("Firewalker hit left wall");
+                                    //console.log("Firewalker hit left wall");
                                     //if (this.x >= this.spawnPoint + 300)
                                     this.dir = 0;
                                 }     
@@ -83,7 +83,7 @@ var fireWalker = {
 		                for (var c =0 ; c < map[0].length ; c ++) {
 			                if (map[r][c].aRock === true && ((this.x + this.size > map[r][c].x) && (this.x + this.size <= map[r][c].x + 20))) {
                                 if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
-                                    console.log("Firewalker hit right wall");
+                                    //console.log("Firewalker hit right wall");
                                     //if (this.x >= this.spawnPoint + 300)
                                     this.dir = 1;
                                 }                      
@@ -98,7 +98,7 @@ var fireWalker = {
 		                for (var c =0 ; c < map[0].length ; c ++) {
 			                if (map[r][c].aRock === true && ((this.x < map[r][c].x + SIZE) && (this.x >= map[r][c].x + SIZE - 20))) {
                                 if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
-                                    console.log("Firewalker hit left wall");
+                                   // console.log("Firewalker hit left wall");
                                     //if (this.x >= this.spawnPoint + 300)
                                     this.dir = 0;
                                 }           
@@ -116,7 +116,7 @@ var fireWalker = {
                     for (var c = 0; c < map[0].length; c++) {
                         if (map[r][c].aRock === true && ((this.x + this.size > map[r][c].x) && (this.x + this.size <= map[r][c].x + 20))) {
                             if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
-                                console.log("Firewalker hit right wall");
+                               // console.log("Firewalker hit right wall");
                                 //if (this.x >= this.spawnPoint + 300)
                                 this.dir = 1;
                             }              
@@ -131,7 +131,7 @@ var fireWalker = {
                     for (var c = 0; c < map[0].length; c++) {
                         if (map[r][c].aRock === true && ((this.x < map[r][c].x + SIZE) && (this.x >= map[r][c].x + SIZE - 20))) {
                             if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
-                                console.log("Firewalker hit left wall");
+                               // console.log("Firewalker hit left wall");
                                 //if (this.x >= this.spawnPoint + 300)
                                 this.dir = 0;
                             }
@@ -162,10 +162,10 @@ function updateAnimation()
 function fireWalkerCollision() {
     if ((player.x > fireWalker.x - SIZE) && (player.x < fireWalker.x + fireWalker.size)) {
         //It's within x-range, check y-range
-        console.log("player/fireWalker in x-range..");
+        //console.log("player/fireWalker in x-range..");
         if ((player.y > fireWalker.y - fireWalker.size) && (player.y < fireWalker.y + fireWalker.size)) {
             //It's in both ranges so fireWalker and player have collided
-            console.log("player/fireWalker in y-range..");
+            //console.log("player/fireWalker in y-range..");
             endGame();
         }
     }

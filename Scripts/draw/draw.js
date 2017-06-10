@@ -56,7 +56,17 @@ function render()
 		surface.strokeStyle = "green";
 		surface.rect( player.x + 10 ,player.y + 20 , SIZE - 20 , SIZE);
 		surface.stroke();*/
-
+		for (i = 0; i < bulletArray.length; i++)
+			{
+				surface.beginPath();
+                surface.arc(bulletArray[i].x, bulletArray[i].y,	4, 0, 2*Math.PI);
+                surface.fillStyle = "white";
+                surface.fill();
+                surface.lineWidth = 2;
+                surface.strokeStyle = "red";
+                surface.stroke();
+                surface.closePath();
+			}
 
 
 }

@@ -2,6 +2,7 @@
 var leftPressed = false;
 var rightPressed = false;
 var jumpPressed = false;
+var bulletPressed=false;
 var onGround = true;
 var jumpVal = 0;
 var jumpPeak = false;
@@ -16,6 +17,8 @@ images[1].src = "./Assets/run-l.png";
 images[2].src = "./Assets/run-r.png";
 images[3].src = "./Assets/mainCharacterJump.png";
 images[4].src = "./Assets/mainCharacterJumpLeft.png";
+
+var bulletArray = []; // For keeping track of player bullets
 
 //creating Player object.....
 var player = {img:null, x:300, y:600, dir:1, idle:true, width:100, height:100};
@@ -38,6 +41,7 @@ function update3()
 	{
 		animate();
 	}
+	moveBullets();
 }
 
 function scrollMap()
@@ -71,6 +75,7 @@ function onKeyDown(event)
 			if (leftPressed == false)
 			{
 				leftPressed = true;
+				r=false;
 			}
 			break;
 		case 68: // D
@@ -80,6 +85,7 @@ function onKeyDown(event)
 			{
 				rightPressed = true;
 				isPressed = true;
+				r=true;
 			}
 			break;
 		case 32:
@@ -99,6 +105,14 @@ function onKeyDown(event)
 				onGround = false;
 				jumpPressed = true;
 				jump();
+			}
+			break;
+		case 87:
+		case 38:
+			if(bulletPressed == false)
+			{
+				bulletPressed=true;
+				createBullet();
 			}
 			break;
 		}
@@ -152,7 +166,7 @@ function collision()
 				{// Check if we are within Y's range top and bottom
 					if (player.y + SIZE >= map[r][c].y && player.y + SIZE <= map[r][c].y)
 					{
-						console.log("on ground true");
+						//console.log("on ground true");
 						jumpPeak = false;				
 						onGround = true;
 						jumpVal = 0;
@@ -166,7 +180,7 @@ function collision()
 				{// Check if we are within Y's range top and bottom
 					if (player.y + SIZE >= map[r][c].y)
 					{
-						console.log("on ground false");
+						//console.log("on ground false");
 						jumpPeak = true;
 						onGround = false;
 					}
@@ -199,9 +213,38 @@ function onKeyUp(event)
 		case 32:
 			jumpPressed = false;
 			break;
+		case 87:
+		case 38:
+			bulletPressed=false;
+			break;
 	}
 }
 
+var r=true;
+
+ function createBullet(){
+            var tempBullet = {x: (player.x + 50), y:player.y + 50};   
+			bulletArray.push(tempBullet);
+			}
+function moveBullets(){
+	var i = 0; 
+	while(bulletArray[i] != undefined)
+	{if (bulletArray[i].x > player.x+700 || bulletArray[i].x < 0 )bulletArray.splice(i,1);
+	if((r==true )||(bulletArray[i].x>=player.x+60))	
+	{
+		bulletArray[i].x += 10;
+		if((player.x+40>=bulletArray[i].x))
+			{ bulletArray[i].x -= 10;}	
+	}
+	if ((r==false) ||  (player.x+40>=bulletArray[i].x) )
+	{		
+		bulletArray[i].x -= 10;
+		if(bulletArray[i].x>=player.x+60)
+			bulletArray[i].x += 10;
+	}
+	i++;
+	}  
+}
 //To set the right image from Array images for the player with the right key
 function handleInput()
 {
@@ -245,7 +288,7 @@ function handleInput()
 	 }
 	 
  }
-
+	
 }
 
 //Animating the player images....
