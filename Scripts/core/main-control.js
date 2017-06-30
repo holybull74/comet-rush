@@ -1,28 +1,14 @@
-// IIFE - Immediately Invoked Function Expression
-
-
-(function()
-{
-    console.log("Executing script");
-    //Canvas
-    //var stage = document.getElementById("stage");
-    //var canvas = document.getElementById("myCanvas");
-    //canvas.width = 1400;
-    //canvas.height = 900;
-    //surface = canvas.getContext("2d");
-    //Main
-    initGame();
-	//A set interval to check everything....
-    var idInt = setInterval(update, 33.34);
-
-    function initGame()
-    {
+function initGame(){
         console.log("Generating map)");
+        var idInt = setInterval(update, 33.34);
+        themeSong.load();
+        themeSong.play();
+        themeSong.loop = true;
         generateMap();
-    }
+}
 
-    function update()
-    {
+
+function update(){
         collision();
         scrollMap();
         handleInput();
@@ -30,7 +16,4 @@
         fireWalkerCollision();
         back();
         render();
-    }
-
-    
-})();
+}
