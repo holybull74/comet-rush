@@ -145,8 +145,8 @@ var fireWalker = {
 
 var fireWalkerImg = [new Image, new Image];
 //fireWalkerImg.addEventListener("load", loadHandler, false);
-fireWalkerImg[0].src = "./Assets/fireEnemySpriteSheet-r.png";
-fireWalkerImg[1].src = "./Assets/fireEnemySpriteSheet-l.png";
+fireWalkerImg[0].src = "./Assets/Enemy/FirePlanet/fireEnemySpriteSheetR.png";
+fireWalkerImg[1].src = "./Assets/Enemy/FirePlanet/fireEnemySpriteSheetL.png";
 //fireWalker.img = fireWalkerImg;
 
 //function loadHandler() {

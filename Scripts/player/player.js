@@ -12,11 +12,11 @@ var end=false;
 	
 //Array for all player images.....
 var images = [new Image(), new Image(), new Image(), new Image(), new Image()];
-images[0].src = "./Assets/MainCharacterIdle.png";
-images[1].src = "./Assets/run-l.png";
-images[2].src = "./Assets/run-r.png";
-images[3].src = "./Assets/mainCharacterJump.png";
-images[4].src = "./Assets/mainCharacterJumpLeft.png";
+images[0].src = "./Assets/MainCharacter/MainCharacterIdleR.png";
+images[1].src = "./Assets/MainCharacter/MainCharacterRunL.png";
+images[2].src = "./Assets/MainCharacter/MainCharacterRunR.png";
+images[3].src = "./Assets/MainCharacter/mainCharacterJumpRight.png";
+images[4].src = "./Assets/MainCharacter/mainCharacterJumpLeft.png";
 
 var bulletArray = []; // For keeping track of player bullets
 

@@ -45,17 +45,17 @@ var cometSize = cometWidth;
 var cometRotate = 0;
 
 //Image source locations
-bgImage.src = "./Assets/Background.png";
-logoImage.src ="./Assets/CometRushLogo3.png";
-playImage.src = "./Assets/play.png";
-instructImage.src = "./Assets/instructions.png";
-settingsImage.src = "./Assets/settings.png";
-creditsImage.src = "./Assets/credits.png";
-cometImage.src = "./Assets/fireball.png";
+bgImage.src = "./Assets/UI/Background.png";
+logoImage.src ="./Assets/UI/CometRushLogo.gif";
+playImage.src = "./Assets/UI/play.png";
+instructImage.src = "./Assets/UI/instructions.png";
+settingsImage.src = "./Assets/UI/settings.png";
+creditsImage.src = "./Assets/UI/credits.png";
+cometImage.src = "./Assets/UI/fireball.png";
 
 //Audio source & initialization
-introMusic.src = "./Assets/Castlevania - An Empty Tome.mp3"
-themeSong.src = "./Assets/Heroic Fantasy - Onslaught(fire).mp3"
+introMusic.src = "./Assets/Sound/Castlevania(MainScreen).mp3"
+themeSong.src = "./Assets/Sound/Heroic Fantasy(FireLevel).mp3"
 introMusic.load();
 introMusic.play();
 introMusic.loop = true;

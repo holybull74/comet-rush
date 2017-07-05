@@ -20,58 +20,58 @@ var maxBackgroundFrames = 5; 		// The number of frames a single Background sprit
 
 //crating objects for all map tiles
 var topLeft = new Image();
-topLeft.src = "./Assets/TopLeft.png";
+topLeft.src = "./Assets/LevelTiles/FireLevel/TopLeft.png";
 
 var botLeft = new Image();
-botLeft.src = "./Assets/BottLeft.png";
+botLeft.src = "./Assets/LevelTiles/FireLevel/BottLeft.png";
 
 var topMid = new Image();
-topMid.src = "./Assets/TopMid.png";
+topMid.src = "./Assets/LevelTiles/FireLevel/TopMid.png";
 
 var center = new Image();
-center.src = "./Assets/Center.png";
+center.src = "./Assets/LevelTiles/FireLevel/Center.png";
 
 var topRight = new Image();
-topRight.src = "./Assets/TopRigth.png";
+topRight.src = "./Assets/LevelTiles/FireLevel/TopRight.png";
 
 var botRight = new Image();
-botRight.src = "./Assets/BottRight.png";
+botRight.src = "./Assets/LevelTiles/FireLevel/BottRight.png";
 
 var lavaTop = new Image();
-lavaTop.src = "./Assets/lavaTop.png";
+lavaTop.src = "./Assets/LevelTiles/FireLevel/lavaTopSprite.png";
 
 var lavaBot = new Image();
-lavaBot.src = "./Assets/lavaBot.png";
+lavaBot.src = "./Assets/LevelTiles/FireLevel/lavaBotSprite.png";
 
 var leftCorner = new Image();
-leftCorner.src = "./Assets/leftCorner.png";
+leftCorner.src = "./Assets/LevelTiles/FireLevel/leftCorner.png";
 
 var rightCorner = new Image();
-rightCorner.src = "./Assets/rightCorner.png";
+rightCorner.src = "./Assets/LevelTiles/FireLevel/rightCorner.png";
 
 var middle = new Image();
-middle.src = "./Assets/middle.png";
+middle.src = "./Assets/LevelTiles/FireLevel/middle.png";
 
 var rightPlatform = new Image();
-rightPlatform.src = "./Assets/rightPlatform.png";
+rightPlatform.src = "./Assets/LevelTiles/FireLevel/rightPlatform.png";
 
 var leftPlatform = new Image();
-leftPlatform.src = "./Assets/leftPlatform.png";
+leftPlatform.src = "./Assets/LevelTiles/FireLevel/leftPlatform.png";
 
 var centerCorners= new Image();
-centerCorners.src = "./Assets/centerCorners.png";
+centerCorners.src = "./Assets/LevelTiles/FireLevel/centerCorners.png";
 
 var black = new Image();
-black.src = "./Assets/black.png";
+black.src = "./Assets/LevelTiles/FireLevel/black.png";
 
 var background = new Image();
-background.src = "./Assets/backgroundSprite.png";
+background.src = "./Assets/LevelTiles/FireLevel/backgroundSprite.png";
 
 var rightSideWithCorner = new Image();
-rightSideWithCorner.src = "./Assets/rightSideWithCorner.png";
+rightSideWithCorner.src = "./Assets/LevelTiles/FireLevel/rightSideWithCorner.png";
 
 var singlePlatform = new Image();
-singlePlatform.src = "./Assets/singlePlatform.png";
+singlePlatform.src = "./Assets/LevelTiles/FireLevel/singlePlatform.png";
 
 //Creating the map
 var map =[
@@ -200,7 +200,7 @@ function animateBackground()
     {
         frameBackgroundIndex++;
         currentBackgroundFrame = 0;
-        if (frameBackgroundIndex == 6)
+        if (frameBackgroundIndex == 4)
             frameBackgroundIndex = 0;
     }
 }
