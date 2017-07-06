@@ -49,7 +49,11 @@ function render()
             fireWalker.sourceX, fireWalker.sourceY, fireWalker.size, fireWalker.size,
             fireWalker.x, fireWalker.y, fireWalker.size, fireWalker.size);
 
-
+	//Drawing FireWolf
+		console.log("FireWolf Image: " + fireWolf.img);
+		surface.drawImage(fireWolf.img,
+			fireWolf.sourceX, fireWolf.sourceY, fireWolf.size, fireWolf.size,
+			fireWolf.x, fireWolf.y, fireWolf.size, fireWolf.size);
 
 		/*surface.beginPath();
 		surface.lineWidth = "3";

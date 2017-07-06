@@ -20,6 +20,8 @@ function update() {
     handleInput();
     fireWalker.move();
     fireWalkerCollision();
+    fireWolf.move();
+    fireWolfCollision();
     back();
     render();
 }
