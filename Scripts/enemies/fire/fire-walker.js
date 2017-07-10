@@ -176,6 +176,6 @@ function endGame()
        // clearInterval(idInt);
        // clearInterval(idInt2);
        // clearInterval(idInt3);
-        window.alert("Game over!")
+       // window.alert("Game over!")
     }
 

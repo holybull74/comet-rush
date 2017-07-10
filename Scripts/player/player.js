@@ -16,7 +16,7 @@ var isPressed=false; // any key is Pressed
 var end=false; 
 	
 //Array for all player images.....
-var images = [new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image()];
+var images = [new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image()];
 images[0].src = "./Assets/MainCharacter/MainCharacterIdleR.png";
 images[1].src = "./Assets/MainCharacter/MainCharacterIdleL.png";
 images[2].src = "./Assets/MainCharacter/MainCharacterRunL.png";
@@ -27,11 +27,13 @@ images[6].src = "./Assets/MainCharacter/MainCharacterShootingL.png";
 images[7].src = "./Assets/MainCharacter/MainCharacterShootingR.png";
 images[8].src = "./Assets/MainCharacter/NoMoveShootingL.png";
 images[9].src = "./Assets/MainCharacter/NoMoveShootingR.png";
+images[10].src = "./Assets/MainCharacter/MainCharacterDamageR.png";
+images[11].src = "./Assets/MainCharacter/MainCharacterDamageL.png";
 
 var bulletArray = []; // For keeping track of player bullets
 
 //creating Player object.....
-var player = {img: images[0], x:300, y:600, dir:1, idle:true, width:100, height:100 , speed: WORLDSPEED, sX :0, sY:0 , isJumping: false, onGround: false};
+var player = {img: images[0], x:300, y:600, dir:1, idle:true, width:100, height:100 , speed: WORLDSPEED, sX :0, sY:0 , isJumping: false, onGround: false,damage:0,health:3};
 	
 var frameIndex = 0; 	// Index of the player sprite to display via drawImage.
 var currentFrame = 0; 	// Counter for the player frames.
@@ -57,7 +59,7 @@ function playerAnimationUpdate()
 {	
 	animate();
 
-	//moveBullets();
+	moveBullets();
 }
 
 //Map scroll function, moves every tile when the player has reached the desired range
@@ -72,7 +74,7 @@ function scrollMap()
 			{
 				map[row][col].x -= WORLDSPEED;
 				//if the end of the map reaches on the screen change the end varialbe to true and stop scrolling.....
-				if (map[map.length - 1][map[0].length - 1].x == 1300)
+				if (map[map.length - 1][map[0].length - 1].x == 1304)
 				{
 					end = true;
 					break;
@@ -208,6 +210,7 @@ function handleInput()
 	// Left Arrow or key A
 	if(inputArray[65] || inputArray[37])
 	{
+		r=false;
 		if(player.isJumping)
 		{
 			player.img = images[5];
@@ -224,6 +227,7 @@ function handleInput()
 	//Right Arrow or key D
 	if(inputArray[68] || inputArray[39])
 	{
+		r=true;
 		if(player.isJumping)
 		{
 			player.img = images[4];
@@ -240,6 +244,13 @@ function handleInput()
 		}
 	}
 
+	if(inputArray[88] || inputArray[75])
+	{
+		
+			bulletPressed=true;
+			createBullet();
+		
+	}
 	player.sY += gravity;
 	player.y += player.sY;
 	player.onGround = false;
@@ -251,6 +262,13 @@ function handleInput()
 	else if ( player.x <= 0)
 	{
 		player.x = 0;
+	}
+	if(player.damage!=0)
+	{
+		if (player.dir == 1)
+			player.img = images[10];
+		else
+			player.img = images[11];
 	}
 }
 

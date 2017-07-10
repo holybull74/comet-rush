@@ -58,6 +58,11 @@ function render()
 		surface.drawImage(fireWolf.img,
 			fireWolf.sourceX, fireWolf.sourceY, fireWolf.size, fireWolf.size,
 			fireWolf.x, fireWolf.y, fireWolf.size, fireWolf.size);
+			
+	//Drawing FireBoss
+		surface.drawImage(fireBoss.img,
+            fireBossFrameIndex * 100, 0, 100, 250,		// Source rectangle.
+            fireBoss.x, fireBoss.y, 100, 250);
 
 		
 		for (i = 0; i < bulletArray.length; i++)
@@ -71,6 +76,17 @@ function render()
                 surface.stroke();
                 surface.closePath();
 			}
-
+		if(textDraw==true)
+		{
+			surface.font="60px Arial";
+			surface.fillStyle="Red";
+			surface.fillText("Be carefull!!!",100,300);	
+			surface.fillText("The Fire Boss is coming...",0,370);
+			
+		}
+		if(healthBarDraw==true)
+		{
+			surface.drawImage(healthBarImage,0, 0, healthBarImage.width, healthBarImage.height, 500, 800, healthBarImage.width, healthBarImage.height);
+		}
 
 }
