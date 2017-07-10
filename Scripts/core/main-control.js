@@ -1,27 +1,23 @@
 function initGame() {
-    console.log("Generating map)");
-    canvas.removeEventListener("mousemove", checkPos);
-    canvas.removeEventListener("mouseup", checkClick);
-    clearInterval(fadeId);
-    clearInterval(timerId);
-    clearInterval(updateUI);
-    introMusic.pause();
-    var idInt = setInterval(update, 33.34);
-    themeSong.load();
+
+    introMusic.pause();  
     themeSong.play();
-    themeSong.loop = true;
-    generateMap();
+    themeSong.loop = true;    
+    var idInt = setInterval(update, 1000/frames);
 }
 
 
 function update() {
-    collision();
+    
+    handleInput();  
+    collision();      
     scrollMap();
-    handleInput();
     fireWalker.move();
     fireWalkerCollision();
     fireWolf.move();
     fireWolfCollision();
-    back();
+	handleInputFireBoss();
+	moveBoss();
+	fireBossCollision();
     render();
 }

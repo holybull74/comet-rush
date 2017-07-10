@@ -10,9 +10,13 @@ function render()
 	{
 		for (var col = 0; col < map[0].length; col++)
 		{
-			surface.drawImage(map[row][col].img,
-					map[row][col].x,
-					map[row][col].y);
+			if(map[row][col].aRock===true || map[row][col].empty == true)
+			{		
+			  	surface.drawImage(map[row][col].img,
+				map[row][col].x,
+				map[row][col].y);
+			}
+
 			if(map[2][col].lava===true)
 			{
 				surface.drawImage(map[2][col].img,
@@ -50,16 +54,17 @@ function render()
             fireWalker.x, fireWalker.y, fireWalker.size, fireWalker.size);
 
 	//Drawing FireWolf
-		console.log("FireWolf Image: " + fireWolf.img);
+		//console.log("FireWolf Image: " + fireWolf.img);
 		surface.drawImage(fireWolf.img,
 			fireWolf.sourceX, fireWolf.sourceY, fireWolf.size, fireWolf.size,
 			fireWolf.x, fireWolf.y, fireWolf.size, fireWolf.size);
+			
+	//Drawing FireBoss
+		surface.drawImage(fireBoss.img,
+            fireBossFrameIndex * 100, 0, 100, 250,		// Source rectangle.
+            fireBoss.x, fireBoss.y, 100, 250);
 
-		/*surface.beginPath();
-		surface.lineWidth = "3";
-		surface.strokeStyle = "green";
-		surface.rect( player.x + 10 ,player.y + 20 , SIZE - 20 , SIZE);
-		surface.stroke();*/
+		
 		for (i = 0; i < bulletArray.length; i++)
 			{
 				surface.beginPath();
@@ -71,6 +76,17 @@ function render()
                 surface.stroke();
                 surface.closePath();
 			}
-
+		if(textDraw==true)
+		{
+			surface.font="60px Arial";
+			surface.fillStyle="Red";
+			surface.fillText("Be carefull!!!",100,300);	
+			surface.fillText("The Fire Boss is coming...",0,370);
+			
+		}
+		if(healthBarDraw==true)
+		{
+			surface.drawImage(healthBarImage,0, 0, healthBarImage.width, healthBarImage.height, 500, 800, healthBarImage.width, healthBarImage.height);
+		}
 
 }

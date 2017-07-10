@@ -1,4 +1,4 @@
-console.log("Executing FireWolf script...");
+//console.log("Executing FireWolf script...");
 var fireWolf = {
     img: null,
     size: 100,
@@ -39,7 +39,7 @@ var fireWolf = {
         }
     },
     move: function () {
-        console.log("Player x: " + player.x + " fireWolf x: " + this.x + " Total Scroll: " + this.scrollCount + " Direction: " + this.dir);
+        //console.log("Player x: " + player.x + " fireWolf x: " + this.x + " Total Scroll: " + this.scrollCount + " Direction: " + this.dir);
         if (rightPressed == true) {
             if (player.x >= 300 || (end == true && player.x > 1300)) {
                 this.scrollCount += 8;
@@ -175,5 +175,5 @@ function endGame()
        // clearInterval(idInt);
        // clearInterval(idInt2);
        // clearInterval(idInt3);
-        window.alert("Game over!")
+       // window.alert("Game over!")
     }

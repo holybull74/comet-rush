@@ -9,6 +9,9 @@ var backgroundY = 0;
 var speed = 1;
 var fadeOutDone = false;
 
+//Generating Level Arrays
+generateMap();
+
 //Audio
 var introMusic = new Audio();
 var themeSong = new Audio();
@@ -24,7 +27,7 @@ var bgImage = new Image();
 var logoImage = new Image();
 var playImage = new Image();
 playImage.setAttribute("id", "play");
-console.log("Img: " + playImage);
+//console.log("Img: " + playImage);
 var instructImage = new Image();
 var settingsImage = new Image();
 var creditsImage = new Image();
@@ -44,9 +47,14 @@ var cometVisible = false;
 var cometSize = cometWidth;
 var cometRotate = 0;
 
+//Logo animation variables
+var logoIndex = 0; 	        
+var currentLogoFrame = 0; 
+var maxLogoFrames = 3; 
+
 //Image source locations
 bgImage.src = "./Assets/UI/Background.png";
-logoImage.src ="./Assets/UI/CometRushLogo.gif";
+logoImage.src ="./Assets/UI/CometRushLogoSprite.png";
 playImage.src = "./Assets/UI/play.png";
 instructImage.src = "./Assets/UI/instructions.png";
 settingsImage.src = "./Assets/UI/settings.png";
@@ -57,6 +65,7 @@ cometImage.src = "./Assets/UI/fireball.png";
 introMusic.src = "./Assets/Sound/Castlevania(MainScreen).mp3"
 themeSong.src = "./Assets/Sound/Heroic Fantasy(FireLevel).mp3"
 introMusic.load();
+themeSong.load();
 introMusic.play();
 introMusic.loop = true;
 
@@ -69,10 +78,6 @@ uiButton[3] = { x:462, y:656, width:467, height:120 };
 
 bgImage.onload = function(){
     surface.drawImage(bgImage, 0, backgroundY);
-};
-
-logoImage.onload = function(){
-    surface.drawImage(logoImage, 300, -75);
 };
 
 playImage.onload = function(){
@@ -101,6 +106,7 @@ function updateUI()
     clear();
     move();
     draw();
+    animateLogo();
 }
 
 function clear(){
@@ -128,7 +134,9 @@ function move()
 function draw()
 {
 	surface.drawImage(bgImage, 0, backgroundY);
-	surface.drawImage(logoImage, 300,-75);
+	surface.drawImage(logoImage,  frameIndex * 1000, 0, 1000, 500,		// Source rectangle.
+                                               200, -75, 1000, 500);	// Dest rectangle.
+
 	surface.drawImage(playImage, uiButton[0].x, uiButton[0].y);
     surface.drawImage(instructImage, uiButton[1].x, uiButton[1].y);
 	surface.drawImage(settingsImage, uiButton[2].x, uiButton[2].y);
@@ -137,6 +145,21 @@ function draw()
         surface.drawImage(cometImage, cometX[0] - (cometSize/2), cometY[0], cometSize, cometHeight);
         surface.drawImage(cometImage, cometX[1] - (cometSize/2), cometY[1], cometSize, cometHeight);
     }
+}
+
+//Animate logo
+
+function animateLogo()
+{
+   if (currentLogoFrame == maxLogoFrames)
+    {
+        logoIndex++;
+        currentLavaFrame = 0;
+        if (logoIndex == 4)
+            logoIndex = 0;
+    }
+
+    currentLogoFrame++;
 }
 
 function checkPos(mouseEvent)
@@ -170,38 +193,29 @@ function checkPos(mouseEvent)
                 cometVisible = false;
             }
         }
-        //console.log("Comet visible? " + cometVisible);
-        //console.log("X: " + mouseX + " " + "Y: " + mouseY);
-        //console.log("i: " + i);
-        //console.log("UIButton " + i + "X: " + uiButton[i].x + " Y: " + uiButton[i].y);
+        
     }
 }
 
 //Checking for mouse clicks
 function checkClick(mouseEvent)
 {
-    for(i = 0; i < uiButton.length; i++)
+    for(var i = 0; i < uiButton.length; i++)
     {
         //Check mouse position
         if(mouseX > uiButton[i].x && mouseX < uiButton[i].x + uiButton[i].width)
         {
             if(mouseY > uiButton[i].y && mouseY < uiButton[i].y + uiButton[i].height)
             {
-                switch(i){
-                    case 0:
-                        fadeId = setInterval("fadeOut(i)", 1000/frames);
-                        //if (fadeOutDone === true)
-                            initGame();
-                            //break;
-                    case 1:
-                    case 2:
-                    case 3:
-            }
-                //Stop other interval and event listeners when clicking
-                //fadeId = setInterval("fadeOut(i)", 1000/frames);
-                clearInterval(timerId);
-                canvas.removeEventListener("mousemove", checkPos);
-                canvas.removeEventListener("mouseup",checkClick);
+                switch(i)
+                {
+                    case 0:                                             
+                        clearInterval(timerId);
+                        fadeId = setInterval(function(){fadeOut(0)}, 1000/frames);
+                    break;
+                    
+                 }
+               
             }
         }
     }
@@ -209,29 +223,22 @@ function checkClick(mouseEvent)
 
 function fadeOut(menuChoice) //Fades out screen on click of either options
 {
+    
     surface.fillStyle = "rgba(0,0,0, 0.2)";
     surface.fillRect(0, 0, canvas.width, canvas.height);
     time += 0.1;
-    if (time >= 2) { //Gives fade out illusion
-        fadeOutDone = true;
-        if (menuChoice === 0) {
-            /*canvas.removeEventListener("mousemove", checkPos);
-            canvas.removeEventListener("mouseup", checkClick);
-            clearInterval(fadeId);
-            clearInterval(timerId);
-            clearInterval(updateUI);*/
-            introMusic.pause();
-            clearInterval(fadeId);
-            time = 0;
-            return fadeOutDone;
+    if (time >= 2) 
+    { //Gives fade out illusion
+        if (menuChoice === 0) 
+        {    
+            canvas.removeEventListener("mousemove", checkPos);
+            canvas.removeEventListener("mouseup", checkClick);           
+            clearInterval(fadeId);    
+            initGame();    
         }
-        //timerId = setInterval("updateUI()", 1000 / frames);
-        //canvas.addEventListener("mousemove", checkPos);
-        //canvas.addEventListener("mouseup", checkClick);
-        
+               
     }
 }
-
 
 
 

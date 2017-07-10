@@ -1,22 +1,16 @@
 //Map
 const SIZE=100;
 const ROWS = 4;
-const COLS = 72;
+const COLS = 85;
 
-//Canvas
-var stage = document.getElementById("stage");
-canvas = document.getElementById("myCanvas");
-canvas.width = 1400;
-canvas.height = 900;
-var surface = canvas.getContext("2d");
-
+// Indexes and counters for animations
 var frameLavaIndex = 0; 	// Index of the Lava sprite to display via drawImage.
 var currentLavaFrame = 0; 	// Counter for the Lava frames.
 var maxLavaFrames = 1; 		// The number of frames in a single Lava sprite is drawn.
 
 var frameBackgroundIndex = 0; 	// Index of the Background sprite to display via drawImage.
 var currentBackgroundFrame = 0; 	// Counter for the Backgroundframes.
-var maxBackgroundFrames = 5; 		// The number of frames a single Background sprite is drawn.
+var maxBackgroundFrames = 3; 		// The number of frames a single Background sprite is drawn.
 
 //crating objects for all map tiles
 var topLeft = new Image();
@@ -75,14 +69,15 @@ singlePlatform.src = "./Assets/LevelTiles/FireLevel/singlePlatform.png";
 
 //Creating the map
 var map =[
-    [0,0,0,0,0,0,11,0,0,16,0,0,0,0,0,0,0,0,0,0,0,0,0,14,13,0,1,5,0,0,14,13,0,0,0,0,0,0,0,0,0,0,0,11,0,0,16,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,1,15,0,0,0,0,0,1,5,0,0,0,0,0,0,0,11,0,0,0,0,2,6,0,0,0,0,0,0,0,0,0,11,0,0,0,1,3,15,0,0,0,0,1,5,0,0,0,0,0,0,0,0,16,0,0,16,0,0,14,13,0,0,0,0,0,0],
-    [1,3,3,3,3,9,6,7,7,7,7,7,2,10,3,3,3,3,3,3,3,12,3,3,3,3,9,6,7,7,7,7,7,7,1,3,3,12,3,3,3,9,4,6,7,7,7,7,2,10,3,3,3,3,3,3,5,7,7,7,7,7,7,7,7,7,7,7,1,3,3,5],
-    [2,4,4,4,4,4,6,8,8,8,8,8,2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,6,8,8,8,8,8,8,2,4,4,4,4,4,4,4,4,6,8,8,8,8,2,4,4,4,4,4,4,4,6,8,8,8,8,8,8,8,8,8,8,8,2,4,4,6]
+    [0,0,0,0,0,0,11,0,0,16,0,0,0,0 ,0,0,0,0,0,0,0,0 ,0,14,13,0,1,5,0 ,0,14,13,0,0,0,0,0,0 ,0,0,0,0,0,11,0,0,16,0,0, 0,0,0,0,0,0,0,0 ,0,0 ,0 , 0,0 ,16,0,0 ,0 ,0,0,0,0,0 ,11,0 ,0,16,0 ,0 ,0 ,16,0 ,0 ,0,16,0,0],
+    [0,0,0,0,0,1,15,0,0, 0,0,0,1,5 ,0,0,0,0,0,0,0,11,0, 0,0 ,0,2,6,0 ,0,0 ,0 ,0,0,0,0,0,11,0,0,0,1,3,15,0,0,0 ,0,1, 5,0,0,0,0,0,0,11,0,0 ,14,13,0 ,0 ,0,14,13,0,0,0,0,1 ,15,0 ,0,0 ,0 ,16,0 ,0 ,0 ,16,0,0 ,0,0],
+    [1,3,3,3,3,9,6 ,7,7, 7,7,7,2,10,3,3,3,3,3,3,3,12,3,3 ,3 ,3,9,6,7 ,7,7 ,7 ,7,7,1,3,3,12,3,3,3,9,4,6 ,7,7,7 ,7,2,10,3,3,3,3,3,3,15,7,7 ,7 ,7 ,7 ,7 ,7,7 ,7 ,7,7,1,3,9 ,10,3 ,3,5 ,7 ,7 ,7 ,7 ,7 ,7 ,7,1 ,3,5],
+    [2,4,4,4,4,4,6 ,8,8, 8,8,8,2, 4,4,4,4,4,4,4,4, 4,4,4 , 4,4,4,6,8 ,8,8 ,8 ,8,8,2,4,4,4 ,4,4,4,4,4,6 ,8,8,8 ,8,2, 4,4,4,4,4,4,4,6 ,8,8 ,8 ,8 ,8 ,8 ,8,8 ,8 ,8,8,2,4,4 ,4 ,4 ,4,6 ,8 ,8 ,8 ,8 ,8 ,8 ,8,2 ,4,6]
 ];
 
-//A set interval to unimate Lava & Background
+//A set interval to animate Lava & Background
 var idInt2 =setInterval(update2, 350);
+var idInt4 = setInterval(backUpdate, 75);
 
 function generateMap()
 {
@@ -176,13 +171,16 @@ function generateMap()
 function update2()
 {
     animateLava();
+}
+
+function backUpdate()
+{
     animateBackground();
 }
 
 function animateLava()
 {
-	//To animate the Lava top & botom images 
-    currentLavaFrame++;
+	//To animate the Lava top & botom images     
     if (currentLavaFrame == maxLavaFrames)
     {
         frameLavaIndex++;
@@ -190,6 +188,7 @@ function animateLava()
         if (frameLavaIndex == 2)
             frameLavaIndex = 0;
     }
+    currentLavaFrame++;
 }
 
 function animateBackground()
