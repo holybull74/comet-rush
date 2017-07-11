@@ -89,4 +89,8 @@ function render()
 			surface.drawImage(healthBarImage,0, 0, healthBarImage.width, healthBarImage.height, 500, 800, healthBarImage.width, healthBarImage.height);
 		}
 
+		if (gameoverPic == false)
+		{
+			surface.drawImage(gameOverbg,0,0, 1000, 500);
+		}
 }

@@ -33,7 +33,7 @@ images[11].src = "./Assets/MainCharacter/MainCharacterDamageL.png";
 var bulletArray = []; // For keeping track of player bullets
 
 //creating Player object.....
-var player = {img: images[0], x:300, y:600, dir:1, idle:true, width:100, height:100 , speed: WORLDSPEED, sX :0, sY:0 , isJumping: false, onGround: false,damage:0,health:3};
+var player = {img: images[0], x:300, y:600, dir:1, idle:true, width:100, height:100 , speed: WORLDSPEED, sX :0, sY:0 , isJumping: false, onGround: false,damage:0,health:5};
 	
 var frameIndex = 0; 	// Index of the player sprite to display via drawImage.
 var currentFrame = 0; 	// Counter for the player frames.

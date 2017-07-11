@@ -100,8 +100,9 @@ function fireBossCollision()
 	{
         if ((player.y + player.height > fireBoss.y ) && (player.y < fireBoss.y + fireBoss.height))
 		{
+
 			countP++;
-			if(countP==1){ player.damage++;player.health--;}
+			if(countP==1){ player.damage++;player.health--;drain();}
 			//console.log("Count"+count);
         }
     }else
@@ -115,7 +116,7 @@ function fireBossCollision()
 	}
 	if(player.health<=0)
 	{
-		alert("GameOver");
+		//alert("GameOver");
 	}
 	for (i = 0; i < bulletArray.length; i++)
 	{
