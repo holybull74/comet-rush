@@ -139,6 +139,29 @@ function collision()
 					}	
 				}
 			}
+			if(map[r][c].lava)
+			{
+				var vectorX = (player.x + (player.width/2) - 10) - (map[r][c].x + (SIZE/2));
+				var vectorY = (player.y + (player.height/2)) - (map[r][c].y + (SIZE));
+				
+				var boxWidth = ((player.width/2) - 10) + SIZE/2;
+
+
+				if(Math.abs(vectorX) < boxWidth && Math.abs(vectorY) < SIZE)
+				{
+					var cX = boxWidth - Math.abs(vectorX);
+					var cY = SIZE- Math.abs(vectorY);
+
+					if( cX >= cY)
+					{
+						if (vectorY < 0)
+						{
+							clearInterval(mainUpdateInterval);
+							alert("You died");
+						}
+					}					
+				}
+			}
 		}
 	}
 }

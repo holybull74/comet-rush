@@ -1,9 +1,12 @@
+
+var mainUpdateInterval;
+
 function initGame() {
 
     introMusic.pause();  
     themeSong.play();
     themeSong.loop = true;    
-    var idInt = setInterval(update, 1000/frames);
+    mainUpdateInterval = setInterval(update, 1000/frames);
 }
 
 

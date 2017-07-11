@@ -12,7 +12,7 @@ imagesB[0].src = "./Assets/Enemy/FirePlanet/FireBossSpriteSheetL.png";
 imagesB[1].src = "./Assets/Enemy/FirePlanet/FireBossSpriteSheetR.png";
 
 var healthBarImage=new Image();
-healthBarImage.src="./HealthBar.png";
+healthBarImage.src="./Assets/UI/HealthFire.png";
 healthBarImage.width=500;
 healthBarImage.height=40;
 
