@@ -33,3 +33,8 @@ function update() {
 function bossDeath(){
     alert('Victory!');
 }
+
+function gameEnd()
+{
+    clearInterval(mainUpdateInterval);
+}

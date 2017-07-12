@@ -17,6 +17,11 @@ var introMusic = new Audio();
 var themeSong = new Audio();
 var bossVictory = new Audio();
 
+// Player's sound effects
+var jumpSound = new Audio();
+var shootSound = new Audio();
+var deathSound = new Audio();
+
 //Mouse variable initialization
 var mouseX;
 var mouseY;
@@ -71,6 +76,14 @@ introMusic.load();
 themeSong.load();
 introMusic.play();
 introMusic.loop = true;
+
+//Player's audio source & initialization
+jumpSound.src = "./Assets/Sound/Effects/Jump1.wav";
+shootSound.src = "./Assets/Sound/Effects/Shoot.wav";
+deathSound.src = "./Assets/Sound/Effects/HeroDeath.wav";
+jumpSound.load();
+shootSound.load();
+deathSound.load();
 
 //Initializing button position and size in arrays
 var uiButton = [];

@@ -7,6 +7,7 @@ var stageArrivalDrawPermit = false;
 var stageArrivalTimer = 0;
 var bulletCount = 0;
 var bulletTimer = 0;
+var playerAlive = true;
 
 
 // World variables
@@ -72,7 +73,7 @@ function arriveToStage()
 		//A set interval to animate the player images...
 		stageArrivalDrawPermit = true;
 		playerAnimationIntervalID = setInterval(playerAnimationUpdate, 70);
-		//clearTimeout(timerId);
+		
 		
 	}
 
@@ -97,7 +98,7 @@ function playerAnimationUpdate()
 function scrollMap()
 {
 	//Scroll the map if player.x>= 300 & isPressed == True
-	if (isPressed && player.x >= 300)
+	if (playerAlive && isPressed && player.x >= 300)
 	{
 		for (var row = 0; row < map.length; row++)
 		{
@@ -187,8 +188,15 @@ function collision()
 					{
 						if (vectorY < 0)
 						{
-							clearInterval(mainUpdateInterval);
-							alert("You died");
+							//frameIndex = 0; 	
+				            //currentFrame = 0;
+							player.img = images[12];
+							playerAlive = false;
+							player.speed = 0;
+							player.sY = 0;
+							gravity = 0;
+							deathSound.play();
+							setTimeout(gameEnd, 1000);										
 						}
 					}					
 				}
@@ -255,7 +263,7 @@ function moveBullets()
 //To set the right image from Array images for the player with the right key
 function handleInput()
 {
-	if(!stageArrival)
+	if(!stageArrival && playerAlive)
 	{
 		
 			// Space, is the player jumping?
@@ -268,6 +276,7 @@ function handleInput()
 				player.isJumping = true;
 				player.onGround = false;
 				player.sY = -player.speed * impulse;
+				jumpSound.play();
 
 				if(player.dir === 1)
 				{
@@ -353,6 +362,7 @@ function handleInput()
 				if( bulletTimer >= 1)
 				{
 					bulletTimer = 0;
+					shootSound.play();
 					createBullet();	
 
 				}
