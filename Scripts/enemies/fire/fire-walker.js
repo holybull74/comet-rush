@@ -13,6 +13,8 @@ var fireWalker = {
     spawnPoint: 2300,
     x: 2300,
     y: 600,
+    DAMAGE: 1,
+    HP: 2,
     updateAnimation: function() {
        // console.log("current frame: " + this.currentFrame + "frame index: " + this.frameIndex + "sourceX: " + this.sourceX);
         if (this.dir == 0){
@@ -41,9 +43,9 @@ var fireWalker = {
     },
     move: function () {
        // console.log("Player x: " + player.x + " Firewalker x: " + this.x + " Total Scroll: " + this.scrollCount + " Direction: " + this.dir);
-        if (rightPressed == true) {
+        if (isPressed == true) {
             if (player.x >= 300 || (end == true && player.x > 1300)) {
-                this.scrollCount += 8;
+                this.scrollCount += WORLDSPEED;
                 if (this.dir == 0) {
                     this.x += 0;
                     //this.spawnPoint -= 8;
@@ -60,7 +62,7 @@ var fireWalker = {
                     }
                 }
                 else {
-                    this.x -= 16;
+                    this.x -= WORLDSPEED * 2;
                     //this.spawnPoint -= 8;
                     for (var r =0; r < map.length ; r++) {
 		                for (var c =0 ; c < map[0].length ; c ++) {
@@ -77,7 +79,7 @@ var fireWalker = {
             }
             else {
                 if (this.dir == 0) {
-                    this.x += 8;
+                    this.x += WORLDSPEED;
                     //if (this.x >= this.spawnPoint + 295)
                     for (var r =0; r < map.length ; r++) {
 		                for (var c =0 ; c < map[0].length ; c ++) {
@@ -92,7 +94,7 @@ var fireWalker = {
                     }
                 }
                 else {
-                    this.x -= 8;
+                    this.x -= WORLDSPEED;
                     //if (this.x < this.spawnPoint)
                     for (var r =0; r < map.length ; r++) {
 		                for (var c =0 ; c < map[0].length ; c ++) {
@@ -108,9 +110,9 @@ var fireWalker = {
                 }
             }        
         }
-        else if (rightPressed == false){
+        else if (isPressed == false){
             if (this.dir == 0) {
-                this.x += 8;
+                this.x += WORLDSPEED;
                 //if (this.x >= this.spawnPoint + 300)
                 for (var r = 0; r < map.length; r++) {
                     for (var c = 0; c < map[0].length; c++) {
@@ -125,7 +127,7 @@ var fireWalker = {
                 }
             }
             else {
-                this.x -= 8;
+                this.x -= WORLDSPEED;
                 //if (this.x < this.spawnPoint)
                 for (var r = 0; r < map.length; r++) {
                     for (var c = 0; c < map[0].length; c++) {
@@ -160,15 +162,42 @@ function updateAnimation()
 }
 
 function fireWalkerCollision() {
+    //console.log("Player hit: " + player.hit);
+    //console.log("Player health: " + player.health);
     if ((player.x > fireWalker.x - SIZE) && (player.x < fireWalker.x + fireWalker.size)) {
         //It's within x-range, check y-range
         //console.log("player/fireWalker in x-range..");
         if ((player.y > fireWalker.y - fireWalker.size) && (player.y < fireWalker.y + fireWalker.size)) {
             //It's in both ranges so fireWalker and player have collided
             //console.log("player/fireWalker in y-range..");
-            endGame();
+            if (player.hit === false)
+                reconcileDamage();
         }
     }
+    for (i = 0; i < bulletArray.length; i++) {
+        if ((bulletArray[i].x + 10 > fireWalker.x) && (bulletArray[i].x < fireWalker.x + fireWalker.size + 10)) {
+
+            if ((bulletArray[i].y + 10 > fireWalker.y) && (bulletArray[i].y < fireWalker.y + fireWalker.size)) {
+                bulletArray.splice(i, 1);
+                fireWalker.HP--
+            }
+                if (fireWalker.HP <= 0)
+                    delete fireWalker;
+        }
+        console.log("Firewalker HP: " + fireWalker.HP);
+    }
+}
+
+function reconcileDamage(){
+    player.health -= fireWalker.DAMAGE;
+    drain();
+    player.hit = true;
+    setTimeout(playerRecovered, 2000);
+}
+
+function playerRecovered(){
+    console.log("recovered...");
+    player.hit = false;
 }
 
 function endGame()
