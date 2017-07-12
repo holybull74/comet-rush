@@ -2,10 +2,13 @@
 var textDraw=false;
 var healthBarDraw=false;
 var audioBoss=document.createElement("audio");
-audioBoss.setAttribute("src","./Assets/Sound/FireBoss.mp3");
+audioBoss.setAttribute("src","./Assets/Sound/Fire/FireBoss.mp3");
 
 var audioIntoBoss=document.createElement("audio");
-audioIntoBoss.setAttribute("src","./Assets/Sound/Boss Intro.mp3");
+audioIntoBoss.setAttribute("src","./Assets/Sound/BossIntro.mp3");
+
+var audioPlayerDeath = document.createElement("audio");
+audioPlayerDeath.setAttribute("src","./Assets/Sound/Effects/HeroDeath.wav");
 
 var imagesB = [new Image(), new Image()];
 imagesB[0].src = "./Assets/Enemy/FirePlanet/FireBossSpriteSheetL.png";
@@ -26,9 +29,8 @@ var fireBossMaxFrames = 3; 		// The number of frames in a single boss sprite is 
 var idIntB = setInterval(updateB, 70);
 
 function updateB()
-{
-	
-		animateFireBoss();
+{	
+	animateFireBoss();
 }
 
 function moveBoss()
@@ -112,7 +114,9 @@ function fireBossCollision()
 	}
 	if(fireBoss.health<=0)
 	{
-		alert("GameOver");
+		audioBoss.pause();
+        bossVictory.play();
+        setTimeout(bossDeath, 1000);
 	}
 	if(player.health<=0)
 	{

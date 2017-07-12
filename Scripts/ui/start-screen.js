@@ -15,6 +15,7 @@ generateMap();
 //Audio
 var introMusic = new Audio();
 var themeSong = new Audio();
+var bossVictory = new Audio();
 
 //Mouse variable initialization
 var mouseX;
@@ -62,8 +63,10 @@ creditsImage.src = "./Assets/UI/credits.png";
 cometImage.src = "./Assets/UI/fireball.png";
 
 //Audio source & initialization
-introMusic.src = "./Assets/Sound/Castlevania(MainScreen).mp3"
-themeSong.src = "./Assets/Sound/Heroic Fantasy(FireLevel).mp3"
+introMusic.src = "./Assets/Sound/Castlevania(MainScreen).mp3";
+themeSong.src = "./Assets/Sound/Fire/FireStage2.mp3";
+bossVictory.src = "./Assets/Sound/bossVictory.mp3";
+bossVictory.load();
 introMusic.load();
 themeSong.load();
 introMusic.play();

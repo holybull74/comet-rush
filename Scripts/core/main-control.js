@@ -1,9 +1,9 @@
 var gameoverPic = true;
 var mainUpdateInterval;
+var divHealthBar = document.getElementById("healthBar");
+var divHealthP = document.getElementById("healthPercentage");
 
-function initGame() {
-    var divHealthBar = document.getElementById("healthBar");
-    var divHealthP = document.getElementById("healthPercentage");
+function initGame() {    
     divHealthBar.style.visibility = "visible";
     divHealthP.style.visibility = "visible";
     introMusic.pause();  
@@ -27,4 +27,9 @@ function update() {
 	moveBoss();
 	fireBossCollision();
     render();
+}
+
+// New
+function bossDeath(){
+    alert('Victory!');
 }
