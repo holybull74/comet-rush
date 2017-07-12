@@ -43,9 +43,14 @@ function render()
 		}
 	}
 	//Drawing Player
-	surface.drawImage(player.img,
-            frameIndex * 100, 0, 100, 100,		// Source rectangle.
-            player.x, player.y, 100, 100);	// Dest rectangle.
+	if(stageArrivalDrawPermit)
+	{
+		surface.drawImage(player.img,
+        frameIndex * 100, 0, 100, 100,		// Source rectangle.
+         player.x, player.y, 100, 100);	// Dest rectangle.
+
+	}
+	
 			
 	//Drawing FireWalker
         //console.log("FireWalker Image: " + fireWalker.img);

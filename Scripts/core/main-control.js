@@ -10,6 +10,7 @@ function initGame() {
     themeSong.play();
     themeSong.loop = true;    
     mainUpdateInterval = setInterval(update, 1000/frames);
+    arriveToStage();
 }
 
 

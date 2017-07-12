@@ -1,7 +1,11 @@
 //Player
+var playerAnimationIntervalID;
 var leftPressed = false;
 var rightPressed = false;
-var bulletPressed=false;
+var stageArrival = true;
+var stageArrivalDrawPermit = false;
+var stageArrivalTimer = 0;
+
 
 // World variables
 var WORLDSPEED = 8;
@@ -16,7 +20,8 @@ var isPressed=false; // any key is Pressed
 var end=false; 
 	
 //Array for all player images.....
-var images = [new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image()];
+var images = [new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(),
+	          new Image(), new Image(), new Image()];
 images[0].src = "./Assets/MainCharacter/MainCharacterIdleR.png";
 images[1].src = "./Assets/MainCharacter/MainCharacterIdleL.png";
 images[2].src = "./Assets/MainCharacter/MainCharacterRunL.png";
@@ -29,11 +34,15 @@ images[8].src = "./Assets/MainCharacter/NoMoveShootingL.png";
 images[9].src = "./Assets/MainCharacter/NoMoveShootingR.png";
 images[10].src = "./Assets/MainCharacter/MainCharacterDamageR.png";
 images[11].src = "./Assets/MainCharacter/MainCharacterDamageL.png";
+images[12].src = "./Assets/MainCharacter/DeathSprite.png";
+images[13].src = "./Assets/MainCharacter/TeleportSpriteIn.png";
+images[14].src = "./Assets/MainCharacter/TeleportSpriteOut.png";
+
 
 var bulletArray = []; // For keeping track of player bullets
 
 //creating Player object.....
-var player = {img: images[0], x:300, y:600, dir:1, idle:true, width:100, height:100 , speed: WORLDSPEED, sX :0, sY:0 , isJumping: false, onGround: false,damage:0,health:5};
+var player = {img: images[13], x:300, y:600, dir:1, idle:true, width:100, height:100 , speed: WORLDSPEED, sX :0, sY:0 , isJumping: false, onGround: false,damage:0,health:5};
 	
 var frameIndex = 0; 	// Index of the player sprite to display via drawImage.
 var currentFrame = 0; 	// Counter for the player frames.
@@ -50,8 +59,22 @@ window.addEventListener("keyup", function(e)
 	
 });
 
-//A set interval to animate the player images....
-var idInt3 = setInterval(playerAnimationUpdate, 70);
+function arriveToStage()
+{
+	if(stageArrivalTimer === 3)
+	{
+		//A set interval to animate the player images...
+		stageArrivalDrawPermit = true;
+		playerAnimationIntervalID = setInterval(playerAnimationUpdate, 70);
+		clearTimeout(timerId);
+		
+	}
+
+	stageArrivalTimer++;
+	var timerId = setTimeout(arriveToStage, 1000);
+}
+
+
 
 var n=0;
 
@@ -166,132 +189,183 @@ function collision()
 	}
 }
 
-var r=true;
 
- function createBullet(){
-            var tempBullet = {x: (player.x + 50), y:player.y + 50};   
-			bulletArray.push(tempBullet);
-			}
-function moveBullets(){
-	var i = 0; 
-	while(bulletArray[i] != undefined)
-	{if (bulletArray[i].x > player.x+700 || bulletArray[i].x < 0 )bulletArray.splice(i,1);
-	if((r==true )||(bulletArray[i].x>=player.x+60))	
+
+// Create temporary bullet
+function createBullet()
+{
+	if(player.dir === 1)
 	{
-		bulletArray[i].x += 10;
-		if((player.x+40>=bulletArray[i].x))
-			{ bulletArray[i].x -= 10;}	
+		var tempBullet = {x: (player.x + SIZE - 8), y:player.y + SIZE/2 + 5, bulletLife: 700 , speedDir: 0};  
 	}
-	if ((r==false) ||  (player.x+40>=bulletArray[i].x) )
-	{		
-		bulletArray[i].x -= 10;
-		if(bulletArray[i].x>=player.x+60)
-			bulletArray[i].x += 10;
-	}
+	else if(player.dir === -1)
+		{
+			var tempBullet = {x: (player.x - 8), y:player.y + SIZE/2 + 5, bulletLife: 700 , speedDir: 0};  
+		}
+	 
+	bulletArray.push(tempBullet);
+}
+function moveBullets()
+{
+	var i = 0; 
+
+	while(bulletArray[i] != undefined)
+	{
+		if (bulletArray[i].bulletLife <= 0 || bulletArray[i].x < 0 )
+		{
+			bulletArray.splice(i,1);
+		}
+
+		if(player.dir === 1 && bulletArray[i].speedDir === 0)	
+		{
+			bulletArray[i].speedDir = 1;
+		}
+		if (player.dir === -1 && bulletArray[i].speedDir === 0)
+		{	
+			bulletArray[i].speedDir = -1;				
+		}
+
+		if(bulletArray[i].speedDir === 1)	
+		{
+			bulletArray[i].x += 20;
+			bulletArray[i].bulletLife -= 20;
+	
+		}
+		if (bulletArray[i].speedDir === -1 )
+		{		
+			bulletArray[i].x -= 20;
+			bulletArray[i].bulletLife -=20;
+			
+		}
+
 	i++;
 	}  
 }
 //To set the right image from Array images for the player with the right key
 function handleInput()
 {
-	//There is no input, then idle
-	if(!(inputArray[65] && inputArray[37] && inputArray[68] && inputArray[39]) && player.onGround)
+	if(!stageArrival)
 	{
-			if(player.dir === 1)
+		
+			// Space, is the player jumping?
+		if(inputArray[32])
 		{
-			player.img = images[0];
+			if(!player.isJumping && player.onGround)
+			{
+				frameIndex = 0; 	
+				currentFrame = 0;
+				player.isJumping = true;
+				player.onGround = false;
+				player.sY = -player.speed * impulse;
 
-		}else
-		{
-			player.img = images[1];
+				if(player.dir === 1)
+				{
+					player.img = images[4];
+
+				}else
+				{
+					player.img = images[5];
+				}
+			
+			}
 		}
 
-	}
-		// Space, is the player jumping?
-	if(inputArray[32])
-	{
-		if(!player.isJumping && player.onGround)
+		// Left Arrow or key A
+		if(inputArray[65] || inputArray[37])
 		{
-			frameIndex = 0; 	
-			currentFrame = 0;
-			player.isJumping = true;
-			player.onGround = false;
-			player.sY = -player.speed * impulse;
-
-			if(player.dir === 1)
+			
+			if(player.isJumping)
 			{
-				player.img = images[4];
+				player.img = images[5];
 
 			}else
 			{
-				player.img = images[5];
+				player.img = images[2];
 			}
-		   
-		}
-	}
-
-	// Left Arrow or key A
-	if(inputArray[65] || inputArray[37])
-	{
-		r=false;
-		if(player.isJumping)
-		{
-			player.img = images[5];
-
-		}else
-		{
-			player.img = images[2];
-		}
-		
-		player.dir = -1;
-		player.x -= player.speed;
-	}
-
-	//Right Arrow or key D
-	if(inputArray[68] || inputArray[39])
-	{
-		r=true;
-		if(player.isJumping)
-		{
-			player.img = images[4];
 			
-		}else
-		{
-			player.img = images[3];
-		}		
-		player.dir = 1;
-		isPressed = true;
-		if (player.x <= 300 || (end == true && player.x < 1300))
-		{ 
-			player.x += player.speed; 
+			player.dir = -1;
+			player.x -= player.speed;
 		}
-	}
 
-	if(inputArray[88] || inputArray[75])
-	{
-		
-			bulletPressed=true;
-			createBullet();
-		
-	}
-	player.sY += gravity;
-	player.y += player.sY;
-	player.onGround = false;
+		//Right Arrow or key D
+		if(inputArray[68] || inputArray[39])
+		{
+			
+			if(player.isJumping)
+			{
+				player.img = images[4];
+				
+			}else
+			{
+				player.img = images[3];
+			}		
+			player.dir = 1;
+			isPressed = true;
+			if (player.x <= 300 || (end == true && player.x < 1300))
+			{ 
+				player.x += player.speed; 
+			}
+		}
 
-	if(player.x >= canvas.width - player.width)
-	{
-		player.x = canvas.width - player.width;
-	}
-	else if ( player.x <= 0)
-	{
-		player.x = 0;
-	}
-	if(player.damage!=0)
-	{
-		if (player.dir == 1)
-			player.img = images[10];
-		else
-			player.img = images[11];
+		//Shooting F & K
+		if(inputArray[70] || inputArray[75] )
+		{
+			//Shooting and moving to the left
+				if(inputArray[65] || inputArray[37])
+				{
+					player.img = images[6];
+				}
+				//Shooting and moving to the right
+				else if(inputArray[68] || inputArray[39])
+				{
+					player.img = images[7];
+				}
+				else if(player.dir === 1)
+				{
+					player.img = images[9];
+
+				}else
+				{
+					player.img = images[8];
+				}
+			
+		createBullet();			
+		}
+		//There is no input, then idle, or if there is conflicting input idle
+		if((!(inputArray[65] || inputArray[37]) && !(inputArray[68] || inputArray[39]) && !(inputArray[70] || inputArray[75]) && player.onGround) 
+			|| ((inputArray[65] || inputArray[37]) && (inputArray[68] || inputArray[39]) && player.onGround))
+		{
+
+			if(player.dir === 1)
+			{
+				player.img = images[0];
+
+			}else
+			{
+				player.img = images[1];
+			}
+
+		}
+
+		player.sY += gravity;
+		player.y += player.sY;
+		player.onGround = false;
+
+		if(player.x >= canvas.width - player.width)
+		{
+			player.x = canvas.width - player.width;
+		}
+		else if ( player.x <= 0)
+		{
+			player.x = 0;
+		}
+		if(player.damage!=0)
+		{
+			if (player.dir == 1)
+				player.img = images[10];
+			else
+				player.img = images[11];
+		}
 	}
 }
 
@@ -303,7 +377,14 @@ function animate()
 		frameIndex++;
 		currentFrame = 0;
 		if (frameIndex == 4)
+		{
+			if(stageArrival)
+				{
+					player.img = images[0];
+					stageArrival = false;					
+				}
 			frameIndex = 0;
+		}
 	}
 	currentFrame++;
 }

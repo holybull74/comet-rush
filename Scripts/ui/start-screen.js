@@ -134,7 +134,7 @@ function move()
 function draw()
 {
 	surface.drawImage(bgImage, 0, backgroundY);
-	surface.drawImage(logoImage,  frameIndex * 1000, 0, 1000, 500,		// Source rectangle.
+	surface.drawImage(logoImage,  logoIndex * 1000, 0, 1000, 500,		// Source rectangle.
                                                200, -75, 1000, 500);	// Dest rectangle.
 
 	surface.drawImage(playImage, uiButton[0].x, uiButton[0].y);
@@ -154,7 +154,7 @@ function animateLogo()
    if (currentLogoFrame == maxLogoFrames)
     {
         logoIndex++;
-        currentLavaFrame = 0;
+        currentLogoFrame = 0;
         if (logoIndex == 4)
             logoIndex = 0;
     }
