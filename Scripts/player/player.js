@@ -14,7 +14,6 @@ var playerAlive = true;
 var WORLDSPEED = 8;
 var gravity =  1.7;
 var impulse = 2.8;
-var collisionDirection = " ";
 var clockTimer = 0;
 
 //Getting the user input in an array for multiple input.
@@ -139,13 +138,16 @@ function collision()
 
 					if( cX >= cY)
 					{
-						if (vectorY > 0)
+						if (vectorY > 0 && vectorY < 40)
 						{
-							collisionDirection = "top"
+							console.log("Vector y: " + vectorY);
+							//collision on top of sprite
+							player.sY = 0;
+							player.y = (map[r][c].y + SIZE/2);
 							
 						}else if ( vectorY <= 0 && ((((player.x + SIZE - 30) >= (map[r][c].x )) || ( (player.x + 30) >= (map[r][c].x ) )) && ((player.x + 30) <= (map[r][c].x + SIZE))))
 						{
-							collisionDirection = "bot";
+							//collision on bot of sprite
 							player.onGround = true;
 							player.sY = 0;
 							player.isJumping = false;
@@ -157,13 +159,13 @@ function collision()
 					{
 						if(vectorX >= 0  && vectorX <= 70 )
 						{
-							collisionDirection = "left";
+							//collision on left of sprite
 							player.img = images[1];
 							player.x = map[r][c].x + SIZE - 20;
 							
 						}else if(((player.x + SIZE - 20) >= map[r][c].x) && (player.x + SIZE - 20) <= (map[r][c].x + SIZE/2))
 						{
-							collisionDirection = "right";
+							//collision on right of sprite
 							player.img = images[0];
 							player.x = map[r][c].x - (player.width - 20);
 							
@@ -195,6 +197,8 @@ function collision()
 							player.speed = 0;
 							player.sY = 0;
 							gravity = 0;
+							divHealthP.style.width = 0 + 'px';
+           					divHealthP.innerHTML = 0 * 1 + '%';							
 							deathSound.play();
 							setTimeout(gameEnd, 1000);										
 						}

@@ -70,7 +70,7 @@ cometImage.src = "./Assets/UI/fireball.png";
 //Audio source & initialization
 introMusic.src = "./Assets/Sound/Castlevania(MainScreen).mp3";
 themeSong.src = "./Assets/Sound/Fire/FireStage2.mp3";
-bossVictory.src = "./Assets/Sound/bossVictory.mp3";
+bossVictory.src = "./Assets/Sound/StageClear.mp3";
 bossVictory.load();
 introMusic.load();
 themeSong.load();

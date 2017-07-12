@@ -1,4 +1,4 @@
-var gameoverPic = true;
+var gameOver = false;
 var mainUpdateInterval;
 var divHealthBar = document.getElementById("healthBar");
 var divHealthP = document.getElementById("healthPercentage");
@@ -35,6 +35,7 @@ function bossDeath(){
 }
 
 function gameEnd()
-{
-    clearInterval(mainUpdateInterval);
+{   
+   clearInterval(mainUpdateInterval);
+   renderGameOver();
 }

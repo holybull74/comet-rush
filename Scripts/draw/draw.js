@@ -89,13 +89,16 @@ function render()
 			surface.fillText("The Fire Boss is coming...",0,370);
 			
 		}
-		if(healthBarDraw==true)
+		if(healthBarDraw==true )
 		{
 			surface.drawImage(healthBarImage,0, 0, healthBarImage.width, healthBarImage.height, 500, 800, healthBarImage.width, healthBarImage.height);
 		}
 
-		if (gameoverPic == false)
-		{
-			surface.drawImage(gameOverbg,0,0, 1000, 500);
-		}
+}
+
+function renderGameOver()
+{
+	divHealthBar.style.visibility = "hidden";
+   	divHealthP.style.visibility = "hidden";
+    surface.drawImage(gameOverbg,0,0, 1400, 900);
 }
