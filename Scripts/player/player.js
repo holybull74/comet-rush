@@ -5,6 +5,8 @@ var rightPressed = false;
 var stageArrival = true;
 var stageArrivalDrawPermit = false;
 var stageArrivalTimer = 0;
+var bulletCount = 0;
+var bulletTimer = 0;
 
 
 // World variables
@@ -12,16 +14,19 @@ var WORLDSPEED = 8;
 var gravity =  1.7;
 var impulse = 2.8;
 var collisionDirection = " ";
+var clockTimer = 0;
 
 //Getting the user input in an array for multiple input.
-inputArray = [];
+var inputArray = [];
+// For keeping track of player bullets
+var bulletArray = [];
 
 var isPressed=false; // any key is Pressed
 var end=false; 
 	
 //Array for all player images.....
 var images = [new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(),
-	          new Image(), new Image(), new Image()];
+	          new Image(), new Image(), new Image(), new Image(), new Image()];
 images[0].src = "./Assets/MainCharacter/MainCharacterIdleR.png";
 images[1].src = "./Assets/MainCharacter/MainCharacterIdleL.png";
 images[2].src = "./Assets/MainCharacter/MainCharacterRunL.png";
@@ -37,9 +42,10 @@ images[11].src = "./Assets/MainCharacter/MainCharacterDamageL.png";
 images[12].src = "./Assets/MainCharacter/DeathSprite.png";
 images[13].src = "./Assets/MainCharacter/TeleportSpriteIn.png";
 images[14].src = "./Assets/MainCharacter/TeleportSpriteOut.png";
+images[15].src = "./Assets/MainCharacter/mainCharacterJumpShootL.png";
+images[16].src = "./Assets/MainCharacter/mainCharacterJumpShootR.png";
 
-
-var bulletArray = []; // For keeping track of player bullets
+ 
 
 //creating Player object.....
 var player = {img: images[13], x:300, y:600, dir:1, idle:true, width:100, height:100 , speed: WORLDSPEED, sX :0, sY:0 , isJumping: false, onGround: false,damage:0,health:5};
@@ -66,12 +72,14 @@ function arriveToStage()
 		//A set interval to animate the player images...
 		stageArrivalDrawPermit = true;
 		playerAnimationIntervalID = setInterval(playerAnimationUpdate, 70);
-		clearTimeout(timerId);
+		//clearTimeout(timerId);
 		
 	}
 
 	stageArrivalTimer++;
-	var timerId = setTimeout(arriveToStage, 1000);
+	clockTimer++;
+	bulletTimer += 1;
+	var timerId = setTimeout(arriveToStage, 500);
 }
 
 
@@ -196,11 +204,13 @@ function createBullet()
 {
 	if(player.dir === 1)
 	{
-		var tempBullet = {x: (player.x + SIZE - 8), y:player.y + SIZE/2 + 5, bulletLife: 700 , speedDir: 0};  
+		var tempBullet = {x: (player.x + SIZE - 8), y:player.y + SIZE/2 + 5, bulletLife: 700 , speedDir: 0 , speed: 40};  
+	
 	}
 	else if(player.dir === -1)
 		{
-			var tempBullet = {x: (player.x - 8), y:player.y + SIZE/2 + 5, bulletLife: 700 , speedDir: 0};  
+			var tempBullet = {x: (player.x - 8), y:player.y + SIZE/2 + 5, bulletLife: 700 , speedDir: 0, speed: 40};  
+		
 		}
 	 
 	bulletArray.push(tempBullet);
@@ -214,6 +224,7 @@ function moveBullets()
 		if (bulletArray[i].bulletLife <= 0 || bulletArray[i].x < 0 )
 		{
 			bulletArray.splice(i,1);
+			
 		}
 
 		if(player.dir === 1 && bulletArray[i].speedDir === 0)	
@@ -227,14 +238,14 @@ function moveBullets()
 
 		if(bulletArray[i].speedDir === 1)	
 		{
-			bulletArray[i].x += 20;
-			bulletArray[i].bulletLife -= 20;
+			bulletArray[i].x += bulletArray[i].speed;
+			bulletArray[i].bulletLife -= bulletArray[i].speed;
 	
 		}
 		if (bulletArray[i].speedDir === -1 )
 		{		
-			bulletArray[i].x -= 20;
-			bulletArray[i].bulletLife -=20;
+			bulletArray[i].x -= bulletArray[i].speed;
+			bulletArray[i].bulletLife -= bulletArray[i].speed;
 			
 		}
 
@@ -307,32 +318,48 @@ function handleInput()
 			}
 		}
 
-		//Shooting F & K
-		if(inputArray[70] || inputArray[75] )
+		//Shooting X & K
+		if(inputArray[88] || inputArray[75])
 		{
 			//Shooting and moving to the left
-				if(inputArray[65] || inputArray[37])
+				if((inputArray[65] || inputArray[37]) && player.onGround)
 				{
 					player.img = images[6];
 				}
 				//Shooting and moving to the right
-				else if(inputArray[68] || inputArray[39])
+				else if((inputArray[68] || inputArray[39]) && player.onGround)
 				{
 					player.img = images[7];
 				}
-				else if(player.dir === 1)
+				// Shoothing and jump left
+				else if(inputArray[32] && (player.dir === -1) && !player.onGround )
+				{
+					player.img = images[15];
+				}
+				// Shooting and jump right
+				else if(inputArray[32] && (player.dir === 1) && !player.onGround)
+				{
+					player.img = images[16];
+				}
+				else if(player.dir === 1 && player.onGround)
 				{
 					player.img = images[9];
 
-				}else
+				}else if(player.dir === -1 && player.onGround)
 				{
 					player.img = images[8];
 				}
-			
-		createBullet();			
+
+				if( bulletTimer >= 1)
+				{
+					bulletTimer = 0;
+					createBullet();	
+
+				}
+
 		}
 		//There is no input, then idle, or if there is conflicting input idle
-		if((!(inputArray[65] || inputArray[37]) && !(inputArray[68] || inputArray[39]) && !(inputArray[70] || inputArray[75]) && player.onGround) 
+		if((!(inputArray[65] || inputArray[37]) && !(inputArray[68] || inputArray[39]) && !(inputArray[88] || inputArray[75]) && player.onGround) 
 			|| ((inputArray[65] || inputArray[37]) && (inputArray[68] || inputArray[39]) && player.onGround))
 		{
 
