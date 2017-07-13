@@ -1,6 +1,7 @@
 //Fire Boss
 var textDraw=false;
 var bossHealthBarDraw=false;
+var bossArmAttackAnimation = false;
 var audioBoss=document.createElement("audio");
 audioBoss.setAttribute("src","./Assets/Sound/Fire/FireBoss.mp3");
 
@@ -88,27 +89,34 @@ function moveBoss()
 	if((isPressed==false&&end==true)||(isPressed==true&&end==true))
 	{
 		//Distance from the center of the player to the center of the boss on X
-		var vectorX =  (player.X + SIZE/2) - (fireBoss.x + fireBoss.width/2);
-
+		var vectorX =  (player.x + SIZE/2) - (fireBoss.x + fireBoss.width/2);
+		
 		if(vectorX < 0)
 		{
-			console.log("VectorX : "+ vectorX);
-			if(vectorX > -120 && vectorX < 0 )
-				{		
-
+			
+			if(vectorX > -144 && vectorX < 0 )
+				{	
+					console.log("Inside distance to animate");
+					bossArmAttackAnimation = true;	
 					fireBoss.img=imagesB[2];
 				}
-
-		}else
-		{
+			else if(vectorX < -144)
+				{
+					bossArmAttackAnimation = false;
+				}
 
 		}
+			
 		bossHealthBarDraw=true;
 		if(fireBoss.dir==1)
 		{
-			fireBoss.img=imagesB[0];
+			if(!bossArmAttackAnimation)
+			{
+			  	fireBoss.img=imagesB[0];
+			}
+
 			fireBoss.x-=8;
-		//console.log(fireBoss.x);
+
 			if(fireBoss.x<100)
 			{
 				fireBoss.dir=-1;
@@ -116,8 +124,13 @@ function moveBoss()
 		}
 		if(fireBoss.dir==-1)
 		{
-			fireBoss.img=imagesB[1];
+			if(!bossArmAttackAnimation)
+			{
+				fireBoss.img=imagesB[1];
+			}
+
 			fireBoss.x+=8;
+
 			if(fireBoss.x>1300)
 			{
 				fireBoss.dir=1;
