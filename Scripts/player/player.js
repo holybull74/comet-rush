@@ -8,6 +8,7 @@ var stageArrivalTimer = 0;
 var bulletCount = 0;
 var bulletTimer = 0;
 var playerAlive = true;
+var jumpLimit = 1;
 
 
 // World variables
@@ -61,6 +62,10 @@ window.addEventListener("keydown", function(e)
 window.addEventListener("keyup", function(e)
 {
 	isPressed = false;
+	if(e.keyCode === 32)
+	{
+	   jumpLimit = 1;
+	}
 	inputArray[e.keyCode] = false;
 	
 });
@@ -134,38 +139,47 @@ function collision()
 				if(Math.abs(vectorX) < boxWidth && Math.abs(vectorY) < SIZE)
 				{
 					var cX = boxWidth - Math.abs(vectorX);
-					var cY = SIZE- Math.abs(vectorY);
+					var cY = SIZE/2 - Math.abs(vectorY);
+					
 
-					if( cX >= cY)
-					{
-						if (vectorY > 0 && vectorY < 40)
+					//Collide againts the bottom of a tile
+					if (  ( ((player.x + (SIZE/2) - 10) >= (map[r][c].x)) || ((player.x + 30) >= (map[r][c].x)) ) && ((player.x + 30) <= (map[r][c].x + SIZE)) )
 						{
-							console.log("Vector y: " + vectorY);
-							//collision on top of sprite
-							player.sY = 0;
-							player.y = (map[r][c].y + SIZE/2);
+							if( (player.y + 25) >= (map[r][c].y) && (player.y + 25) <= (map[r][c].y + SIZE/2) )
+							{
+								//collision on top of sprite
+								player.y = (map[r][c].y + (SIZE/2) + 2 );
+								player.sY *= -1;
+								
+							}							
 							
-						}else if ( vectorY <= 0 && ((((player.x + SIZE - 30) >= (map[r][c].x )) || ( (player.x + 30) >= (map[r][c].x ) )) && ((player.x + 30) <= (map[r][c].x + SIZE))))
-						{
+						}
+					// collide on ground
+					if ( (vectorY < 0) && ((player.y + SIZE - 25) <= ( map[r][c].y )) && ((((player.x + (SIZE/2) - 10) >= (map[r][c].x )) || ( (player.x + 30) >= (map[r][c].x ) )) 
+										   && ((player.x + 30) <= (map[r][c].x + SIZE))))
+					{
 							//collision on bot of sprite
 							player.onGround = true;
 							player.sY = 0;
 							player.isJumping = false;
 						    player.y = map[r][c].y - player.height;
 
-						}
+					}
 
-					}else
+					if( cX <= cY)
 					{
+						//collision on left of sprite 
 						if(vectorX >= 0  && vectorX <= 70 )
 						{
-							//collision on left of sprite
+							
 							player.img = images[1];
 							player.x = map[r][c].x + SIZE - 20;
 							
-						}else if(((player.x + SIZE - 20) >= map[r][c].x) && (player.x + SIZE - 20) <= (map[r][c].x + SIZE/2))
+						}
+						//collision on right of sprite
+						else if(((player.x + SIZE - 20) >= map[r][c].x) && (player.x + SIZE - 20) <= (map[r][c].x + SIZE/2))
 						{
-							//collision on right of sprite
+							
 							player.img = images[0];
 							player.x = map[r][c].x - (player.width - 20);
 							
@@ -271,8 +285,9 @@ function handleInput()
 	{
 		
 			// Space, is the player jumping?
-		if(inputArray[32])
+		if(inputArray[32] && jumpLimit === 1)
 		{
+			jumpLimit = 0;
 			if(!player.isJumping && player.onGround)
 			{
 				frameIndex = 0; 	

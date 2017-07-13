@@ -34,11 +34,20 @@ function render()
 			{
 				surface.beginPath();
 				surface.lineWidth = "3";
-				surface.strokeStyle = "red";
-				surface.rect( map[row][col].x, map[row][col].y , SIZE , SIZE);
+				surface.strokeStyle = "blue";
+				surface.rect( map[row][col].x, map[row][col].y , SIZE , SIZE/2);
 				surface.stroke();
 
-			}*/
+			}
+							if (map[row][col].aRock === true)
+							{
+							surface.beginPath();
+							surface.moveTo(player.x + (player.width/2) - 10,player.y + (player.height/2));
+							surface.lineTo(map[row][col].x + (SIZE/2),map[row][col].y + (SIZE/2));
+							surface.lineWidth = 2;
+               				surface.strokeStyle = "red";
+							surface.stroke();
+							} */
 
 		}
 	}
@@ -50,8 +59,12 @@ function render()
          player.x, player.y, 100, 100);	// Dest rectangle.
 
 	}
-	
-			
+			/*	surface.beginPath();
+				surface.lineWidth = "3";
+				surface.strokeStyle = "green";
+				surface.rect(player.x + 30 , player.y + 25 , SIZE - 60 , SIZE - 25);
+				surface.stroke();*/
+							
 	//Drawing FireWalker
         //console.log("FireWalker Image: " + fireWalker.img);
         surface.drawImage(fireWalker.img,
