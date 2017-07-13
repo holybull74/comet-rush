@@ -50,8 +50,12 @@ images[16].src = "./Assets/MainCharacter/mainCharacterJumpShootR.png";
  
 
 //creating Player object.....
+<<<<<<< HEAD
 var player = {img: images[13], x:300, y:600, dir:1, idle:true, width:100, height:100 , speed: WORLDSPEED, sX :0, sY:0 , isJumping: false, onGround: false,damage:0,health:5};
 
+=======
+var player = {img: images[13], x:300, y:600, dir:1, idle:true, width:100, height:100 , speed: WORLDSPEED, sX :0, sY:0 , isJumping: false, onGround: false,damage:0,health:5,hit: false};
+>>>>>>> 669ba7b88472337ddd0828e356c10c8963f6e46e
 	
 var frameIndex = 0; 	// Index of the player sprite to display via drawImage.
 var currentFrame = 0; 	// Counter for the player frames.
@@ -419,7 +423,7 @@ function handleInput()
 		{
 			player.x = 0;
 		}
-		if(player.damage!=0)
+		if(player.damage!=0 || player.hit === true)
 		{
 			if (player.dir == 1)
 				player.img = images[10];
