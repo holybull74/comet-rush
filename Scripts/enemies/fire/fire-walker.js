@@ -11,7 +11,7 @@ var fireWalkerProto = {
     scrollCount: 0,
     sourceX: 0,
     sourceY: 0,
-    spawnPoint: 0,
+    //spawnPoint: 0,
     x: 0,
     y: 600,
     DAMAGE: 1,
