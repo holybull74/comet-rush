@@ -2,6 +2,7 @@
 var playerAnimationIntervalID;
 var leftPressed = false;
 var rightPressed = false;
+<<<<<<< HEAD
 var stageArrival = true;
 var stageArrivalDrawPermit = false;
 var stageArrivalTimer = 0;
@@ -10,24 +11,38 @@ var bulletTimer = 0;
 var playerAlive = true;
 var jumpLimit = 1;
 
+=======
+var bulletPressed=false;
+>>>>>>> master
 
 // World variables
 var WORLDSPEED = 8;
 var gravity =  1.7;
 var impulse = 2.8;
+<<<<<<< HEAD
 var clockTimer = 0;
 
 //Getting the user input in an array for multiple input.
 var inputArray = [];
 // For keeping track of player bullets
 var bulletArray = [];
+=======
+var collisionDirection = " ";
+
+//Getting the user input in an array for multiple input.
+inputArray = [];
+>>>>>>> master
 
 var isPressed=false; // any key is Pressed
 var end=false; 
 	
 //Array for all player images.....
+<<<<<<< HEAD
 var images = [new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(),
 	          new Image(), new Image(), new Image(), new Image(), new Image()];
+=======
+var images = [new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image(), new Image()];
+>>>>>>> master
 images[0].src = "./Assets/MainCharacter/MainCharacterIdleR.png";
 images[1].src = "./Assets/MainCharacter/MainCharacterIdleL.png";
 images[2].src = "./Assets/MainCharacter/MainCharacterRunL.png";
@@ -40,16 +55,23 @@ images[8].src = "./Assets/MainCharacter/NoMoveShootingL.png";
 images[9].src = "./Assets/MainCharacter/NoMoveShootingR.png";
 images[10].src = "./Assets/MainCharacter/MainCharacterDamageR.png";
 images[11].src = "./Assets/MainCharacter/MainCharacterDamageL.png";
+<<<<<<< HEAD
 images[12].src = "./Assets/MainCharacter/DeathSprite.png";
 images[13].src = "./Assets/MainCharacter/TeleportSpriteIn.png";
 images[14].src = "./Assets/MainCharacter/TeleportSpriteOut.png";
 images[15].src = "./Assets/MainCharacter/mainCharacterJumpShootL.png";
 images[16].src = "./Assets/MainCharacter/mainCharacterJumpShootR.png";
+=======
+>>>>>>> master
 
  
 
 //creating Player object.....
+<<<<<<< HEAD
 var player = {img: images[13], x:300, y:600, dir:1, idle:true, width:100, height:100 , speed: WORLDSPEED, sX :0, sY:0 , isJumping: false, onGround: false,damage:0,health:5,hit: false};
+=======
+var player = {img: images[0], x:300, y:600, dir:1, idle:true, width:100, height:100 , speed: WORLDSPEED, sX :0, sY:0 , isJumping: false, onGround: false,damage:0,health:3};
+>>>>>>> master
 	
 var frameIndex = 0; 	// Index of the player sprite to display via drawImage.
 var currentFrame = 0; 	// Counter for the player frames.
@@ -62,6 +84,7 @@ window.addEventListener("keydown", function(e)
 window.addEventListener("keyup", function(e)
 {
 	isPressed = false;
+<<<<<<< HEAD
 	if(e.keyCode === 32)
 	{
 	   jumpLimit = 1;
@@ -91,6 +114,17 @@ function arriveToStage()
 
 var n=0;
 
+=======
+	inputArray[e.keyCode] = false;
+	
+});
+
+//A set interval to animate the player images....
+var idInt3 = setInterval(playerAnimationUpdate, 70);
+
+var n=0;
+
+>>>>>>> master
 function playerAnimationUpdate()
 {	
 	animate();
@@ -134,6 +168,7 @@ function collision()
 				var vectorY = (player.y + (player.height/2)) - (map[r][c].y + (SIZE/2));
 				
 				var boxWidth = ((player.width/2) - 10) + SIZE/2;
+<<<<<<< HEAD
 
 
 				if(Math.abs(vectorX) < boxWidth && Math.abs(vectorY) < SIZE)
@@ -217,12 +252,54 @@ function collision()
 							setTimeout(gameEnd, 1000);										
 						}
 					}					
+=======
+
+
+				if(Math.abs(vectorX) < boxWidth && Math.abs(vectorY) < SIZE)
+				{
+					var cX = boxWidth - Math.abs(vectorX);
+					var cY = SIZE- Math.abs(vectorY);
+
+					if( cX >= cY)
+					{
+						if (vectorY > 0)
+						{
+							collisionDirection = "top"
+							
+						}else if ( vectorY <= 0 && ((((player.x + SIZE - 30) >= (map[r][c].x )) || ( (player.x + 30) >= (map[r][c].x ) )) && ((player.x + 30) <= (map[r][c].x + SIZE))))
+						{
+							collisionDirection = "bot";
+							player.onGround = true;
+							player.sY = 0;
+							player.isJumping = false;
+						    player.y = map[r][c].y - player.height;
+
+						}
+
+					}else
+					{
+						if(vectorX >= 0  && vectorX <= 70 )
+						{
+							collisionDirection = "left";
+							player.img = images[1];
+							player.x = map[r][c].x + SIZE - 20;
+							
+						}else if(((player.x + SIZE - 20) >= map[r][c].x) && (player.x + SIZE - 20) <= (map[r][c].x + SIZE/2))
+						{
+							collisionDirection = "right";
+							player.img = images[0];
+							player.x = map[r][c].x - (player.width - 20);
+							
+						}
+					}	
+>>>>>>> master
 				}
 			}
 		}
 	}
 }
 
+<<<<<<< HEAD
 
 
 // Create temporary bullet
@@ -243,6 +320,15 @@ function createBullet()
 }
 function moveBullets()
 {
+=======
+var r=true;
+
+ function createBullet(){
+            var tempBullet = {x: (player.x + 50), y:player.y + 50};   
+			bulletArray.push(tempBullet);
+			}
+function moveBullets(){
+>>>>>>> master
 	var i = 0; 
 
 	while(bulletArray[i] != undefined)
@@ -281,6 +367,7 @@ function moveBullets()
 //To set the right image from Array images for the player with the right key
 function handleInput()
 {
+<<<<<<< HEAD
 	if(!stageArrival && playerAlive)
 	{
 		
@@ -401,8 +488,82 @@ function handleInput()
 				player.img = images[1];
 			}
 
+=======
+	//There is no input, then idle
+	if(!(inputArray[65] && inputArray[37] && inputArray[68] && inputArray[39]) && player.onGround)
+	{
+			if(player.dir === 1)
+		{
+			player.img = images[0];
+
+		}else
+		{
+			player.img = images[1];
 		}
 
+	}
+		// Space, is the player jumping?
+	if(inputArray[32])
+	{
+		if(!player.isJumping && player.onGround)
+		{
+			frameIndex = 0; 	
+			currentFrame = 0;
+			player.isJumping = true;
+			player.onGround = false;
+			player.sY = -player.speed * impulse;
+
+			if(player.dir === 1)
+			{
+				player.img = images[4];
+
+			}else
+			{
+				player.img = images[5];
+			}
+		   
+		}
+	}
+
+	// Left Arrow or key A
+	if(inputArray[65] || inputArray[37])
+	{
+		r=false;
+		if(player.isJumping)
+		{
+			player.img = images[5];
+
+		}else
+		{
+			player.img = images[2];
+		}
+		
+		player.dir = -1;
+		player.x -= player.speed;
+	}
+
+	//Right Arrow or key D
+	if(inputArray[68] || inputArray[39])
+	{
+		r=true;
+		if(player.isJumping)
+		{
+			player.img = images[4];
+			
+		}else
+		{
+			player.img = images[3];
+		}		
+		player.dir = 1;
+		isPressed = true;
+		if (player.x <= 300 || (end == true && player.x < 1300))
+		{ 
+			player.x += player.speed; 
+>>>>>>> master
+		}
+	}
+
+<<<<<<< HEAD
 		player.sY += gravity;
 		player.y += player.sY;
 		player.onGround = false;
@@ -422,6 +583,33 @@ function handleInput()
 			else
 				player.img = images[11];
 		}
+=======
+	if(inputArray[88] || inputArray[75])
+	{
+		
+			bulletPressed=true;
+			createBullet();
+		
+	}
+	player.sY += gravity;
+	player.y += player.sY;
+	player.onGround = false;
+
+	if(player.x >= canvas.width - player.width)
+	{
+		player.x = canvas.width - player.width;
+	}
+	else if ( player.x <= 0)
+	{
+		player.x = 0;
+	}
+	if(player.damage!=0)
+	{
+		if (player.dir == 1)
+			player.img = images[10];
+		else
+			player.img = images[11];
+>>>>>>> master
 	}
 }
 

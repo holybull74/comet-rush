@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var gameOver = false;
 var mainUpdateInterval;
 var divHealthBar = document.getElementById("healthBar");
@@ -11,6 +12,14 @@ function initGame() {
     themeSong.loop = true;    
     mainUpdateInterval = setInterval(update, 1000/frames);
     arriveToStage();
+=======
+function initGame() {
+
+    introMusic.pause();  
+    themeSong.play();
+    themeSong.loop = true;    
+    var idInt = setInterval(update, 1000/frames);
+>>>>>>> master
 }
 
 
@@ -19,8 +28,12 @@ function update() {
     handleInput();  
     collision();      
     scrollMap();
+<<<<<<< HEAD
     for (var i = 0; i < fireWalker.length; i++)
         fireWalker[i].move();
+=======
+    fireWalker.move();
+>>>>>>> master
     fireWalkerCollision();
     fireWolf.move();
     fireWolfCollision();

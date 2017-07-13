@@ -104,12 +104,19 @@ function render()
 			surface.fillText("The Fire Boss is coming...",0,370);
 			
 		}
+<<<<<<< HEAD
 		if(healthBarDraw==true )
 		{
 			surface.drawImage(healthBarImage,0, 0, healthBarImage.width, healthBarImage.height, 500, 800, healthBarImage.width, healthBarImage.height);
 		}
 
 }
+=======
+		if(healthBarDraw==true)
+		{
+			surface.drawImage(healthBarImage,0, 0, healthBarImage.width, healthBarImage.height, 500, 800, healthBarImage.width, healthBarImage.height);
+		}
+>>>>>>> master
 
 function renderGameOver()
 {
