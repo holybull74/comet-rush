@@ -50,12 +50,8 @@ images[16].src = "./Assets/MainCharacter/mainCharacterJumpShootR.png";
  
 
 //creating Player object.....
-<<<<<<< HEAD
 var player = {img: images[13], x:300, y:600, dir:1, idle:true, width:100, height:100 , speed: WORLDSPEED, sX :0, sY:0 , isJumping: false, onGround: false,damage:0,health:5};
 
-=======
-var player = {img: images[13], x:300, y:600, dir:1, idle:true, width:100, height:100 , speed: WORLDSPEED, sX :0, sY:0 , isJumping: false, onGround: false,damage:0,health:5,hit: false};
->>>>>>> 669ba7b88472337ddd0828e356c10c8963f6e46e
 	
 var frameIndex = 0; 	// Index of the player sprite to display via drawImage.
 var currentFrame = 0; 	// Counter for the player frames.
@@ -134,11 +130,6 @@ function collision()
 	{
 		for (var c =0 ; c < map[0].length ; c ++)
 		{
-			playerLeft = player.x + 30;
-			playerRight = player.x + SIZE - 60;
-			playerTop = player.y + 25;
-			playerBot = player.y + SIZE;	
-
 			if(map[r][c].aRock)
 			{
 				//Get the distance from the center of the player to the center of a rock
