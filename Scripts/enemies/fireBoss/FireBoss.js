@@ -92,8 +92,10 @@ function moveBoss()
 
 		if(vectorX < 0)
 		{
+			console.log("VectorX : "+ vectorX);
 			if(vectorX > -120 && vectorX < 0 )
-				{
+				{		
+
 					fireBoss.img=imagesB[2];
 				}
 
