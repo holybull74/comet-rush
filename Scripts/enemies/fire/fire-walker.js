@@ -1,7 +1,7 @@
 //Fire-walker
 //console.log("Executing Fire Walker Script");
 var fireWalker = [];
-fireWalker[0] = {
+var fireWalkerProto = {
     img: null,
     size: 100,
     dir: 0,
@@ -11,8 +11,8 @@ fireWalker[0] = {
     scrollCount: 0,
     sourceX: 0,
     sourceY: 0,
-    spawnPoint: 2300,
-    x: 2300,
+    spawnPoint: 0,
+    x: 0,
     y: 600,
     DAMAGE: 1,
     HP: 2,
@@ -145,295 +145,21 @@ fireWalker[0] = {
     }
 };
 
-fireWalker[1] = {
-    img: null,
-    size: 100,
-    dir: 0,
-    maxFrames: 3,
-    currentFrame: 0,
-    frameIndex: 0,
-    scrollCount: 0,
-    sourceX: 0,
-    sourceY: 0,
-    spawnPoint: 4100,
-    x: 4100,
-    y: 600,
-    DAMAGE: 1,
-    HP: 2,
-    updateAnimation: function() {
-       // console.log("current frame: " + this.currentFrame + "frame index: " + this.frameIndex + "sourceX: " + this.sourceX);
-        if (this.dir == 0){
-            this.img = fireWalkerImg[0];
-            this.currentFrame++;
-            if (this.currentFrame == this.maxFrames){
-                this.frameIndex++;
-                this.currentFrame = 0;
-                if (this.frameIndex == 4)
-                    this.frameIndex = 0;
-                this.sourceX = this.frameIndex * this.size;
-            }
-        }
-        else {
-            this.img = fireWalkerImg[1];
-            this.currentFrame++;
-            if (this.currentFrame == this.maxFrames)
-            {
-                this.frameIndex++;
-                this.currentFrame = 0;
-                if (this.frameIndex == 4)
-                    this.frameIndex = 0;
-                this.sourceX = this.frameIndex * this.size;
-            }
-        }
-    },
-    move: function () {
-       // console.log("Player x: " + player.x + " Firewalker x: " + this.x + " Total Scroll: " + this.scrollCount + " Direction: " + this.dir);
-        if (isPressed == true) {
-            if (player.x >= 300 || (end == true && player.x > 1300)) {
-                this.scrollCount += WORLDSPEED;
-                if (this.dir == 0) {
-                    this.x += 0;
-                    //this.spawnPoint -= 8;
-                    for (var r =0; r < map.length ; r++) {
-		                for (var c =0 ; c < map[0].length ; c ++) {
-			                if (map[r][c].aRock === true && ((this.x + this.size > map[r][c].x) && (this.x + this.size <= map[r][c].x + 20))) {
-                                if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
-                                    //console.log("Firewalker hit right wall");
-                                    //if (this.x >= this.spawnPoint + 300)
-                                    this.dir = 1;
-                                }        
-                            }
-                        }
-                    }
-                }
-                else {
-                    this.x -= WORLDSPEED * 2;
-                    //this.spawnPoint -= 8;
-                    for (var r =0; r < map.length ; r++) {
-		                for (var c =0 ; c < map[0].length ; c ++) {
-			                if (map[r][c].aRock === true && ((this.x < map[r][c].x + SIZE) && (this.x >= map[r][c].x + SIZE - 20))) {
-                                if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
-                                    //console.log("Firewalker hit left wall");
-                                    //if (this.x >= this.spawnPoint + 300)
-                                    this.dir = 0;
-                                }     
-                            }
-                        }
-                    }
-                }
-            }
-            else {
-                if (this.dir == 0) {
-                    this.x += WORLDSPEED;
-                    //if (this.x >= this.spawnPoint + 295)
-                    for (var r =0; r < map.length ; r++) {
-		                for (var c =0 ; c < map[0].length ; c ++) {
-			                if (map[r][c].aRock === true && ((this.x + this.size > map[r][c].x) && (this.x + this.size <= map[r][c].x + 20))) {
-                                if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
-                                    //console.log("Firewalker hit right wall");
-                                    //if (this.x >= this.spawnPoint + 300)
-                                    this.dir = 1;
-                                }                      
-                            }
-                        }
-                    }
-                }
-                else {
-                    this.x -= WORLDSPEED;
-                    //if (this.x < this.spawnPoint)
-                    for (var r =0; r < map.length ; r++) {
-		                for (var c =0 ; c < map[0].length ; c ++) {
-			                if (map[r][c].aRock === true && ((this.x < map[r][c].x + SIZE) && (this.x >= map[r][c].x + SIZE - 20))) {
-                                if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
-                                   // console.log("Firewalker hit left wall");
-                                    //if (this.x >= this.spawnPoint + 300)
-                                    this.dir = 0;
-                                }           
-                            }
-                        }
-                    }
-                }
-            }        
-        }
-        else if (isPressed == false){
-            if (this.dir == 0) {
-                this.x += WORLDSPEED;
-                //if (this.x >= this.spawnPoint + 300)
-                for (var r = 0; r < map.length; r++) {
-                    for (var c = 0; c < map[0].length; c++) {
-                        if (map[r][c].aRock === true && ((this.x + this.size > map[r][c].x) && (this.x + this.size <= map[r][c].x + 20))) {
-                            if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
-                               // console.log("Firewalker hit right wall");
-                                //if (this.x >= this.spawnPoint + 300)
-                                this.dir = 1;
-                            }              
-                        }
-                    }
-                }
-            }
-            else {
-                this.x -= WORLDSPEED;
-                //if (this.x < this.spawnPoint)
-                for (var r = 0; r < map.length; r++) {
-                    for (var c = 0; c < map[0].length; c++) {
-                        if (map[r][c].aRock === true && ((this.x < map[r][c].x + SIZE) && (this.x >= map[r][c].x + SIZE - 20))) {
-                            if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
-                               // console.log("Firewalker hit left wall");
-                                //if (this.x >= this.spawnPoint + 300)
-                                this.dir = 0;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-};
-fireWalker[2] = {
-    img: null,
-    size: 100,
-    dir: 0,
-    maxFrames: 3,
-    currentFrame: 0,
-    frameIndex: 0,
-    scrollCount: 0,
-    sourceX: 0,
-    sourceY: 0,
-    spawnPoint: 5400,
-    x: 5400,
-    y: 600,
-    DAMAGE: 1,
-    HP: 2,
-    updateAnimation: function() {
-       // console.log("current frame: " + this.currentFrame + "frame index: " + this.frameIndex + "sourceX: " + this.sourceX);
-        if (this.dir == 0){
-            this.img = fireWalkerImg[0];
-            this.currentFrame++;
-            if (this.currentFrame == this.maxFrames){
-                this.frameIndex++;
-                this.currentFrame = 0;
-                if (this.frameIndex == 4)
-                    this.frameIndex = 0;
-                this.sourceX = this.frameIndex * this.size;
-            }
-        }
-        else {
-            this.img = fireWalkerImg[1];
-            this.currentFrame++;
-            if (this.currentFrame == this.maxFrames)
-            {
-                this.frameIndex++;
-                this.currentFrame = 0;
-                if (this.frameIndex == 4)
-                    this.frameIndex = 0;
-                this.sourceX = this.frameIndex * this.size;
-            }
-        }
-    },
-    move: function () {
-       // console.log("Player x: " + player.x + " Firewalker x: " + this.x + " Total Scroll: " + this.scrollCount + " Direction: " + this.dir);
-        if (isPressed == true) {
-            if (player.x >= 300 || (end == true && player.x > 1300)) {
-                this.scrollCount += WORLDSPEED;
-                if (this.dir == 0) {
-                    this.x += 0;
-                    //this.spawnPoint -= 8;
-                    for (var r =0; r < map.length ; r++) {
-		                for (var c =0 ; c < map[0].length ; c ++) {
-			                if (map[r][c].aRock === true && ((this.x + this.size > map[r][c].x) && (this.x + this.size <= map[r][c].x + 20))) {
-                                if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
-                                    //console.log("Firewalker hit right wall");
-                                    //if (this.x >= this.spawnPoint + 300)
-                                    this.dir = 1;
-                                }        
-                            }
-                        }
-                    }
-                }
-                else {
-                    this.x -= WORLDSPEED * 2;
-                    //this.spawnPoint -= 8;
-                    for (var r =0; r < map.length ; r++) {
-		                for (var c =0 ; c < map[0].length ; c ++) {
-			                if (map[r][c].aRock === true && ((this.x < map[r][c].x + SIZE) && (this.x >= map[r][c].x + SIZE - 20))) {
-                                if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
-                                    //console.log("Firewalker hit left wall");
-                                    //if (this.x >= this.spawnPoint + 300)
-                                    this.dir = 0;
-                                }     
-                            }
-                        }
-                    }
-                }
-            }
-            else {
-                if (this.dir == 0) {
-                    this.x += WORLDSPEED;
-                    //if (this.x >= this.spawnPoint + 295)
-                    for (var r =0; r < map.length ; r++) {
-		                for (var c =0 ; c < map[0].length ; c ++) {
-			                if (map[r][c].aRock === true && ((this.x + this.size > map[r][c].x) && (this.x + this.size <= map[r][c].x + 20))) {
-                                if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
-                                    //console.log("Firewalker hit right wall");
-                                    //if (this.x >= this.spawnPoint + 300)
-                                    this.dir = 1;
-                                }                      
-                            }
-                        }
-                    }
-                }
-                else {
-                    this.x -= WORLDSPEED;
-                    //if (this.x < this.spawnPoint)
-                    for (var r =0; r < map.length ; r++) {
-		                for (var c =0 ; c < map[0].length ; c ++) {
-			                if (map[r][c].aRock === true && ((this.x < map[r][c].x + SIZE) && (this.x >= map[r][c].x + SIZE - 20))) {
-                                if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
-                                   // console.log("Firewalker hit left wall");
-                                    //if (this.x >= this.spawnPoint + 300)
-                                    this.dir = 0;
-                                }           
-                            }
-                        }
-                    }
-                }
-            }        
-        }
-        else if (isPressed == false){
-            if (this.dir == 0) {
-                this.x += WORLDSPEED;
-                //if (this.x >= this.spawnPoint + 300)
-                for (var r = 0; r < map.length; r++) {
-                    for (var c = 0; c < map[0].length; c++) {
-                        if (map[r][c].aRock === true && ((this.x + this.size > map[r][c].x) && (this.x + this.size <= map[r][c].x + 20))) {
-                            if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
-                               // console.log("Firewalker hit right wall");
-                                //if (this.x >= this.spawnPoint + 300)
-                                this.dir = 1;
-                            }              
-                        }
-                    }
-                }
-            }
-            else {
-                this.x -= WORLDSPEED;
-                //if (this.x < this.spawnPoint)
-                for (var r = 0; r < map.length; r++) {
-                    for (var c = 0; c < map[0].length; c++) {
-                        if (map[r][c].aRock === true && ((this.x < map[r][c].x + SIZE) && (this.x >= map[r][c].x + SIZE - 20))) {
-                            if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
-                               // console.log("Firewalker hit left wall");
-                                //if (this.x >= this.spawnPoint + 300)
-                                this.dir = 0;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-};
+createFireWalkers();
 
+function createFireWalkers() {
+    var fireWalkerSpawnpoints = [2300, 4100, 5400];
+    var newFireWalker;
+    //Create the FireWalkers for the level w/ spawn points
+    for (var i = 0; i < fireWalkerSpawnpoints.length; i++) {
+        newFireWalker = Object.create(fireWalkerProto);
+        newFireWalker.spawnPoint = fireWalkerSpawnpoints[i];
+        newFireWalker.x = newFireWalker.spawnPoint;
+        fireWalker.push(newFireWalker);
+    } 
+}
+
+//Assign FireWalker images L/R
 var fireWalkerImg = [new Image, new Image];
 //fireWalkerImg.addEventListener("load", loadHandler, false);
 fireWalkerImg[0].src = "./Assets/Enemy/FirePlanet/fireEnemySpriteSheetR.png";
@@ -473,20 +199,20 @@ function fireWalkerCollision() {
                 if (fireWalker[j].HP <= 0)
                     fireWalker.splice(j, 1);
             }
-            console.log("Firewalker " + j + " HP: " + fireWalker[j].HP);
+            //console.log("Firewalker " + j + " HP: " + fireWalker[j].HP);
         }
     }
 }
 
 function reconcileDamage(){
-    player.health -= fireWalker[0].DAMAGE;
+    player.health -= fireWalkerProto.DAMAGE;
     drain();
     player.hit = true;
     setTimeout(playerRecovered, 2000);
 }
 
 function playerRecovered(){
-    console.log("recovered...");
+    //console.log("recovered...");
     player.hit = false;
 }
 
