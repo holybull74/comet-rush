@@ -7,13 +7,14 @@ var stageArrivalDrawPermit = false;
 var stageArrivalTimer = 0;
 var bulletCount = 0;
 var bulletTimer = 0;
+var playerAlive = true;
+var jumpLimit = 1;
 
 
 // World variables
 var WORLDSPEED = 8;
 var gravity =  1.7;
 var impulse = 2.8;
-var collisionDirection = " ";
 var clockTimer = 0;
 
 //Getting the user input in an array for multiple input.
@@ -61,6 +62,10 @@ window.addEventListener("keydown", function(e)
 window.addEventListener("keyup", function(e)
 {
 	isPressed = false;
+	if(e.keyCode === 32)
+	{
+	   jumpLimit = 1;
+	}
 	inputArray[e.keyCode] = false;
 	
 });
@@ -72,7 +77,7 @@ function arriveToStage()
 		//A set interval to animate the player images...
 		stageArrivalDrawPermit = true;
 		playerAnimationIntervalID = setInterval(playerAnimationUpdate, 70);
-		//clearTimeout(timerId);
+		
 		
 	}
 
@@ -97,7 +102,7 @@ function playerAnimationUpdate()
 function scrollMap()
 {
 	//Scroll the map if player.x>= 300 & isPressed == True
-	if (isPressed && player.x >= 300)
+	if (playerAlive && isPressed && player.x >= 300)
 	{
 		for (var row = 0; row < map.length; row++)
 		{
@@ -134,35 +139,47 @@ function collision()
 				if(Math.abs(vectorX) < boxWidth && Math.abs(vectorY) < SIZE)
 				{
 					var cX = boxWidth - Math.abs(vectorX);
-					var cY = SIZE- Math.abs(vectorY);
+					var cY = SIZE/2 - Math.abs(vectorY);
+					
 
-					if( cX >= cY)
-					{
-						if (vectorY > 0)
+					//Collide againts the bottom of a tile
+					if (  ( ((player.x + (SIZE/2) - 10) >= (map[r][c].x)) || ((player.x + 30) >= (map[r][c].x)) ) && ((player.x + 30) <= (map[r][c].x + SIZE)) )
 						{
-							collisionDirection = "top"
+							if( (player.y + 25) >= (map[r][c].y) && (player.y + 25) <= (map[r][c].y + SIZE/2) )
+							{
+								//collision on top of sprite
+								player.y = (map[r][c].y + (SIZE/2) + 2 );
+								player.sY *= -1;
+								
+							}							
 							
-						}else if ( vectorY <= 0 && ((((player.x + SIZE - 30) >= (map[r][c].x )) || ( (player.x + 30) >= (map[r][c].x ) )) && ((player.x + 30) <= (map[r][c].x + SIZE))))
-						{
-							collisionDirection = "bot";
+						}
+					// collide on ground
+					if ( (vectorY < 0) && ((player.y + SIZE - 25) <= ( map[r][c].y )) && ((((player.x + (SIZE/2) - 10) >= (map[r][c].x )) || ( (player.x + 30) >= (map[r][c].x ) )) 
+										   && ((player.x + 30) <= (map[r][c].x + SIZE))))
+					{
+							//collision on bot of sprite
 							player.onGround = true;
 							player.sY = 0;
 							player.isJumping = false;
 						    player.y = map[r][c].y - player.height;
 
-						}
+					}
 
-					}else
+					if( cX <= cY)
 					{
+						//collision on left of sprite 
 						if(vectorX >= 0  && vectorX <= 70 )
 						{
-							collisionDirection = "left";
+							
 							player.img = images[1];
 							player.x = map[r][c].x + SIZE - 20;
 							
-						}else if(((player.x + SIZE - 20) >= map[r][c].x) && (player.x + SIZE - 20) <= (map[r][c].x + SIZE/2))
+						}
+						//collision on right of sprite
+						else if(((player.x + SIZE - 20) >= map[r][c].x) && (player.x + SIZE - 20) <= (map[r][c].x + SIZE/2))
 						{
-							collisionDirection = "right";
+							
 							player.img = images[0];
 							player.x = map[r][c].x - (player.width - 20);
 							
@@ -187,8 +204,17 @@ function collision()
 					{
 						if (vectorY < 0)
 						{
-							clearInterval(mainUpdateInterval);
-							alert("You died");
+							//frameIndex = 0; 	
+				            //currentFrame = 0;
+							player.img = images[12];
+							playerAlive = false;
+							player.speed = 0;
+							player.sY = 0;
+							gravity = 0;
+							divHealthP.style.width = 0 + 'px';
+           					divHealthP.innerHTML = 0 * 1 + '%';							
+							deathSound.play();
+							setTimeout(gameEnd, 1000);										
 						}
 					}					
 				}
@@ -255,12 +281,13 @@ function moveBullets()
 //To set the right image from Array images for the player with the right key
 function handleInput()
 {
-	if(!stageArrival)
+	if(!stageArrival && playerAlive)
 	{
 		
 			// Space, is the player jumping?
-		if(inputArray[32])
+		if(inputArray[32] && jumpLimit === 1)
 		{
+			jumpLimit = 0;
 			if(!player.isJumping && player.onGround)
 			{
 				frameIndex = 0; 	
@@ -268,6 +295,7 @@ function handleInput()
 				player.isJumping = true;
 				player.onGround = false;
 				player.sY = -player.speed * impulse;
+				jumpSound.play();
 
 				if(player.dir === 1)
 				{
@@ -353,6 +381,7 @@ function handleInput()
 				if( bulletTimer >= 1)
 				{
 					bulletTimer = 0;
+					shootSound.play();
 					createBullet();	
 
 				}

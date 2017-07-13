@@ -17,6 +17,11 @@ var introMusic = new Audio();
 var themeSong = new Audio();
 var bossVictory = new Audio();
 
+// Player's sound effects
+var jumpSound = new Audio();
+var shootSound = new Audio();
+var deathSound = new Audio();
+
 //Mouse variable initialization
 var mouseX;
 var mouseY;
@@ -65,12 +70,20 @@ cometImage.src = "./Assets/UI/fireball.png";
 //Audio source & initialization
 introMusic.src = "./Assets/Sound/Castlevania(MainScreen).mp3";
 themeSong.src = "./Assets/Sound/Fire/FireStage2.mp3";
-bossVictory.src = "./Assets/Sound/bossVictory.mp3";
+bossVictory.src = "./Assets/Sound/StageClear.mp3";
 bossVictory.load();
 introMusic.load();
 themeSong.load();
 introMusic.play();
 introMusic.loop = true;
+
+//Player's audio source & initialization
+jumpSound.src = "./Assets/Sound/Effects/Jump1.wav";
+shootSound.src = "./Assets/Sound/Effects/Shoot.wav";
+deathSound.src = "./Assets/Sound/Effects/HeroDeath.wav";
+jumpSound.load();
+shootSound.load();
+deathSound.load();
 
 //Initializing button position and size in arrays
 var uiButton = [];
