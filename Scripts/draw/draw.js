@@ -104,8 +104,9 @@ function render()
 			surface.fillText("The Fire Boss is coming...",0,370);
 			
 		}
-		if(healthBarDraw==true )
+		if(bossHealthBarDraw==true )
 		{
+			surface.drawImage(healthBarFrameImg, 500, 800, healthBarFrameImg.width, healthBarFrameImg.height)
 			surface.drawImage(healthBarImage,0, 0, healthBarImage.width, healthBarImage.height, 500, 800, healthBarImage.width, healthBarImage.height);
 		}
 

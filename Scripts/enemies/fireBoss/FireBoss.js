@@ -1,6 +1,6 @@
 //Fire Boss
 var textDraw=false;
-var healthBarDraw=false;
+var bossHealthBarDraw=false;
 var audioBoss=document.createElement("audio");
 audioBoss.setAttribute("src","./Assets/Sound/Fire/FireBoss.mp3");
 
@@ -15,9 +15,14 @@ imagesB[0].src = "./Assets/Enemy/FirePlanet/FireBossSpriteSheetL.png";
 imagesB[1].src = "./Assets/Enemy/FirePlanet/FireBossSpriteSheetR.png";
 
 var healthBarImage=new Image();
+var healthBarFrameImg = new Image();
 healthBarImage.src="./Assets/UI/HealthFire.png";
+healthBarFrameImg.src = "./Assets/UI/HealthFrame.png"
 healthBarImage.width=500;
 healthBarImage.height=40;
+healthBarFrameImg.width = 500;
+healthBarFrameImg.height = 40;
+
 
 
 var fireBoss={x:8400,y:450,dir:1,img:null,width:100,height:250,onground:true,health:20};
@@ -70,7 +75,7 @@ function moveBoss()
 	}	
 	if((isPressed==false&&end==true)||(isPressed==true&&end==true))
 	{
-		healthBarDraw=true;
+		bossHealthBarDraw=true;
 		if(fireBoss.dir==1)
 		{
 			fireBoss.x-=8;
@@ -128,6 +133,7 @@ function fireBossCollision()
        
         if ((bulletArray[i].y + 10 > fireBoss.y ) && (bulletArray[i].y < fireBoss.y + fireBoss.height)) {
 			bulletArray.splice(i,1);
+			enemyIsDamaged.play();
 			countB++;
 			if(countB==1){fireBoss.health--; healthBarImage.width-=25;}
 			//console.log(fireBoss.health);

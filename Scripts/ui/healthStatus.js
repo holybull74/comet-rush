@@ -9,6 +9,7 @@ function drain()
         if(width>20)
         {
             width-=20;
+            playerDamagedSound.play();
             divHealthP.style.width = (width * 5) + 'px';
             divHealthP.innerHTML = width * 1 + '%';
         }

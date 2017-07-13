@@ -76,6 +76,7 @@ function arriveToStage()
 	{
 		//A set interval to animate the player images...
 		stageArrivalDrawPermit = true;
+		playerTeleportSound.play();
 		playerAnimationIntervalID = setInterval(playerAnimationUpdate, 70);
 		
 		
@@ -164,6 +165,10 @@ function collision()
 						{
 						
 							player.onGround = true;
+							if(player.onGround && player.isJumping)
+							{
+								playerOnGroundSound.play();
+							}							
 							player.sY = 0;
 							player.isJumping = false;
 						    player.y = map[r][c].y - player.height;
