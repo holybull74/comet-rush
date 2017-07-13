@@ -19,7 +19,8 @@ function update() {
     handleInput();  
     collision();      
     scrollMap();
-    fireWalker.move();
+    for (var i = 0; i < fireWalker.length; i++)
+        fireWalker[i].move();
     fireWalkerCollision();
     fireWolf.move();
     fireWolfCollision();

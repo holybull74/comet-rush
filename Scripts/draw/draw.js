@@ -54,9 +54,11 @@ function render()
 			
 	//Drawing FireWalker
         //console.log("FireWalker Image: " + fireWalker.img);
-        surface.drawImage(fireWalker.img,
-            fireWalker.sourceX, fireWalker.sourceY, fireWalker.size, fireWalker.size,
-            fireWalker.x, fireWalker.y, fireWalker.size, fireWalker.size);
+	for (var i = 0; i < fireWalker.length; i++) {
+		surface.drawImage(fireWalker[i].img,
+			fireWalker[i].sourceX, fireWalker[i].sourceY, fireWalker[i].size, fireWalker[i].size,
+			fireWalker[i].x, fireWalker[i].y, fireWalker[i].size, fireWalker[i].size);
+	}
 
 	//Drawing FireWolf
 		//console.log("FireWolf Image: " + fireWolf.img);
