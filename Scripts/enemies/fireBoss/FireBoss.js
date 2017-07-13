@@ -10,14 +10,26 @@ audioIntoBoss.setAttribute("src","./Assets/Sound/BossIntro.mp3");
 var audioPlayerDeath = document.createElement("audio");
 audioPlayerDeath.setAttribute("src","./Assets/Sound/Effects/HeroDeath.wav");
 
-var imagesB = [new Image(), new Image()];
+//Fire boss array of images
+var imagesB = [new Image(), new Image(), new Image(), new Image(), new Image(), new Image()];
 imagesB[0].src = "./Assets/Enemy/FirePlanet/FireBossSpriteSheetL.png";
 imagesB[1].src = "./Assets/Enemy/FirePlanet/FireBossSpriteSheetR.png";
+imagesB[2].src = "./Assets/Enemy/FirePlanet/FireBossAttackSpriteL.png";
+imagesB[3].src = "./Assets/Enemy/FirePlanet/FireBossAttackSpriteR.png";
+imagesB[4].src = "./Assets/Enemy/FirePlanet/FireBossNoArmSpriteL.png";
+imagesB[5].src = "./Assets/Enemy/FirePlanet/FireBossNoArmSpriteR.png";
+
+var bossArmImgL = new Image();
+bossArmImgL.src = "./Assets/Enemy/FirePlanet/FireBossArmL.png";
+var bossArmImgR = new Image();
+bossArmImgR.src = "./Assets/Enemy/FirePlanet/FireBossArmR.png";
+
+
 
 var healthBarImage=new Image();
 var healthBarFrameImg = new Image();
 healthBarImage.src="./Assets/UI/HealthFire.png";
-healthBarFrameImg.src = "./Assets/UI/HealthFrame.png"
+healthBarFrameImg.src = "./Assets/UI/HealthFrame.png";
 healthBarImage.width=500;
 healthBarImage.height=40;
 healthBarFrameImg.width = 500;
@@ -25,7 +37,7 @@ healthBarFrameImg.height = 40;
 
 
 
-var fireBoss={x:8400,y:450,dir:1,img:null,width:100,height:250,onground:true,health:20};
+var fireBoss={x:8400,y:450,dir:1,img: imagesB[0],width:100,height:250,onground:true,health:20};
 
 var fireBossFrameIndex = 0; 	// Index of the Boss sprite to display via drawImage.
 var fireBossCurrentFrame = 0; 	// Counter for the Boss frames.
@@ -41,23 +53,23 @@ function updateB()
 function moveBoss()
 {
 	if(isPressed && player.x >= 300&&end==false)
-	{
-	
-		if(fireBoss.dir==1)
+	{	
+		if(fireBoss.dir === 1)
 		{
 			fireBoss.x-=8;
-			//console.log(fireBoss.x);
+		  
 			if(fireBoss.x<100)
 			{
-				fireBoss.dir=-1;
+				fireBoss.dir = -1;
 			}
 		}
-		if(fireBoss.dir==-1)
+		if(fireBoss.dir === -1)
 		{
 			fireBoss.x+=8;
+
 			if(fireBoss.x>1300)
 			{
-				fireBoss.dir=1;
+				fireBoss.dir = 1;
 			}
 		}
 		if(fireBoss.x==1904)
@@ -75,9 +87,24 @@ function moveBoss()
 	}	
 	if((isPressed==false&&end==true)||(isPressed==true&&end==true))
 	{
+		//Distance from the center of the player to the center of the boss on X
+		var vectorX =  (player.X + SIZE/2) - (fireBoss.x + fireBoss.width/2);
+
+		if(vectorX < 0)
+		{
+			if(vectorX > -120 && vectorX < 0 )
+				{
+					fireBoss.img=imagesB[2];
+				}
+
+		}else
+		{
+
+		}
 		bossHealthBarDraw=true;
 		if(fireBoss.dir==1)
 		{
+			fireBoss.img=imagesB[0];
 			fireBoss.x-=8;
 		//console.log(fireBoss.x);
 			if(fireBoss.x<100)
@@ -87,6 +114,7 @@ function moveBoss()
 		}
 		if(fireBoss.dir==-1)
 		{
+			fireBoss.img=imagesB[1];
 			fireBoss.x+=8;
 			if(fireBoss.x>1300)
 			{
@@ -136,8 +164,6 @@ function fireBossCollision()
 			enemyIsDamaged.play();
 			countB++;
 			if(countB==1){fireBoss.health--; healthBarImage.width-=25;}
-			//console.log(fireBoss.health);
-			//console.log("Count"+countB);
         }
     }else{
 		countB=0;
@@ -145,20 +171,8 @@ function fireBossCollision()
 	}
 
 }
-			
 
 
-
-function handleInputFireBoss()
-{
-	if(fireBoss.dir==1)
-	{
-		fireBoss.img=imagesB[0];}
-	if(fireBoss.dir==-1)
-	{
-		fireBoss.img=imagesB[1];
-	}
-}
 function animateFireBoss()
 {
 	if (fireBossCurrentFrame === fireBossMaxFrames)

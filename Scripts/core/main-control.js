@@ -24,7 +24,6 @@ function update() {
     fireWalkerCollision();
     fireWolf.move();
     fireWolfCollision();
-	handleInputFireBoss();
 	moveBoss();
 	fireBossCollision();
     render();
