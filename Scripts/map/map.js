@@ -95,6 +95,7 @@ function generateMap()
             tempTile.aRock=false; //If the image is a tile
             tempTile.empty=false; //If there is an empty image
             tempTile.lava=false; // If the image is lava
+            tempTile.smallPlatform = false; // If the image is a small platform
             switch(map[row][col])
             {
                 case 0:
@@ -164,6 +165,7 @@ function generateMap()
                 case 16:
                     tempTile.img=singlePlatform;
                     tempTile.aRock=true;
+                    tempTile.smallPlatform = true;
                     break;
             }
             map[row][col] = tempTile;

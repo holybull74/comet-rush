@@ -47,8 +47,6 @@ images[14].src = "./Assets/MainCharacter/TeleportSpriteOut.png";
 images[15].src = "./Assets/MainCharacter/mainCharacterJumpShootL.png";
 images[16].src = "./Assets/MainCharacter/mainCharacterJumpShootR.png";
 
- 
-
 //creating Player object.....
 var player = {img: images[13], x:300, y:600, dir:1, idle:true, width:100, height:100 , speed: WORLDSPEED, sX :0, sY:0 , isJumping: false, onGround: false, damage: 0, health: 5, hit: false};
 
@@ -147,16 +145,22 @@ function collision()
 					var cX = boxWidth - Math.abs(vectorX);
 					var cY = SIZE- Math.abs(vectorY);
 
+					//Head Collision
+					if( !map[r][c].smallPlatform )
+					{
+						if (vectorY > 0 && ((((player.x + SIZE - 30) >= (map[r][c].x )) || ( (player.x + 30) >= (map[r][c].x ) )) && ((player.x + 30) <= (map[r][c].x + SIZE))))
+							{	
+								if(player.y <= (map[r][c].y + SIZE/2) && (player.y >= map[r][c].y) )
+								{	
+									player.sY *= -1;
+								
+								}							
+							}
+					}
 					if( cX >= cY)
 					{
-						//Head Collision
-						if (vectorY > 0)
-						{
-						
-							
-						}
 						//We are on ground
-						else if ( vectorY <= 0 && ((((player.x + SIZE - 30) >= (map[r][c].x )) || ( (player.x + 30) >= (map[r][c].x ) )) && ((player.x + 30) <= (map[r][c].x + SIZE))))
+					  if ( vectorY <= 0 && ((((player.x + SIZE - 30) >= (map[r][c].x )) || ( (player.x + 30) >= (map[r][c].x ) )) && ((player.x + 30) <= (map[r][c].x + SIZE))))
 						{
 						
 							player.onGround = true;
