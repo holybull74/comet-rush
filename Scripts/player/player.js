@@ -17,6 +17,7 @@ var gravity =  1.7;
 var impulse = 2.8;
 var clockTimer = 0;
 
+
 //Getting the user input in an array for multiple input.
 var inputArray = [];
 // For keeping track of player bullets
@@ -50,6 +51,7 @@ images[16].src = "./Assets/MainCharacter/mainCharacterJumpShootR.png";
 
 //creating Player object.....
 var player = {img: images[13], x:300, y:600, dir:1, idle:true, width:100, height:100 , speed: WORLDSPEED, sX :0, sY:0 , isJumping: false, onGround: false,damage:0,health:5};
+
 	
 var frameIndex = 0; 	// Index of the player sprite to display via drawImage.
 var currentFrame = 0; 	// Counter for the player frames.
@@ -128,47 +130,49 @@ function collision()
 	{
 		for (var c =0 ; c < map[0].length ; c ++)
 		{
+			playerLeft = player.x + 30;
+			playerRight = player.x + SIZE - 60;
+			playerTop = player.y + 25;
+			playerBot = player.y + SIZE;	
+
 			if(map[r][c].aRock)
 			{
-				var vectorX = (player.x + (player.width/2) - 10) - (map[r][c].x + (SIZE/2));
+				//Get the distance from the center of the player to the center of a rock
+
+			    var vectorX = (player.x + SIZE - 65) - (map[r][c].x + (SIZE/2));
 				var vectorY = (player.y + (player.height/2)) - (map[r][c].y + (SIZE/2));
+
+				//var vectorX = (player.x + (player.width/2) - 10) - (map[r][c].x + (SIZE/2));
+				//var vectorY = (player.y + (player.height/2)) - (map[r][c].y + (SIZE/2));
 				
 				var boxWidth = ((player.width/2) - 10) + SIZE/2;
-
 
 				if(Math.abs(vectorX) < boxWidth && Math.abs(vectorY) < SIZE)
 				{
 					var cX = boxWidth - Math.abs(vectorX);
-					var cY = SIZE/2 - Math.abs(vectorY);
-					
+					var cY = SIZE- Math.abs(vectorY);
 
-					//Collide againts the bottom of a tile
-					if (  ( ((player.x + (SIZE/2) - 10) >= (map[r][c].x)) || ((player.x + 30) >= (map[r][c].x)) ) && ((player.x + 30) <= (map[r][c].x + SIZE)) )
+					if( cX >= cY)
+					{
+						//Head Collision
+						if (vectorY > 0)
 						{
-							if( (player.y + 25) >= (map[r][c].y) && (player.y + 25) <= (map[r][c].y + SIZE/2) )
-							{
-								//collision on top of sprite
-								player.y = (map[r][c].y + (SIZE/2) + 2 );
-								player.sY *= -1;
-								
-							}							
+						
 							
 						}
-					// collide on ground
-					if ( (vectorY < 0) && ((player.y + SIZE - 25) <= ( map[r][c].y )) && ((((player.x + (SIZE/2) - 10) >= (map[r][c].x )) || ( (player.x + 30) >= (map[r][c].x ) )) 
-										   && ((player.x + 30) <= (map[r][c].x + SIZE))))
-					{
-							//collision on bot of sprite
+						//We are on ground
+						else if ( vectorY <= 0 && ((((player.x + SIZE - 30) >= (map[r][c].x )) || ( (player.x + 30) >= (map[r][c].x ) )) && ((player.x + 30) <= (map[r][c].x + SIZE))))
+						{
+						
 							player.onGround = true;
 							player.sY = 0;
 							player.isJumping = false;
 						    player.y = map[r][c].y - player.height;
 
-					}
+						}
 
-					if( cX <= cY)
-					{
-						//collision on left of sprite 
+					}else
+					{  // Left side collision
 						if(vectorX >= 0  && vectorX <= 70 )
 						{
 							
@@ -176,7 +180,7 @@ function collision()
 							player.x = map[r][c].x + SIZE - 20;
 							
 						}
-						//collision on right of sprite
+						//Right side collision
 						else if(((player.x + SIZE - 20) >= map[r][c].x) && (player.x + SIZE - 20) <= (map[r][c].x + SIZE/2))
 						{
 							
