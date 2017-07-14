@@ -2,13 +2,12 @@ function loadIceLevel()
 {
 themeSong.pause();
 
-themeSong.src = "./Assets/Sound/Ice/IceStage1.mp3";
+var iceThemeSong = new Audio();
+iceThemeSong.src = "./Assets/Sound/Ice/IceStage1.mp3";
+iceThemeSong.load();
+iceThemeSong.play();
+iceThemeSong.loop = true;
 
-themSong.load();
-
-themeSong.play();
-
-themeSong.loop = true;
     
 topLeft.src = "./Assets/LevelTiles/IceLevel/TopLeft.png";
 
