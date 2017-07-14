@@ -217,14 +217,11 @@ function fireBossCollision()
 				if((fireBoss.x<=map[r][c].x+SIZE)&&(fireBoss.x+fireBoss.width>=map[r][c].x)&&(distance>=0 && distance<=100))
 					
 				{
-									
-				
-					
+								
 					if(r==2){fireBoss.y=450;}
 					if(r==1){fireBoss.y=350;}
 					if(r==0){fireBoss.y=250;}
-					
-				
+							
 				}
 				
 			}
