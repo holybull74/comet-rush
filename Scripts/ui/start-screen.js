@@ -31,6 +31,8 @@ var playerTeleportSound = new Audio();
 var mouseX;
 var mouseY;
 var fadeId = 0;
+var fadeId1 = 0;
+var fadeId4 = 0;
 var time = 0.0;
 
 //Image objects
@@ -43,6 +45,8 @@ var instructImage = new Image();
 var settingsImage = new Image();
 var creditsImage = new Image();
 var cometImage = new Image();
+var backBtn=new Image();
+var instructBg=new Image();
 
 //Frame variables
 var frames = 30;
@@ -71,6 +75,8 @@ instructImage.src = "./Assets/UI/instructions.png";
 settingsImage.src = "./Assets/UI/settings.png";
 creditsImage.src = "./Assets/UI/credits.png";
 cometImage.src = "./Assets/UI/fireball.png";
+backBtn.src="./Assets/UI/BackBtn.png";
+instructBg.src="./Assets/UI/Controls.png";
 
 //Audio source & initialization
 introMusic.src = "./Assets/Sound/Castlevania(MainScreen).mp3";
@@ -104,6 +110,7 @@ uiButton[0] = { x:560, y:292, width:280, height:120 };
 uiButton[1] = { x:321, y:413, width:758, height:120 };
 uiButton[2] = { x:435, y:535, width:531, height:120 };
 uiButton[3] = { x:462, y:656, width:467, height:120 };
+uiButton[4] = { x:0, y:800, width:100, height:100 };
 
 bgImage.onload = function(){
     surface.drawImage(bgImage, 0, backgroundY);
@@ -202,7 +209,7 @@ function checkPos(mouseEvent)
         mouseY = mouseEvent.offsetY;
     }
 
-    for(i = 0; i < uiButton.length; i++) //Cycle through buttons 
+    for(i = 0; i < uiButton.length-1; i++) //Cycle through buttons 
     {
         //Check if mouse is within horizontal bound of a button
         if((mouseX > uiButton[i].x) && (mouseX < (uiButton[i].x + uiButton[i].width)))
@@ -242,6 +249,16 @@ function checkClick(mouseEvent)
                         clearInterval(timerId);
                         fadeId = setInterval(function(){fadeOut(0)}, 1000/frames);
                     break;
+					case 1:
+						clearInterval(timerId);
+						fadeId1 = setInterval(function(){fadeOut(1)}, 1000/frames);
+						
+					break;
+					case 4:
+						clearInterval(timerId);
+						fadeId4 = setInterval(function(){fadeOut(4)}, 1000/frames);
+					break;
+                    
                     
                  }
                
@@ -265,6 +282,22 @@ function fadeOut(menuChoice) //Fades out screen on click of either options
             clearInterval(fadeId);    
             initGame();    
         }
+		if(menuChoice===1)
+		{
+			clearInterval(fadeId1); 
+			surface.drawImage(instructBg, 0, 0,1400,900);
+			         
+			surface.drawImage(backBtn, uiButton[4].x, uiButton[4].y);
+			         
+               
+			
+		}
+         if(menuChoice===4)
+		{
+			           
+            clearInterval(fadeId4);
+			timerId = setInterval(updateUI, 1000/frames);
+		}   
                
     }
 }
