@@ -99,7 +99,7 @@ enemyIsDamaged.load();
 introMusic.loop = true;
 
 //Player's audio source & initialization
-jumpSound.src = "./Assets/Sound/Effects/Jump1.wav";
+jumpSound.src = "./Assets/Sound/Effects/Jump.wav";
 shootSound.src = "./Assets/Sound/Effects/Shoot.wav";
 deathSound.src = "./Assets/Sound/Effects/heroDeath.wav";
 playerDamagedSound.src = "./Assets/Sound/Effects/damage.wav";
