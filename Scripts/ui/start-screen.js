@@ -12,6 +12,9 @@ var fadeOutDone = false;
 //Generating Level Arrays
 generateMap();
 
+//Sound control setting
+var playSounds = true;
+
 //Audio
 var introMusic = new Audio();
 var themeSong = new Audio();
@@ -87,7 +90,6 @@ bossVictory.load();
 introMusic.load();
 themeSong.load();
 enemyIsDamaged.load();
-introMusic.play();
 introMusic.loop = true;
 
 //Player's audio source & initialization
@@ -139,10 +141,19 @@ canvas.addEventListener("mouseup", checkClick);
 
 function updateUI()
 {
+    if(playSounds)
+    {
+       playAudio();     
+    }
     clear();
     move();
     draw();
     animateLogo();
+}
+
+function playAudio()
+{
+    introMusic.play();
 }
 
 function clear(){

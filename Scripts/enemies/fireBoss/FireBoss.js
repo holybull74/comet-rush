@@ -76,13 +76,21 @@ function moveBoss()
 		if(fireBoss.x==1904)
 		{
 			themeSong.pause();
-			audioIntoBoss.play();
+			if(playSounds)
+			{
+				audioIntoBoss.play();
+			}
+			
 			textDraw=true;
 		}
 		if(fireBoss.x==1576)
 		{
-			audioIntoBoss.pause();
-			audioBoss.play();
+			if(playSounds)
+			{
+				audioIntoBoss.pause();
+				audioBoss.play();
+				audioBoss.loop = true;
+			}
 			textDraw=false;		
 		}
 	}	

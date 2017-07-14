@@ -6,9 +6,12 @@ var divHealthP = document.getElementById("healthPercentage");
 function initGame() {    
     divHealthBar.style.visibility = "visible";
     divHealthP.style.visibility = "visible";
-    introMusic.pause();  
-    themeSong.play();
-    themeSong.loop = true;    
+    introMusic.pause();
+    if(playSounds)
+    {
+       themeSong.play();
+       themeSong.loop = true;
+    }         
     mainUpdateInterval = setInterval(update, 1000/frames);
     arriveToStage();
 }
