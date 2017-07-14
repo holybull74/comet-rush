@@ -96,7 +96,9 @@ bossVictory.load();
 introMusic.load();
 themeSong.load();
 enemyIsDamaged.load();
-introMusic.loop = true;
+introMusic.play();
+introMusic.loop = true; 
+
 
 //Player's audio source & initialization
 jumpSound.src = "./Assets/Sound/Effects/Jump.wav";
@@ -108,6 +110,7 @@ playerTeleportSound.src = "./Assets/Sound/Effects/arriving.wav";
 jumpSound.load();
 shootSound.load();
 deathSound.load();
+
 playerDamagedSound.load();
 playerOnGroundSound.load();
 playerTeleportSound.load();
@@ -147,21 +150,13 @@ canvas.addEventListener("mousemove", checkPos);
 canvas.addEventListener("mouseup", checkClick);
 
 function updateUI()
-{
-    if(playSounds)
-    {
-       playAudio();     
-    }
+{   
     clear();
     move();
     draw();
     animateLogo();
 }
 
-function playAudio()
-{
-    introMusic.play();
-}
 
 function clear(){
     surface.clearRect(0, 0, canvas.width, canvas.height);
@@ -336,11 +331,18 @@ function fadeOut(menuChoice) //Fades out screen on click of either options
 			timerId = setInterval(updateUI, 1000/frames);
 		}   
         if(menuChoice===5)
-		{
-			           
+		{			           
             clearInterval(fadeId5);
-			if(playSounds==true)playSounds=false;
-			if(playSounds==false)playSounds=true;
+            if(playSounds==true)
+                {   
+                    introMusic.pause();
+                    playSounds=false;
+                }
+                else if(playSounds == false)
+                {
+                     playSounds = true;
+                     introMusic.play();
+                }
 		}           
     }
 }
