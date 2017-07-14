@@ -36,6 +36,7 @@ var mouseY;
 var fadeId = 0;
 var fadeId1 = 0;
 var fadeId2 = 0;
+var fadeId3 = 0;
 var fadeId4 = 0;
 var fadeId5 = 0;
 var time = 0.0;
@@ -272,6 +273,11 @@ function checkClick(mouseEvent)
 						fadeId2 = setInterval(function(){fadeOut(2)}, 1000/frames);
 						
 					break;
+					case 3:
+						clearInterval(timerId);
+						fadeId3 = setInterval(function(){fadeOut(3)}, 1000/frames);
+						
+					break;
 					case 4:
 						clearInterval(timerId);
 						fadeId4 = setInterval(function(){fadeOut(4)}, 1000/frames);
@@ -324,6 +330,14 @@ function fadeOut(menuChoice) //Fades out screen on click of either options
                
 			
 		}
+		  if(menuChoice===3)
+		{
+			           
+            clearInterval(fadeId3);
+			timerId = setInterval(updateUI, 1000/frames);
+			alert("The Credits are coming soon!!!");
+			
+		} 
          if(menuChoice===4)
 		{
 			           
