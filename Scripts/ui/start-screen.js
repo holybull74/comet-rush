@@ -35,7 +35,9 @@ var mouseX;
 var mouseY;
 var fadeId = 0;
 var fadeId1 = 0;
+var fadeId2 = 0;
 var fadeId4 = 0;
+var fadeId5 = 0;
 var time = 0.0;
 
 //Image objects
@@ -50,6 +52,8 @@ var creditsImage = new Image();
 var cometImage = new Image();
 var backBtn=new Image();
 var instructBg=new Image();
+var soundBtn=new Image();
+var settingBg=new Image();
 
 //Frame variables
 var frames = 30;
@@ -80,6 +84,8 @@ creditsImage.src = "./Assets/UI/credits.png";
 cometImage.src = "./Assets/UI/fireball.png";
 backBtn.src="./Assets/UI/BackBtn.png";
 instructBg.src="./Assets/UI/Controls.png";
+soundBtn.src="./Assets/UI/soundBtn.png";
+settingBg.src="./Assets/UI/settingBg.png";
 
 //Audio source & initialization
 introMusic.src = "./Assets/Sound/Castlevania(MainScreen).mp3";
@@ -113,6 +119,7 @@ uiButton[1] = { x:321, y:413, width:758, height:120 };
 uiButton[2] = { x:435, y:535, width:531, height:120 };
 uiButton[3] = { x:462, y:656, width:467, height:120 };
 uiButton[4] = { x:0, y:800, width:100, height:100 };
+uiButton[5] = { x:300, y:500, width:100, height:100 };
 
 bgImage.onload = function(){
     surface.drawImage(bgImage, 0, backgroundY);
@@ -220,7 +227,7 @@ function checkPos(mouseEvent)
         mouseY = mouseEvent.offsetY;
     }
 
-    for(i = 0; i < uiButton.length-1; i++) //Cycle through buttons 
+    for(i = 0; i < uiButton.length-2; i++) //Cycle through buttons 
     {
         //Check if mouse is within horizontal bound of a button
         if((mouseX > uiButton[i].x) && (mouseX < (uiButton[i].x + uiButton[i].width)))
@@ -265,9 +272,18 @@ function checkClick(mouseEvent)
 						fadeId1 = setInterval(function(){fadeOut(1)}, 1000/frames);
 						
 					break;
+					case 2:
+						clearInterval(timerId);
+						fadeId2 = setInterval(function(){fadeOut(2)}, 1000/frames);
+						
+					break;
 					case 4:
 						clearInterval(timerId);
 						fadeId4 = setInterval(function(){fadeOut(4)}, 1000/frames);
+					break;
+					case 5:
+						clearInterval(timerId);
+						fadeId5 = setInterval(function(){fadeOut(5)}, 1000/frames);
 					break;
                     
                     
@@ -303,13 +319,29 @@ function fadeOut(menuChoice) //Fades out screen on click of either options
                
 			
 		}
+		if(menuChoice===2)
+		{
+			clearInterval(fadeId2); 
+			surface.drawImage(settingBg, 0, 0,1400,900);
+			     
+			surface.drawImage(backBtn, uiButton[4].x, uiButton[4].y);
+			 surface.drawImage(soundBtn, uiButton[5].x, uiButton[5].y);        
+               
+			
+		}
          if(menuChoice===4)
 		{
 			           
             clearInterval(fadeId4);
 			timerId = setInterval(updateUI, 1000/frames);
 		}   
-               
+        if(menuChoice===5)
+		{
+			           
+            clearInterval(fadeId5);
+			if(playSounds==true)playSounds=false;
+			if(playSounds==false)playSounds=true;
+		}           
     }
 }
 
