@@ -1,5 +1,6 @@
 //console.log("Executing FireWolf script...");
-var fireWolf = {
+var fireWolf = [];
+var fireWolfProto = {
     img: null,
     size: 100,
     dir: 0, //pointing left
@@ -9,10 +10,13 @@ var fireWolf = {
     scrollCount: 0,
     sourceX: 0,
     sourceY: 0,
-    spawnPoint: 1900,
-    x: 1900,
+    spawnPoint: 0,
+    x: 0,
     y: 600,
-    updateWolfAnimation: function() {
+    DAMAGE: 1,
+    HP: 1,
+    SPEED: 5,
+    updateAnimation: function() {
        // console.log("current frame: " + this.currentFrame + "frame index: " + this.frameIndex + "sourceX: " + this.sourceX);
         if (this.dir == 0){
             this.img = fireWolfImg[0];
@@ -40,11 +44,13 @@ var fireWolf = {
     },
     move: function () {
         //console.log("Player x: " + player.x + " fireWolf x: " + this.x + " Total Scroll: " + this.scrollCount + " Direction: " + this.dir);
-        if (rightPressed == true) {
+        var netSpeed;
+        if (isPressed == true) {
             if (player.x >= 300 || (end == true && player.x > 1300)) {
+                netSpeed = this.SPEED - WORLDSPEED;
                 this.scrollCount += 8;
                 if (this.dir == 0) {
-                    this.x += 0;
+                    this.x += netSpeed;
                     //this.spawnPoint -= 8;
                     for (var r =0; r < map.length ; r++) {
 		                for (var c =0 ; c < map[0].length ; c ++) {
@@ -59,7 +65,8 @@ var fireWolf = {
                     }
                 }
                 else {
-                    this.x -= 16;
+                    netSpeed = this.SPEED + WORLDSPEED;
+                    this.x -= netSpeed;
                     //this.spawnPoint -= 8;
                     for (var r =0; r < map.length ; r++) {
 		                for (var c =0 ; c < map[0].length ; c ++) {
@@ -76,7 +83,7 @@ var fireWolf = {
             }
             else {
                 if (this.dir == 0) {
-                    this.x += 8;
+                    this.x += this.SPEED;
                     //if (this.x >= this.spawnPoint + 295)
                     for (var r =0; r < map.length ; r++) {
 		                for (var c =0 ; c < map[0].length ; c ++) {
@@ -91,7 +98,7 @@ var fireWolf = {
                     }
                 }
                 else {
-                    this.x -= 8;
+                    this.x -= this.SPEED;
                     //if (this.x < this.spawnPoint)
                     for (var r =0; r < map.length ; r++) {
 		                for (var c =0 ; c < map[0].length ; c ++) {
@@ -107,9 +114,9 @@ var fireWolf = {
                 }
             }        
         }
-        else if (rightPressed == false){
+        else if (isPressed == false){
             if (this.dir == 0) {
-                this.x += 8;
+                this.x += this.SPEED;
                 //if (this.x >= this.spawnPoint + 300)
                 for (var r = 0; r < map.length; r++) {
                     for (var c = 0; c < map[0].length; c++) {
@@ -124,7 +131,7 @@ var fireWolf = {
                 }
             }
             else {
-                this.x -= 8;
+                this.x -= this.SPEED;
                 //if (this.x < this.spawnPoint)
                 for (var r = 0; r < map.length; r++) {
                     for (var c = 0; c < map[0].length; c++) {
@@ -142,6 +149,21 @@ var fireWolf = {
     }
 };
 
+createFireWolves();
+
+function createFireWolves() {
+    var fireWolfSpawnpoints = [1900, 2300];
+    var newFireWolf;
+    //Create the FireWolves for the level w/ spawn points
+    for (var i = 0; i < fireWolfSpawnpoints.length; i++) {
+        newFireWolf = Object.create(fireWolfProto);
+        newFireWolf.spawnPoint = fireWolfSpawnpoints[i];
+        newFireWolf.x = newFireWolf.spawnPoint;
+        fireWolf.push(newFireWolf);
+    } 
+}
+
+//Assign FireWolf images L/R
 var fireWolfImg = [new Image, new Image];
 //fireWolfImg.addEventListener("load", loadHandler, false);
 fireWolfImg[0].src = "./Assets/Enemy/FirePlanet/FireWolfSpriteR.png";
@@ -155,17 +177,34 @@ fireWolfImg[1].src = "./Assets/Enemy/FirePlanet/FireWolfSpriteL.png";
 function updateWolfAnimation()
 {
     setTimeout(updateWolfAnimation, 100);
-    fireWolf.updateWolfAnimation();
+    for (var i = 0; i < fireWolf.length; i ++)
+        fireWolf[i].updateAnimation();
 }
 
 function fireWolfCollision() {
-    if ((player.x > fireWolf.x - SIZE) && (player.x < fireWolf.x + fireWolf.size)) {
-        //It's within x-range, check y-range
-        //console.log("player/fireWolf in x-range..");
-        if ((player.y > fireWolf.y - fireWolf.size) && (player.y < fireWolf.y + fireWolf.size)) {
-            //It's in both ranges so fireWolf and player have collided
-            //console.log("player/fireWolf in y-range..");
-            endGame();
+    //console.log("Player hit: " + player.hit);
+    //console.log("Player health: " + player.health);
+    for (var j = 0; j < fireWolf.length; j++) {
+        if ((player.x > fireWolf[j].x - SIZE) && (player.x < fireWolf[j].x + fireWolf[j].size)) {
+            //It's within x-range, check y-range
+            //console.log("player/fireWolf in x-range..");
+            if ((player.y > fireWolf[j].y - fireWolf[j].size) && (player.y < fireWolf[j].y + fireWolf[j].size)) {
+                //It's in both ranges so fireWolf and player have collided
+                //console.log("player/fireWolf in y-range..");
+                if (player.hit === false)
+                    reconcileDamage();
+            }
+        }
+        for (var i = 0; i < bulletArray.length; i++) {
+            if ((bulletArray[i].x + 10 > fireWolf[j].x) && (bulletArray[i].x < fireWolf[j].x + fireWolf[j].size + 10)) {
+                if ((bulletArray[i].y + 10 > fireWolf[j].y) && (bulletArray[i].y < fireWolf[j].y + fireWolf[j].size)) {
+                    bulletArray.splice(i, 1);
+                    fireWolf[j].HP--
+                }
+                if (fireWolf[j].HP <= 0)
+                    fireWolf.splice(j, 1);
+            }
+            //console.log("fireWolf " + j + " HP: " + fireWolf[j].HP);
         }
     }
 }

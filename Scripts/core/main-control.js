@@ -22,7 +22,8 @@ function update() {
     for (var i = 0; i < fireWalker.length; i++)
         fireWalker[i].move();
     fireWalkerCollision();
-    fireWolf.move();
+    for(var i = 0; i < fireWolf.length; i++)
+        fireWolf[i].move();
     fireWolfCollision();
 	handleInputFireBoss();
 	moveBoss();

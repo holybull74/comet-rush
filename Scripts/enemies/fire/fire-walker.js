@@ -16,6 +16,7 @@ var fireWalkerProto = {
     y: 600,
     DAMAGE: 1,
     HP: 2,
+    SPEED: 9,
     updateAnimation: function () {
         // console.log("current frame: " + this.currentFrame + "frame index: " + this.frameIndex + "sourceX: " + this.sourceX);
         if (this.dir == 0) {
@@ -43,11 +44,13 @@ var fireWalkerProto = {
     },
     move: function () {
         // console.log("Player x: " + player.x + " Firewalker x: " + this.x + " Total Scroll: " + this.scrollCount + " Direction: " + this.dir);
+        var netSpeed;
         if (isPressed == true) {
             if (player.x >= 300 || (end == true && player.x > 1300)) {
+                netSpeed = this.SPEED - WORLDSPEED;
                 this.scrollCount += WORLDSPEED;
                 if (this.dir == 0) {
-                    this.x += 0;
+                    this.x += netSpeed;
                     //this.spawnPoint -= 8;
                     for (var r = 0; r < map.length; r++) {
                         for (var c = 0; c < map[0].length; c++) {
@@ -62,7 +65,8 @@ var fireWalkerProto = {
                     }
                 }
                 else {
-                    this.x -= WORLDSPEED * 2;
+                    netSpeed = this.SPEED + WORLDSPEED;
+                    this.x -= netSpeed;
                     //this.spawnPoint -= 8;
                     for (var r = 0; r < map.length; r++) {
                         for (var c = 0; c < map[0].length; c++) {
@@ -79,7 +83,7 @@ var fireWalkerProto = {
             }
             else {
                 if (this.dir == 0) {
-                    this.x += WORLDSPEED;
+                    this.x += this.SPEED;
                     //if (this.x >= this.spawnPoint + 295)
                     for (var r = 0; r < map.length; r++) {
                         for (var c = 0; c < map[0].length; c++) {
@@ -94,7 +98,7 @@ var fireWalkerProto = {
                     }
                 }
                 else {
-                    this.x -= WORLDSPEED;
+                    this.x -= this.SPEED;
                     //if (this.x < this.spawnPoint)
                     for (var r = 0; r < map.length; r++) {
                         for (var c = 0; c < map[0].length; c++) {
@@ -112,7 +116,7 @@ var fireWalkerProto = {
         }
         else if (isPressed == false) {
             if (this.dir == 0) {
-                this.x += WORLDSPEED;
+                this.x += this.SPEED;
                 //if (this.x >= this.spawnPoint + 300)
                 for (var r = 0; r < map.length; r++) {
                     for (var c = 0; c < map[0].length; c++) {
@@ -127,7 +131,7 @@ var fireWalkerProto = {
                 }
             }
             else {
-                this.x -= WORLDSPEED;
+                this.x -= this.SPEED;
                 //if (this.x < this.spawnPoint)
                 for (var r = 0; r < map.length; r++) {
                     for (var c = 0; c < map[0].length; c++) {
@@ -148,7 +152,7 @@ var fireWalkerProto = {
 createFireWalkers();
 
 function createFireWalkers() {
-    var fireWalkerSpawnpoints = [2300, 4100, 5400];
+    var fireWalkerSpawnpoints = [4100, 5400];
     var newFireWalker;
     //Create the FireWalkers for the level w/ spawn points
     for (var i = 0; i < fireWalkerSpawnpoints.length; i++) {
