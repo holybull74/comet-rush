@@ -12,20 +12,33 @@ var fadeOutDone = false;
 //Generating Level Arrays
 generateMap();
 
+//Sound control setting
+var playSounds = true;
+
 //Audio
 var introMusic = new Audio();
 var themeSong = new Audio();
 var bossVictory = new Audio();
+var enemyIsDamaged = new Audio();
 
 // Player's sound effects
 var jumpSound = new Audio();
 var shootSound = new Audio();
 var deathSound = new Audio();
+var playerDamagedSound = new Audio();
+var playerOnGroundSound = new Audio();
+var playerTeleportSound = new Audio();
+
 
 //Mouse variable initialization
 var mouseX;
 var mouseY;
 var fadeId = 0;
+var fadeId1 = 0;
+var fadeId2 = 0;
+var fadeId3 = 0;
+var fadeId4 = 0;
+var fadeId5 = 0;
 var time = 0.0;
 
 //Image objects
@@ -38,6 +51,10 @@ var instructImage = new Image();
 var settingsImage = new Image();
 var creditsImage = new Image();
 var cometImage = new Image();
+var backBtn=new Image();
+var instructBg=new Image();
+var soundBtn=new Image();
+var settingBg=new Image();
 
 //Frame variables
 var frames = 30;
@@ -66,24 +83,38 @@ instructImage.src = "./Assets/UI/instructions.png";
 settingsImage.src = "./Assets/UI/settings.png";
 creditsImage.src = "./Assets/UI/credits.png";
 cometImage.src = "./Assets/UI/fireball.png";
+backBtn.src="./Assets/UI/BackBtn.png";
+instructBg.src="./Assets/UI/Controls.png";
+soundBtn.src="./Assets/UI/soundBtn.png";
+settingBg.src="./Assets/UI/settingBg.png";
 
 //Audio source & initialization
 introMusic.src = "./Assets/Sound/Castlevania(MainScreen).mp3";
 themeSong.src = "./Assets/Sound/Fire/FireStage2.mp3";
 bossVictory.src = "./Assets/Sound/StageClear.mp3";
+enemyIsDamaged.src = "./Assets/Sound/Effects/enemyDamage.wav";
 bossVictory.load();
 introMusic.load();
 themeSong.load();
+enemyIsDamaged.load();
 introMusic.play();
-introMusic.loop = true;
+introMusic.loop = true; 
+
 
 //Player's audio source & initialization
-jumpSound.src = "./Assets/Sound/Effects/Jump1.wav";
+jumpSound.src = "./Assets/Sound/Effects/Jump.wav";
 shootSound.src = "./Assets/Sound/Effects/Shoot.wav";
-deathSound.src = "./Assets/Sound/Effects/HeroDeath.wav";
+deathSound.src = "./Assets/Sound/Effects/heroDeath.wav";
+playerDamagedSound.src = "./Assets/Sound/Effects/damage.wav";
+playerOnGroundSound.src = "./Assets/Sound/Effects/touchGround.wav";
+playerTeleportSound.src = "./Assets/Sound/Effects/arriving.wav";
 jumpSound.load();
 shootSound.load();
 deathSound.load();
+
+playerDamagedSound.load();
+playerOnGroundSound.load();
+playerTeleportSound.load();
 
 //Initializing button position and size in arrays
 var uiButton = [];
@@ -91,6 +122,8 @@ uiButton[0] = { x:560, y:292, width:280, height:120 };
 uiButton[1] = { x:321, y:413, width:758, height:120 };
 uiButton[2] = { x:435, y:535, width:531, height:120 };
 uiButton[3] = { x:462, y:656, width:467, height:120 };
+uiButton[4] = { x:0, y:800, width:100, height:100 };
+uiButton[5] = { x:300, y:500, width:100, height:100 };
 
 bgImage.onload = function(){
     surface.drawImage(bgImage, 0, backgroundY);
@@ -118,12 +151,13 @@ canvas.addEventListener("mousemove", checkPos);
 canvas.addEventListener("mouseup", checkClick);
 
 function updateUI()
-{
+{   
     clear();
     move();
     draw();
     animateLogo();
 }
+
 
 function clear(){
     surface.clearRect(0, 0, canvas.width, canvas.height);
@@ -189,7 +223,7 @@ function checkPos(mouseEvent)
         mouseY = mouseEvent.offsetY;
     }
 
-    for(i = 0; i < uiButton.length; i++) //Cycle through buttons 
+    for(i = 0; i < uiButton.length-2; i++) //Cycle through buttons 
     {
         //Check if mouse is within horizontal bound of a button
         if((mouseX > uiButton[i].x) && (mouseX < (uiButton[i].x + uiButton[i].width)))
@@ -229,6 +263,30 @@ function checkClick(mouseEvent)
                         clearInterval(timerId);
                         fadeId = setInterval(function(){fadeOut(0)}, 1000/frames);
                     break;
+					case 1:
+						clearInterval(timerId);
+						fadeId1 = setInterval(function(){fadeOut(1)}, 1000/frames);
+						
+					break;
+					case 2:
+						clearInterval(timerId);
+						fadeId2 = setInterval(function(){fadeOut(2)}, 1000/frames);
+						
+					break;
+					case 3:
+						clearInterval(timerId);
+						fadeId3 = setInterval(function(){fadeOut(3)}, 1000/frames);
+						
+					break;
+					case 4:
+						clearInterval(timerId);
+						fadeId4 = setInterval(function(){fadeOut(4)}, 1000/frames);
+					break;
+					case 5:
+						clearInterval(timerId);
+						fadeId5 = setInterval(function(){fadeOut(5)}, 1000/frames);
+					break;
+                    
                     
                  }
                
@@ -252,7 +310,54 @@ function fadeOut(menuChoice) //Fades out screen on click of either options
             clearInterval(fadeId);    
             initGame();    
         }
+		if(menuChoice===1)
+		{
+			clearInterval(fadeId1); 
+			surface.drawImage(instructBg, 0, 0,1400,900);
+			         
+			surface.drawImage(backBtn, uiButton[4].x, uiButton[4].y);
+			         
                
+			
+		}
+		if(menuChoice===2)
+		{
+			clearInterval(fadeId2); 
+			surface.drawImage(settingBg, 0, 0,1400,900);
+			     
+			surface.drawImage(backBtn, uiButton[4].x, uiButton[4].y);
+			 surface.drawImage(soundBtn, uiButton[5].x, uiButton[5].y);        
+               
+			
+		}
+		  if(menuChoice===3)
+		{
+			           
+            clearInterval(fadeId3);
+			timerId = setInterval(updateUI, 1000/frames);
+			alert("The Credits are coming soon!!!");
+			
+		} 
+         if(menuChoice===4)
+		{
+			           
+            clearInterval(fadeId4);
+			timerId = setInterval(updateUI, 1000/frames);
+		}   
+        if(menuChoice===5)
+		{			           
+            clearInterval(fadeId5);
+            if(playSounds==true)
+                {   
+                    introMusic.pause();
+                    playSounds=false;
+                }
+                else if(playSounds == false)
+                {
+                     playSounds = true;
+                     introMusic.play();
+                }
+		}           
     }
 }
 

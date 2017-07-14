@@ -70,6 +70,7 @@ rightSideWithCorner.src = "./Assets/LevelTiles/FireLevel/rightSideWithCorner.png
 var singlePlatform = new Image();
 singlePlatform.src = "./Assets/LevelTiles/FireLevel/singlePlatform.png";
 
+
 //Creating the map
 var map =[
     [0,0,0,0,0,0,11,0,0,16,0,0,0,0 ,0,0,0,0,0,0,0,0 ,0,14,13,0,1,5,0 ,0,14,13,0,0,0,0,0,0 ,0,0,0,0,0,11,0,0,16,0,0, 0,0,0,0,0,0,0,0 ,0,0 ,0 , 0,0 ,16,0,0 ,0 ,0,0,0,0,0 ,11,0 ,0,16,0 ,0 ,0 ,16,0 ,0 ,0,16,0,0],
@@ -95,6 +96,7 @@ function generateMap()
             tempTile.aRock=false; //If the image is a tile
             tempTile.empty=false; //If there is an empty image
             tempTile.lava=false; // If the image is lava
+            tempTile.smallPlatform = false; // If the image is a small platform
             switch(map[row][col])
             {
                 case 0:
@@ -164,6 +166,7 @@ function generateMap()
                 case 16:
                     tempTile.img=singlePlatform;
                     tempTile.aRock=true;
+                    tempTile.smallPlatform = true;
                     break;
             }
             map[row][col] = tempTile;

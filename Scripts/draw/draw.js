@@ -42,8 +42,8 @@ function render()
 							if (map[row][col].aRock === true)
 							{
 							surface.beginPath();
-							surface.moveTo(player.x + (player.width/2) - 10,player.y + (player.height/2));
-							surface.lineTo(map[row][col].x + (SIZE/2),map[row][col].y + (SIZE/2));
+							surface.moveTo(player.x + SIZE - 60, player.y + 25 + 25);
+							surface.lineTo(map[row][col].x + SIZE/2,map[row][col].y + SIZE/2);
 							surface.lineWidth = 2;
                				surface.strokeStyle = "red";
 							surface.stroke();
@@ -105,8 +105,9 @@ function render()
 			surface.fillText("The Fire Boss is coming...",0,370);
 			
 		}
-		if(healthBarDraw==true )
+		if(bossHealthBarDraw==true )
 		{
+			surface.drawImage(healthBarFrameImg, 500, 800, healthBarFrameImg.width, healthBarFrameImg.height)
 			surface.drawImage(healthBarImage,0, 0, healthBarImage.width, healthBarImage.height, 500, 800, healthBarImage.width, healthBarImage.height);
 		}
 
