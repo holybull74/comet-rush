@@ -204,6 +204,32 @@ function fireBossCollision()
 		countB=0;
 	}
 	}
+	for (var r =0; r < map.length ; r++)
+	{
+		for (var c =0 ; c < map[0].length ; c ++)
+		{
+			if(map[r][c].aRock&&end==true)
+			{
+				var mapMid=(map[r][c].x + (SIZE/2));
+				var bossMid=(fireBoss.x + (fireBoss.width/2));
+				var distance=Math.abs(bossMid-mapMid);
+											
+				if((fireBoss.x<=map[r][c].x+SIZE)&&(fireBoss.x+fireBoss.width>=map[r][c].x)&&(distance>=0 && distance<=100))
+					
+				{
+									
+				
+					
+					if(r==2){fireBoss.y=450;}
+					if(r==1){fireBoss.y=350;}
+					if(r==0){fireBoss.y=250;}
+					
+				
+				}
+				
+			}
+		}
+	}
 }
 
 
