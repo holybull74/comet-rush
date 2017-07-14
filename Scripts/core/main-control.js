@@ -11,7 +11,8 @@ function initGame() {
     {
        themeSong.play();
        themeSong.loop = true;
-    }         
+    } 
+    loadIceLevel();        
     mainUpdateInterval = setInterval(update, 1000/frames);
     arriveToStage();
 }

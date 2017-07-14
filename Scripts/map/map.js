@@ -70,6 +70,7 @@ rightSideWithCorner.src = "./Assets/LevelTiles/FireLevel/rightSideWithCorner.png
 var singlePlatform = new Image();
 singlePlatform.src = "./Assets/LevelTiles/FireLevel/singlePlatform.png";
 
+
 //Creating the map
 var map =[
     [0,0,0,0,0,0,11,0,0,16,0,0,0,0 ,0,0,0,0,0,0,0,0 ,0,14,13,0,1,5,0 ,0,14,13,0,0,0,0,0,0 ,0,0,0,0,0,11,0,0,16,0,0, 0,0,0,0,0,0,0,0 ,0,0 ,0 , 0,0 ,16,0,0 ,0 ,0,0,0,0,0 ,11,0 ,0,16,0 ,0 ,0 ,16,0 ,0 ,0,16,0,0],
