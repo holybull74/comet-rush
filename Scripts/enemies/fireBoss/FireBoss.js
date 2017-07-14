@@ -204,36 +204,6 @@ function fireBossCollision()
 		countB=0;
 	}
 	}
-
-	for (var r =0; r < map.length ; r++)
-	{
-		for (var c =0 ; c < map[0].length ; c ++)
-		{
-			if(map[r][c].aRock)
-			{
-				var vectorX =  (player.x + SIZE/2) - (fireBoss.x + fireBoss.width/2);
-
-				if(vectorX <= 0)
-					{
-					  	if(((fireBoss.x + SIZE) >= (map[r][c].x )) || ((fireBoss.x ) >= (map[r][c].x) ) && ((fireBoss.x) <= (map[r][c].x + SIZE)))
-						{
-							fireBoss.y = 350;
-						}
-						else
-							{
-								fireBoss.y = 450;
-							}
-					}
-					else if(vectorX >0)
-					{
-
-					}
-				
-			}
-		}
-	}
-
-
 }
 
 
