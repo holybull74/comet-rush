@@ -22,7 +22,7 @@ function drain()
 			playerAlive = false;
 			player.speed = 0;
 			player.sY = 0;
-			gravity = 0;
+            gravity = 0;
             deathSound.play();
             setTimeout(gameEnd, 1000);
         }

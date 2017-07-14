@@ -222,7 +222,9 @@ function collision()
 							divHealthP.style.width = 0 + 'px';
            					divHealthP.innerHTML = 0 * 1 + '%';							
 							deathSound.play();
-							setTimeout(gameEnd, 1000);										
+							setTimeout(gameEnd, 1000);
+								
+															
 						}
 					}					
 				}

@@ -35,7 +35,7 @@ function toIceLevel(){
 }
 
 function gameEnd()
-{   
+{  
    clearInterval(mainUpdateInterval);
    renderGameOver();
 }

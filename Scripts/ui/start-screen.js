@@ -87,7 +87,7 @@ introMusic.loop = true;
 //Player's audio source & initialization
 jumpSound.src = "./Assets/Sound/Effects/Jump1.wav";
 shootSound.src = "./Assets/Sound/Effects/Shoot.wav";
-deathSound.src = "./Assets/Sound/Effects/HeroDeath.wav";
+deathSound.src = "./Assets/Sound/Effects/heroDeath.wav";
 playerDamagedSound.src = "./Assets/Sound/Effects/damage.wav";
 playerOnGroundSound.src = "./Assets/Sound/Effects/touchGround.wav";
 playerTeleportSound.src = "./Assets/Sound/Effects/arriving.wav";
