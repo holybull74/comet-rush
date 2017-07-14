@@ -106,6 +106,19 @@ function moveBoss()
 				}
 
 		}
+		else if( vectorX > 0)
+		{
+			if(vectorX <144 && vectorX > 0 )
+				{	
+					console.log("Inside distance from left to animate");
+					bossArmAttackAnimation = true;	
+					fireBoss.img=imagesB[3];
+				}
+			else if(vectorX > 144)
+				{
+					bossArmAttackAnimation = false;
+				}
+		}
 			
 		bossHealthBarDraw=true;
 		if(fireBoss.dir==1)
@@ -164,7 +177,7 @@ function fireBossCollision()
 	{
 		audioBoss.pause();
         bossVictory.play();
-        setTimeout(bossDeath, 1000);
+        setTimeout(toIceLevel, 1000);
 	}
 	if(player.health<=0)
 	{

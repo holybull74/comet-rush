@@ -30,8 +30,8 @@ function update() {
 }
 
 // New
-function bossDeath(){
-    alert('Victory!');
+function toIceLevel(){
+    alert('To next level , Coming SOON!...');
 }
 
 function gameEnd()
