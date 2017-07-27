@@ -29,8 +29,10 @@ function update() {
     for (var i = 0; i < fireWolf.length; i++)
         fireWolf[i].move();
     fireWolfCollision();
-	moveBoss();
-	fireBossCollision();
+	//moveBoss();
+	//fireBossCollision();
+	moveiceBoss();
+	iceBossCollision();
     render();
 }
 

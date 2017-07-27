@@ -3,8 +3,11 @@
 function render()
 {
 	surface.clearRect(0, 0, canvas.width, canvas.height);
-	//Drawing Background...
-	surface.drawImage(background, frameBackgroundIndex*1400, 0, 1400, 900, 0, 0, 1400, 900);
+	//Drawing Fire Background...
+	//surface.drawImage(background, frameBackgroundIndex*1400, 0, 1400, 900, 0, 0, 1400, 900);
+	
+	//Drawing Ice Background...
+	surface.drawImage(background, frameIceBackgroundIndex*1400, 0, 1400, 900, 0, 0, 1400, 900);
 	//Drawing Map
 	for (var row = 0; row < map.length; row++)
 	{
@@ -16,19 +19,20 @@ function render()
 				map[row][col].x,
 				map[row][col].y);
 			}
-
-			if(map[2][col].lava===true)
+			//Drawing Ice Lava...
+			if(map[row][col].lava===true)
 			{
-				surface.drawImage(map[2][col].img,
-					frameLavaIndex*100, 0, 100, 100,
-					map[2][col].x, map[2][col].y, 100, 100);
+				surface.drawImage(map[row][col].img,
+					frameIceLavaIndex*100, 0, 100, 100,
+					map[row][col].x, map[row][col].y, 100, 100);
 			}
-			if(map[3][col].lava===true)
+			//Drawing Fire Lava...
+			/*if(map[row][col].lava===true)
 			{
-				surface.drawImage(map[3][col].img,
+				surface.drawImage(map[row][col].img,
 					frameLavaIndex*100, 0, 100, 100,
-					map[3][col].x, map[3][col].y, 100, 100);
-			}
+					map[row][col].x, map[row][col].y, 100, 100);
+			}*/
 
 			/*if (map[row][col].aRock === true)
 			{
@@ -81,10 +85,14 @@ function render()
 			fireWolf[i].x, fireWolf[i].y, fireWolf[i].size, fireWolf[i].size);
 			
 	//Drawing FireBoss
-		surface.drawImage(fireBoss.img,
-            fireBossFrameIndex * 100, 0, 100, 250,		// Source rectangle.
-            fireBoss.x, fireBoss.y, 100, 250);
+	//	surface.drawImage(fireBoss.img,
+      //      fireBossFrameIndex * 100, 0, 100, 250,		// Source rectangle.
+        //    fireBoss.x, fireBoss.y, 100, 250);
 
+			//Drawing IceBoss
+		surface.drawImage(iceBoss.img,
+            iceBossFrameIndex * 200, 0, 200, 150,		// Source rectangle.
+            iceBoss.x, iceBoss.y, 200, 150);
 		
 		for (i = 0; i < bulletArray.length; i++)
 			{

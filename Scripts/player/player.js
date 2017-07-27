@@ -110,6 +110,7 @@ function scrollMap()
 			for (var col = 0; col < map[0].length; col++)
 			{
 				map[row][col].x -= WORLDSPEED;
+				
 				//if the end of the map reaches on the screen change the end varialbe to true and stop scrolling.....
 				if (map[map.length - 1][map[0].length - 1].x == 1304)
 				{
@@ -118,6 +119,7 @@ function scrollMap()
 				}
 			}
 		}
+		
 	}
 }
 

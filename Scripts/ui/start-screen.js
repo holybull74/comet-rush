@@ -9,8 +9,11 @@ var backgroundY = 0;
 var speed = 1;
 var fadeOutDone = false;
 
-//Generating Level Arrays
-generateMap();
+//Generating Fire Level Arrays
+//generateMap();
+
+//Generating Ice Level Arrays
+generateIceMap();
 
 //Sound control setting
 var playSounds = true;
@@ -124,7 +127,7 @@ uiButton[2] = { x:435, y:535, width:531, height:120 };
 uiButton[3] = { x:462, y:656, width:467, height:120 };
 uiButton[4] = { x:0, y:800, width:100, height:100 };
 uiButton[5] = { x:300, y:500, width:100, height:100 };
-
+/*
 bgImage.onload = function(){
     surface.drawImage(bgImage, 0, backgroundY);
 };
@@ -144,7 +147,7 @@ settingsImage.onload = function(){
 creditsImage.onload = function(){
     surface.drawImage(creditsImage, uiButton[3].x, uiButton[3].y);
 };
-
+*/
 timerId = setInterval(updateUI, 1000/frames); //Frame refresh rate
 
 canvas.addEventListener("mousemove", checkPos);
