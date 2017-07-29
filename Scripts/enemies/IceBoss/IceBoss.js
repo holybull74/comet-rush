@@ -134,7 +134,7 @@ function moveiceBoss()
 			  	iceBoss.img=imagesB[0];
 			}
 
-			iceBoss.x-=6;
+			iceBoss.x-=8;
 			
 			if(iceBoss.x<0)
 			{
@@ -148,7 +148,7 @@ function moveiceBoss()
 				iceBoss.img=imagesB[1];
 			}
 
-			iceBoss.x+=6;
+			iceBoss.x+=8;
 				//console.log(iceBoss.x);
 			if(iceBoss.x>1204)
 			{
@@ -208,7 +208,7 @@ function iceBossCollision()
 				var mapMid=(map[r][c].x + (SIZE/2));
 				var bossMid=(iceBoss.x + (iceBoss.width/2));
 				var distance=Math.abs(bossMid-mapMid);											
-				if( (distance>=0 && distance<=60)) 
+				if( (distance>=0 && distance<=70)) 
 				{						
 					if(r==1){iceBoss.y=150;	}
 					if(r==2){iceBoss.y=250;	}
