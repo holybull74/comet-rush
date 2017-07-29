@@ -58,7 +58,6 @@ function moveiceBoss()
 		if(iceBoss.dir === 1)
 		{
 			iceBoss.x-=8;
-			
 			if(iceBoss.x<0)
 			{
 				iceBoss.dir = -1;
@@ -73,7 +72,7 @@ function moveiceBoss()
 				iceBoss.dir = 1;
 			}
 		}
-		if(iceBoss.x==1820)
+		if(iceBoss.x==1924)
 		{
 			themeSong.pause();
 			if(playSounds)
@@ -135,8 +134,8 @@ function moveiceBoss()
 			  	iceBoss.img=imagesB[0];
 			}
 
-			iceBoss.x-=8;
-
+			iceBoss.x-=6;
+			
 			if(iceBoss.x<0)
 			{
 				iceBoss.dir=-1;
@@ -149,9 +148,9 @@ function moveiceBoss()
 				iceBoss.img=imagesB[1];
 			}
 
-			iceBoss.x+=8;
-				console.log(iceBoss.x);
-			if(iceBoss.x>1292)
+			iceBoss.x+=6;
+				//console.log(iceBoss.x);
+			if(iceBoss.x>1204)
 			{
 				iceBoss.dir=1;
 			}
@@ -204,22 +203,18 @@ function iceBossCollision()
 	{
 		for (var c =0 ; c < map[0].length ; c ++)
 		{
-			if(map[r][c].aRock&&end==true)
+			if(map[r][c].smallPlatform&&end==true)
 			{
 				var mapMid=(map[r][c].x + (SIZE/2));
 				var bossMid=(iceBoss.x + (iceBoss.width/2));
-				var distance=Math.abs(bossMid-mapMid);
-											
-				if((iceBoss.x<=map[r][c].x+SIZE)&&(iceBoss.x+iceBoss.width>=map[r][c].x)&&(distance>=0 && distance<=100))
-					
-				{
-								
-					//if(r==2){fireBoss.y=450;}
-					//if(r==1){fireBoss.y=350;}
-					//if(r==0){fireBoss.y=250;}
-							
+				var distance=Math.abs(bossMid-mapMid);											
+				if( (distance>=0 && distance<=60)) 
+				{						
+					if(r==1){iceBoss.y=150;	}
+					if(r==2){iceBoss.y=250;	}
+					if(r==3){iceBoss.y=350;	}
+					if(r==4){iceBoss.y=450;	}
 				}
-				
 			}
 		}
 	}

@@ -212,7 +212,7 @@ function collision()
 
 					if( cX >= cY)
 					{
-						if (vectorY < 0)
+						/*if (vectorY < 0)
 						{
 							//frameIndex = 0; 	
 				            //currentFrame = 0;
@@ -227,7 +227,7 @@ function collision()
 							setTimeout(gameEnd, 1000);
 								
 															
-						}
+						}*/
 					}					
 				}
 			}
