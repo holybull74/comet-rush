@@ -229,7 +229,7 @@ function moveFireBossArm()
 		if (fireBossArm[i].bulletLife <= 0 || fireBossArm[i].x < 0 )
 		{
 			fireBossArm.splice(i,1);
-			
+			break;
 		}
 
 		if(fireBoss.img === imagesB[5] && fireBossArm[i].speedDir === 0)	
@@ -331,9 +331,9 @@ function fireBossCollision()
 					
 				{
 								
-					//if(r==2){fireBoss.y=450;}
-					//if(r==1){fireBoss.y=350;}
-					//if(r==0){fireBoss.y=250;}
+					if(r==2){fireBoss.y=450;}
+					if(r==1){fireBoss.y=350;}
+					if(r==0){fireBoss.y=250;}
 							
 				}
 				

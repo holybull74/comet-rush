@@ -260,7 +260,7 @@ function moveBullets()
 		if (bulletArray[i].bulletLife <= 0 || bulletArray[i].x < 0 )
 		{
 			bulletArray.splice(i,1);
-			
+			break;
 		}
 
 		if(player.dir === 1 && bulletArray[i].speedDir === 0)	
