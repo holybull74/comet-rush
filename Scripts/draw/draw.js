@@ -83,7 +83,12 @@ function render()
 		surface.drawImage(fireBoss.img,
             fireBossFrameIndex * 100, 0, 100, 250,		// Source rectangle.
             fireBoss.x, fireBoss.y, 100, 250);
-
+			
+		for (i = 0; i < fireBossArm.length; i++)
+			{
+			surface.drawImage(fireBossArm[i].img,
+                     fireBossArm[i].x, fireBossArm[i].y, 100, 100);
+			}
 		
 		for (i = 0; i < bulletArray.length; i++)
 			{
