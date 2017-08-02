@@ -2,6 +2,8 @@
 var textDraw=false;
 var bossHealthBarDraw=false;
 var bossArmAttackAnimation = false;
+var fireBossAlive = true;
+var fadeTransition = 0;
 var audioBoss=document.createElement("audio");
 audioBoss.setAttribute("src","./Assets/Sound/Fire/FireBoss.mp3");
 
@@ -126,9 +128,12 @@ function moveBoss()
 					bossArmAttackAnimation = false;
 				}
 		}
-			
-		bossHealthBarDraw=true;
-		if(fireBoss.dir==1)
+		if(fireBossAlive)
+		{
+			bossHealthBarDraw=true;
+		}			
+		
+		if(fireBoss.dir==1 && fireBossAlive)
 		{
 			if(!bossArmAttackAnimation)
 			{
@@ -142,7 +147,7 @@ function moveBoss()
 				fireBoss.dir=-1;
 			}
 		}
-		if(fireBoss.dir==-1)
+		if(fireBoss.dir==-1 && fireBossAlive)
 		{
 			if(!bossArmAttackAnimation)
 			{
@@ -180,11 +185,15 @@ function fireBossCollision()
 		countP=0;
 		player.damage=0;
 	}
-	if(fireBoss.health<=0)
+	if(fireBoss.health<=0 && fireBossAlive)
 	{
+		clearInterval(playerAnimationIntervalID);
+		stageArrival = true;
+		fireBossAlive = false;
 		audioBoss.pause();
-        bossVictory.play();
-        setTimeout(toIceLevel, 1000);
+		bossVictory.play();
+		bossHealthBarDraw = false;
+		setTimeout(teleportOut, 5000);
 	}
 	if(player.health<=0)
 	{

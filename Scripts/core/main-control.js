@@ -1,4 +1,8 @@
+var inTransition = false;
+var transitionToIceLevel = false;
+var transitionToFinalStage = false;
 var gameOver = false;
+var transitionTime = 0.0;
 var mainUpdateInterval;
 var divHealthBar = document.getElementById("healthBar");
 var divHealthP = document.getElementById("healthPercentage");
@@ -29,11 +33,68 @@ function update() {
     for (var i = 0; i < fireWolf.length; i++)
         fireWolf[i].move();
     fireWolfCollision();
-	//moveBoss();
-	//fireBossCollision();
-	moveiceBoss();
-	iceBossCollision();
+    if(!transitionToIceLevel && !transitionToFinalStage)
+        {
+            moveBoss();
+            fireBossCollision();
+        }  
+    if(transitionToIceLevel && !transitionToFinalStage)
+        {
+             moveiceBoss();
+	         iceBossCollision();
+        }
+   
     render();
+}
+
+function teleportOut()
+{    
+    //frameIndex = 0;
+    stageArrivalTimer = 0;
+    player.img = images[14];    
+    //playerTeleportSound.play();
+    arriveToStage();
+    setTimeout(fadeInterval, 6000);
+}
+
+function fadeInterval()
+{
+    //clearInterval(playerAnimationIntervalID);
+    inTransition = true;    
+    stageArrivalDrawPermit = false;
+    fadeTransition = setInterval(function(){screenTransition(1)}, 1000/frames);
+}
+
+function screenTransition(stageSelection)
+{
+    surface.fillStyle = "rgba(0,0,0, 0.2)";
+    surface.fillRect(0, 0, canvas.width, canvas.height);
+    transitionTime += 0.1;
+
+        if (transitionTime >= 5) 
+        {
+            if(stageSelection === 1) // Load stage 1 ice level
+                {
+                   
+                    clearInterval(fadeTransition);
+                    themeSong.pause();
+                    generateIceMap();                     
+                    transitionToIceLevel = true;                    
+                    iceThemeSong.play();
+                    player.y = 600;
+                    iceThemeSong.loop = true;
+                    transitionTime = 0.0;  
+                    inTransition = false;   
+                    stageArrivalDrawPermit = true;               
+
+                }
+            if(stageSelection === 2) // Load Final Stage
+                {
+
+                }
+            
+        }
+
 }
 
 // New

@@ -1,7 +1,7 @@
 //Map
 const SIZE=100;
-const ROWS = 4;
-const COLS = 85;
+const FROWS = 4;
+const FCOLS = 85;
 
 // Indexes and counters for animations
 var frameLavaIndex = 0; 	// Index of the Lava sprite to display via drawImage.
@@ -86,9 +86,9 @@ var idInt4 = setInterval(backUpdate, 75);
 function generateMap()
 {
     //Generating MAP.
-    for (var row = 0; row < ROWS; row++)
+    for (var row = 0; row < FROWS; row++)
     {
-        for (var col = 0; col < COLS; col++)
+        for (var col = 0; col < FCOLS; col++)
         {
             var tempTile = {};
             tempTile.x=col*SIZE;

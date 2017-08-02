@@ -12,13 +12,13 @@ var audioPlayerDeath = document.createElement("audio");
 audioPlayerDeath.setAttribute("src","./Assets/Sound/Effects/HeroDeath.wav");
 
 //Fire boss array of images
-var imagesB = [new Image(), new Image()]//, new Image(), new Image(), new Image(), new Image()];
-imagesB[0].src = "./Assets/Enemy/IcePlanet/IceBossSpriteL.png";
-imagesB[1].src = "./Assets/Enemy/IcePlanet/IceBossSpriteR.png";
-//imagesB[2].src = "./Assets/Enemy/FirePlanet/FireBossAttackSpriteL.png";
-//imagesB[3].src = "./Assets/Enemy/FirePlanet/FireBossAttackSpriteR.png";
-//imagesB[4].src = "./Assets/Enemy/FirePlanet/FireBossNoArmSpriteL.png";
-//imagesB[5].src = "./Assets/Enemy/FirePlanet/FireBossNoArmSpriteR.png";
+var imagesC = [new Image(), new Image()]//, new Image(), new Image(), new Image(), new Image()];
+imagesC[0].src = "./Assets/Enemy/IcePlanet/IceBossSpriteL.png";
+imagesC[1].src = "./Assets/Enemy/IcePlanet/IceBossSpriteR.png";
+//imagesC[2].src = "./Assets/Enemy/FirePlanet/FireBossAttackSpriteL.png";
+//imagesC[3].src = "./Assets/Enemy/FirePlanet/FireBossAttackSpriteR.png";
+//imagesC[4].src = "./Assets/Enemy/FirePlanet/FireBossNoArmSpriteL.png";
+//imagesC[5].src = "./Assets/Enemy/FirePlanet/FireBossNoArmSpriteR.png";
 
 var bossArmImgL = new Image();
 bossArmImgL.src = "./Assets/Enemy/FirePlanet/FireBossArmL.png";
@@ -38,7 +38,7 @@ healthBarFrameImg.height = 40;
 
 
 
-var iceBoss={x:28900,y:450,dir:1,img: imagesB[0],width:200,height:150,onground:true,health:20};
+var iceBoss={x:28900,y:450,dir:1,img: imagesC[0],width:200,height:150,onground:true,health:20};
 
 var iceBossFrameIndex = 0; 	// Index of the Boss sprite to display via drawImage.
 var iceBossCurrentFrame = 0; 	// Counter for the Boss frames.
@@ -104,7 +104,7 @@ function moveiceBoss()
 			if(vectorX > -144 && vectorX < 0 )
 				{						
 					bossArmAttackAnimation = true;	
-					//iceBoss.img=imagesB[2];
+					//iceBoss.img=imagesC[2];
 				}
 			else if(vectorX < -144)
 				{
@@ -118,7 +118,7 @@ function moveiceBoss()
 				{	
 					
 					bossArmAttackAnimation = true;	
-					//iceBoss.img=imagesB[3];
+					//iceBoss.img=imagesC[3];
 				}
 			else if(vectorX > 144)
 				{
@@ -126,12 +126,12 @@ function moveiceBoss()
 				}
 		}
 			
-		bossHealthBarDraw=true;
+		//bossHealthBarDraw=true;
 		if(iceBoss.dir==1)
 		{
 			if(!bossArmAttackAnimation)
 			{
-			  	iceBoss.img=imagesB[0];
+			  	iceBoss.img=imagesC[0];
 			}
 
 			iceBoss.x-=8;
@@ -145,7 +145,7 @@ function moveiceBoss()
 		{
 			if(!bossArmAttackAnimation)
 			{
-				iceBoss.img=imagesB[1];
+				iceBoss.img=imagesC[1];
 			}
 
 			iceBoss.x+=8;

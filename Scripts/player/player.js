@@ -77,6 +77,7 @@ function arriveToStage()
 		//A set interval to animate the player images...
 		stageArrivalDrawPermit = true;
 		playerTeleportSound.play();
+		frameIndex = 0;
 		playerAnimationIntervalID = setInterval(playerAnimationUpdate, 70);
 		
 		

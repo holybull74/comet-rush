@@ -10,10 +10,8 @@ var speed = 1;
 var fadeOutDone = false;
 
 //Generating Fire Level Arrays
-//generateMap();
+generateMap();
 
-//Generating Ice Level Arrays
-generateIceMap();
 
 //Sound control setting
 var playSounds = true;
@@ -21,6 +19,7 @@ var playSounds = true;
 //Audio
 var introMusic = new Audio();
 var themeSong = new Audio();
+var iceThemeSong = new Audio();                   
 var bossVictory = new Audio();
 var enemyIsDamaged = new Audio();
 
@@ -94,11 +93,13 @@ settingBg.src="./Assets/UI/settingBg.png";
 //Audio source & initialization
 introMusic.src = "./Assets/Sound/Castlevania(MainScreen).mp3";
 themeSong.src = "./Assets/Sound/Fire/FireStage2.mp3";
+iceThemeSong.src = "./Assets/Sound/Ice/IceStage1.mp3";
 bossVictory.src = "./Assets/Sound/StageClear.mp3";
 enemyIsDamaged.src = "./Assets/Sound/Effects/enemyDamage.wav";
 bossVictory.load();
 introMusic.load();
 themeSong.load();
+iceThemeSong.load();
 enemyIsDamaged.load();
 introMusic.play();
 introMusic.loop = true; 
@@ -304,7 +305,7 @@ function fadeOut(menuChoice) //Fades out screen on click of either options
     surface.fillStyle = "rgba(0,0,0, 0.2)";
     surface.fillRect(0, 0, canvas.width, canvas.height);
     time += 0.1;
-    if (time >= 2) 
+    if (time >= 3) 
     { //Gives fade out illusion
         if (menuChoice === 0) 
         {    
