@@ -57,6 +57,8 @@ var backBtn=new Image();
 var instructBg=new Image();
 var soundBtn=new Image();
 var settingBg=new Image();
+var fireBossWarning = new Image();
+var iceBossWarning = new Image();
 
 //Frame variables
 var frames = 30;
@@ -89,6 +91,8 @@ backBtn.src="./Assets/UI/BackBtn.png";
 instructBg.src="./Assets/UI/Controls.png";
 soundBtn.src="./Assets/UI/soundBtn.png";
 settingBg.src="./Assets/UI/settingBg.png";
+fireBossWarning.src = "./Assets/UI/WarningRedSpriteSheet.png";
+iceBossWarning.src = "./Assets/UI/WarningBlueSpriteSheet.png";
 
 //Audio source & initialization
 introMusic.src = "./Assets/Sound/Castlevania(MainScreen).mp3";

@@ -199,6 +199,7 @@ function fireWalkerCollision() {
                 if ((bulletArray[i].y + 10 > fireWalker[j].y) && (bulletArray[i].y < fireWalker[j].y + fireWalker[j].size)) {
                     bulletArray.splice(i, 1);
                     fireWalker[j].HP--
+                    enemyIsDamaged.play();
                 }
                 if (fireWalker[j].HP <= 0)
                     fireWalker.splice(j, 1);

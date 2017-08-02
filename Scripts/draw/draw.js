@@ -82,7 +82,7 @@ function render()
 
 			}     	
 
-				console.log("Player.x : " + player.x);
+				
 			
 			for (i = 0; i < bulletArray.length; i++)
 				{
@@ -97,17 +97,21 @@ function render()
 				}
 			if(textDraw==true)
 			{
-				surface.font="60px Arial";
-				surface.fillStyle="Red";
-				surface.fillText("Be carefull!!!",100,300);	
-				surface.fillText("The Fire Boss is coming...",0,370);
-				
+				if(!transitionToIceLevel && !transitionToFinalStage)
+			{
+				surface.drawImage(fireBossWarning, frameIndex * 800, 0, 800, 400, 0, 0, 800, 400);
+			}
+			if(transitionToIceLevel && !transitionToFinalStage)
+			{
+				surface.drawImage(iceBossWarning, frameIndex * 800, 0, 800, 400, 0, 0, 800, 400);
+			}
+
 			}
 			
 			if(bossHealthBarDraw === true )
 			{
 				surface.drawImage(healthBarFrameImg, 500, 800, healthBarFrameImg.width, healthBarFrameImg.height)
-				surface.drawImage(healthBarImage,0, 0, healthBarImage.width, healthBarImage.height, 500, 800, healthBarImage.width, healthBarImage.height);
+				surface.drawImage(healthBarImage, 500, 800, healthBarImage.width, healthBarImage.height);
 			}
 	}
 }

@@ -49,19 +49,22 @@ function update() {
 
 function teleportOut()
 {    
-    //frameIndex = 0;
-    stageArrivalTimer = 0;
-    player.img = images[14];    
-    //playerTeleportSound.play();
-    arriveToStage();
-    setTimeout(fadeInterval, 6000);
+    frameIndex = 0;
+    player.img = images[14];
+   // stageArrivalTimer = 0;        
+    playerTeleportSound.play();
+    //arriveToStage();
+    setTimeout(fadeInterval, 667);
 }
 
 function fadeInterval()
 {
-    //clearInterval(playerAnimationIntervalID);
-    inTransition = true;    
+  
     stageArrivalDrawPermit = false;
+    clearInterval(playerAnimationIntervalID);
+    stageArrival = true;
+    stageDeparture = false;
+    inTransition = true;        
     fadeTransition = setInterval(function(){screenTransition(1)}, 1000/frames);
 }
 
@@ -81,11 +84,14 @@ function screenTransition(stageSelection)
                     generateIceMap();                     
                     transitionToIceLevel = true;                    
                     iceThemeSong.play();
+                    player.x = 300;
                     player.y = 600;
                     iceThemeSong.loop = true;
                     transitionTime = 0.0;  
+                    stageArrivalTimer = 0;
                     inTransition = false;   
-                    stageArrivalDrawPermit = true;               
+                    //stageArrivalDrawPermit = true;
+                    arriveToStage();               
 
                 }
             if(stageSelection === 2) // Load Final Stage

@@ -3,6 +3,7 @@ var playerAnimationIntervalID;
 var leftPressed = false;
 var rightPressed = false;
 var stageArrival = true;
+var stageDeparture = false;
 var stageArrivalDrawPermit = false;
 var stageArrivalTimer = 0;
 var bulletCount = 0;
@@ -78,6 +79,7 @@ function arriveToStage()
 		stageArrivalDrawPermit = true;
 		playerTeleportSound.play();
 		frameIndex = 0;
+		player.img = images[13];
 		playerAnimationIntervalID = setInterval(playerAnimationUpdate, 70);
 		
 		
@@ -197,6 +199,24 @@ function collision()
 						}
 					}	
 				}
+
+				
+					/*for (i = 0; i < bulletArray.length; i++)
+					{
+						if(bulletArray[i] != undefined)
+						{
+							if ((bulletArray[i].x + 5 >= map[r][c].x ) || (bulletArray[i].x >= map[r][c].x  &&  bulletArray[i].x <= map[r][c].x + SIZE )) 
+							{					
+								if ((bulletArray[i].y <= map[r][c].y + SIZE ) && (bulletArray[i].y >= map[r][c].y)) 
+								{
+									bulletArray.splice(i,1);
+									
+								}
+							}
+						}
+					}*/
+				
+
 			}
 			if(map[r][c].lava)
 			{
@@ -263,6 +283,7 @@ function moveBullets()
 		if (bulletArray[i].bulletLife <= 0 || bulletArray[i].x < 0 )
 		{
 			bulletArray.splice(i,1);
+			break;
 			
 		}
 
@@ -294,7 +315,7 @@ function moveBullets()
 //To set the right image from Array images for the player with the right key
 function handleInput()
 {
-	if(!stageArrival && playerAlive)
+	if(!stageArrival && playerAlive && !stageDeparture)
 	{
 		
 			// Space, is the player jumping?

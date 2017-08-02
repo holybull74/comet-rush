@@ -2,6 +2,7 @@
 var textDraw=false;
 var bossHealthBarDraw=false;
 var bossArmAttackAnimation = false;
+var iceBossAlive = true;
 var audioBoss=document.createElement("audio");
 audioBoss.setAttribute("src","./Assets/Sound/Fire/FireBoss.mp3");
 
@@ -26,13 +27,7 @@ var bossArmImgR = new Image();
 bossArmImgR.src = "./Assets/Enemy/FirePlanet/FireBossArmR.png";
 
 
-
-var healthBarImage=new Image();
-var healthBarFrameImg = new Image();
-healthBarImage.src="./Assets/UI/HealthFire.png";
 healthBarFrameImg.src = "./Assets/UI/HealthFrame.png";
-healthBarImage.width=500;
-healthBarImage.height=40;
 healthBarFrameImg.width = 500;
 healthBarFrameImg.height = 40;
 
@@ -53,7 +48,7 @@ function updateiceB()
 
 function moveiceBoss()
 {
-	if(isPressed && player.x >= 300&&end==false)
+	if(isPressed && player.x >= 300 && end==false)
 	{	
 		if(iceBoss.dir === 1)
 		{
@@ -74,7 +69,7 @@ function moveiceBoss()
 		}
 		if(iceBoss.x==1924)
 		{
-			themeSong.pause();
+			iceThemeSong.pause();
 			if(playSounds)
 			{
 				audioIntoBoss.play();
@@ -125,8 +120,12 @@ function moveiceBoss()
 					bossArmAttackAnimation = false;
 				}
 		}
+			if(iceBossAlive)
+		{
+			bossHealthBarDraw=true;
+		}		
 			
-		//bossHealthBarDraw=true;
+		
 		if(iceBoss.dir==1)
 		{
 			if(!bossArmAttackAnimation)
@@ -179,11 +178,12 @@ function iceBossCollision()
 		countP=0;
 		player.damage=0;
 	}
-	if(iceBoss.health<=0)
+	if(iceBoss.health<=0 && iceBossAlive)
 	{
+		iceBossAlive = false;
 		audioBoss.pause();
         bossVictory.play();
-        setTimeout(toIceLevel, 1000);
+       // setTimeout(toIceLevel, 1000);
 	}
 	for (i = 0; i < bulletArray.length; i++)
 	{

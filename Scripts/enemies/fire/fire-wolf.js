@@ -200,6 +200,7 @@ function fireWolfCollision() {
                 if ((bulletArray[i].y + 10 > fireWolf[j].y) && (bulletArray[i].y < fireWolf[j].y + fireWolf[j].size)) {
                     bulletArray.splice(i, 1);
                     fireWolf[j].HP--
+                    enemyIsDamaged.play();
                 }
                 if (fireWolf[j].HP <= 0)
                     fireWolf.splice(j, 1);

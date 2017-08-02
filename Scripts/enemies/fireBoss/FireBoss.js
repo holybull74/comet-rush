@@ -187,12 +187,13 @@ function fireBossCollision()
 	}
 	if(fireBoss.health<=0 && fireBossAlive)
 	{
-		clearInterval(playerAnimationIntervalID);
-		stageArrival = true;
+		
+		stageDeparture = true;
 		fireBossAlive = false;
 		audioBoss.pause();
 		bossVictory.play();
 		bossHealthBarDraw = false;
+		end = false;
 		setTimeout(teleportOut, 5000);
 	}
 	if(player.health<=0)
