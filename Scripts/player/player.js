@@ -201,11 +201,11 @@ function collision()
 				}
 
 				
-					/*for (i = 0; i < bulletArray.length; i++)
+				for (i = 0; i < bulletArray.length; i++)
 					{
-						if(bulletArray[i] != undefined)
+						if(map[r][c].x > 0)
 						{
-							if ((bulletArray[i].x + 5 >= map[r][c].x ) || (bulletArray[i].x >= map[r][c].x  &&  bulletArray[i].x <= map[r][c].x + SIZE )) 
+							if ((bulletArray[i].x >= map[r][c].x  &&  bulletArray[i].x <= map[r][c].x + SIZE )) 
 							{					
 								if ((bulletArray[i].y <= map[r][c].y + SIZE ) && (bulletArray[i].y >= map[r][c].y)) 
 								{
@@ -214,7 +214,7 @@ function collision()
 								}
 							}
 						}
-					}*/
+					}
 				
 
 			}
