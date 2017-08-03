@@ -207,12 +207,12 @@ function createFireBossArm()
 	
 	if(fireBoss.img === imagesB[4])
 	{
-		var tempBullet = {x: (fireBoss.x +SIZE), y:fireBoss.y +Math.floor(Math.random()*100 +1) +SIZE ,img:armImages[0], bulletLife: 700 , speedDir: 0 , speed: 60};  
+		var tempBullet = {x: (fireBoss.x +SIZE), y:fireBoss.y +150 ,img:armImages[0], bulletLife: 700 , speedDir: 0 , speed: 60};  
 	
 	}
 	else if(fireBoss.img === imagesB[5])
 		{
-			var tempBullet = {x: (fireBoss.x +SIZE), y:fireBoss.y +Math.floor(Math.random()*100+1) +SIZE  ,img:armImages[1], bulletLife: 700 , speedDir: 0, speed: 60};  
+			var tempBullet = {x: (fireBoss.x +SIZE), y:fireBoss.y +150  ,img:armImages[1], bulletLife: 700 , speedDir: 0, speed: 60};  
 		
 		}
 	 
@@ -261,6 +261,7 @@ function moveFireBossArm()
 var countP=0; //Counts how many time collision happens between player and Fire Boss
 var countB=0; //Counts how many time collision happens between bullet and Fire Boss
 var countR=0;
+
 
 function fireBossCollision()
 {
@@ -312,6 +313,7 @@ function fireBossCollision()
 		countB=0;
 	}
 	}
+		
 	for (i = 0; i < fireBossArm.length; i++)
 	{
 	if ((fireBossArm[i].x + SIZE > player.x ) && (fireBossArm[i].x <  player.x +  player.width+10)) {

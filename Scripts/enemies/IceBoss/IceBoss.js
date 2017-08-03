@@ -6,6 +6,7 @@ var bossIceSecondAttack = false;
 var bossIceOut = false;
 var bossIceIn = false;
 var iceBossAlive = true;
+var countATK=0;
 var audioBoss=document.createElement("audio");
 audioBoss.setAttribute("src","./Assets/Sound/Fire/FireBoss.mp3");
 
@@ -29,6 +30,11 @@ imagesC[8].src = "./Assets/Enemy/IcePlanet/IceBossATK2L.png";
 imagesC[9].src = "./Assets/Enemy/IcePlanet/IceBossATK2R.png";
 
 
+var bossIceATK=[new Image(), new Image()];
+bossIceATK[0].src = "./Assets/Enemy/IcePlanet/IceBossATK2L.png";
+bossIceATK[1].src = "./Assets/Enemy/IcePlanet/IceBossATK2R.png";
+
+
 healthBarFrameImg.src = "./Assets/UI/HealthFrame.png";
 healthBarFrameImg.width = 500;
 healthBarFrameImg.height = 40;
@@ -36,6 +42,8 @@ healthBarFrameImg.height = 40;
 
 
 var iceBoss={x:28900,y:450,dir:1,img: imagesC[0],width:200,height:150,onground:true,health:20};
+var iceBossATK=[];
+
 
 var iceBossFrameIndex = 0; 	// Index of the Boss sprite to display via drawImage.
 var iceBossCurrentFrame = 0; 	// Counter for the Boss frames.
@@ -46,6 +54,7 @@ var idInticeB = setInterval(updateiceB, 70);
 function updateiceB()
 {	
 	animateiceBoss();
+	moveIceBossATK();
 }
 
 function moveiceBoss()
@@ -107,7 +116,7 @@ function moveiceBoss()
 					bossIceIn=false;
 					iceBoss.img=imagesC[2];
 				}
-			else if(vectorX >-244 && vectorX < -144 )
+			else if(vectorX >-344 && vectorX < -244 )
 				{
 					bossIceOut=true;
 					bossIceIn=false;
@@ -116,17 +125,15 @@ function moveiceBoss()
 					iceBoss.img=imagesC[6];
 				
 				}
-			else if(vectorX >-444 && vectorX < -244 )
+			else if(vectorX >-444 && vectorX < -344 )
 				{
 					bossIceOut=false;
 					bossIceIn=false;
 					bossIceArmAttackAnimation = false;
 					bossIceSecondAttack=true;
 					iceBoss.img=imagesC[8];	
-					if(iceBoss.dir==1)
-					{iceBoss.x-=8;}
-					if(iceBoss.dir==-1)
-					{iceBoss.x+=8;}
+					countATK++;
+					if(countATK==1)createIceBossATK();
 				}
 			else if(vectorX > -544 && vectorX < -444)
 				{
@@ -136,13 +143,13 @@ function moveiceBoss()
 					bossIceIn=true;
 					iceBoss.img=imagesC[4];
 				}
-			else if((vectorX < -544))
+			else if((vectorX < -144 && vectorX > -244)||(vectorX < -544))
 				{
 					bossIceArmAttackAnimation = false;
 					bossIceSecondAttack=false;
 					bossIceOut=false;
 					bossIceIn=false;
-					
+					countATK=0;
 				}
 
 		}
@@ -157,7 +164,7 @@ function moveiceBoss()
 					bossIceIn=false;
 					iceBoss.img=imagesC[3];
 				}
-			else if(vectorX <244 && vectorX > 144 )
+			else if(vectorX <344 && vectorX > 244 )
 				{
 					bossIceOut=true;
 					bossIceIn=false;
@@ -166,17 +173,15 @@ function moveiceBoss()
 					iceBoss.img=imagesC[7];
 				
 				}
-			else if(vectorX <444 && vectorX > 244 )
+			else if(vectorX <444 && vectorX > 344 )
 				{
 					bossIceOut=false;
 					bossIceIn=false;
 					bossIceArmAttackAnimation = false;
 					bossIceSecondAttack=true;
 					iceBoss.img=imagesC[9];		
-					if(iceBoss.dir==1)
-					{iceBoss.x-=8;}
-					if(iceBoss.dir==-1)
-					{iceBoss.x+=8;}
+					countATK++;
+					if(countATK==1)createIceBossATK();
 				}
 			else if(vectorX < 544 && vectorX > 444)
 				{
@@ -186,12 +191,13 @@ function moveiceBoss()
 					bossIceIn=true;
 					iceBoss.img=imagesC[5];
 				}
-			else if((vectorX > 544))
+			else if((vectorX > 144 && vectorX < 244)||(vectorX > 544))
 				{
 					bossIceArmAttackAnimation = false;
 					bossIceSecondAttack=false;
 					bossIceOut=false;
 					bossIceIn=false;
+					countATK=0;
 					
 				}
 		}
@@ -232,6 +238,62 @@ function moveiceBoss()
 	}
 }
 
+
+function createIceBossATK()
+{
+	
+	if(iceBoss.img === imagesC[8])
+	{
+		var tempBullet = {x: (iceBoss.x ), y:iceBoss.y ,img:bossIceATK[0], bulletLife: 700 , speedDir: 0 , speed: 60};  
+	
+	}
+	else if(iceBoss.img === imagesC[9])
+		{
+			var tempBullet = {x: (iceBoss.x), y:iceBoss.y  ,img:bossIceATK[1], bulletLife: 700 , speedDir: 0, speed: 60};  
+		
+		}
+	 
+	iceBossATK.push(tempBullet);
+}
+
+function moveIceBossATK()
+{
+	var i = 0; 
+
+	while(iceBossATK[i] != undefined)
+	{
+		if (iceBossATK[i].bulletLife <= 0 || iceBossATK[i].x < 0 )
+		{
+			iceBossATK.splice(i,1);
+			break;
+		}
+
+		if(iceBoss.img === imagesC[9] && iceBossATK[i].speedDir === 0)	
+		{
+			iceBossATK[i].speedDir = 1;
+		}
+		if (iceBoss.img === imagesC[8] && iceBossATK[i].speedDir === 0)
+		{	
+			iceBossATK[i].speedDir = -1;				
+		}
+
+		if(iceBossATK[i].speedDir === 1)	
+		{
+			iceBossATK[i].x +=iceBossATK[i].speed;
+			iceBossATK[i].bulletLife -= iceBossATK[i].speed;
+	
+		}
+		if (iceBossATK[i].speedDir === -1 )
+		{		
+			iceBossATK[i].x -= iceBossATK[i].speed;
+			iceBossATK[i].bulletLife -= iceBossATK[i].speed;
+			
+		}
+
+	i++;
+	
+	}  
+}
 
 var countP=0; //Counts how many time collision happens between player and Fire Boss
 var countB=0; //Counts how many time collision happens between bullet and Fire Boss
@@ -276,6 +338,20 @@ function iceBossCollision()
         }
     }else{
 		countB=0;
+	}
+	}
+	for (i = 0; i < iceBossATK.length; i++)
+	{
+	if ((iceBossATK[i].x + SIZE > player.x ) && (iceBossATK[i].x <  player.x +  player.width+10)) {
+       
+        if ((iceBossATK[i].y + SIZE >  player.y ) && (iceBossATK[i].y <  player.y +  player.height)) {
+			iceBossATK.splice(i,1);
+			countR++;
+			if(countR==1){ player.damage++;player.health--;drain();}
+        }
+    }else{
+		countR=0;
+		player.damage=0;
 	}
 	}
 	for (var r =0; r < map.length ; r++)
