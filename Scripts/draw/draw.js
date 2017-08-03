@@ -50,6 +50,7 @@ function render()
 			player.x, player.y, 100, 100);	// Dest rectangle.
 
 		}
+<<<<<<< HEAD
 											
 		//Drawing FireWalker
 			//console.log("FireWalker Image: " + fireWalker.img);
@@ -96,6 +97,55 @@ function render()
 
 			}     	
 
+=======
+
+		if(maxKenHealth)
+			{
+				surface.drawImage(playerHealthFrame, 0, 0, 500, 40);
+			}
+											
+		//Drawing FireWalker
+			//console.log("FireWalker Image: " + fireWalker.img);
+		for (var i = 0; i < fireWalker.length; i++) {
+			surface.drawImage(fireWalker[i].img,
+				fireWalker[i].sourceX, fireWalker[i].sourceY, fireWalker[i].size, fireWalker[i].size,
+				fireWalker[i].x, fireWalker[i].y, fireWalker[i].size, fireWalker[i].size);
+		}
+
+		//Drawing FireWolf
+			//console.log("FireWolf Image: " + fireWolf.img);
+		for (var i = 0; i < fireWolf.length; i++)
+			surface.drawImage(fireWolf[i].img,
+				fireWolf[i].sourceX, fireWolf[i].sourceY, fireWolf[i].size, fireWolf[i].size,
+				fireWolf[i].x, fireWolf[i].y, fireWolf[i].size, fireWolf[i].size);
+				
+		//Drawing FireBoss
+		if(!transitionToIceLevel && !transitionToFinalStage)
+			{
+				surface.drawImage(fireBoss.img,
+				fireBossFrameIndex * 100, 0, 100, 250,		// Source rectangle.
+				fireBoss.x, fireBoss.y, 100, 250);
+			}
+			for (i = 0; i < fireBossArm.length; i++)
+			{
+			surface.drawImage(fireBossArm[i].img,
+                     fireBossArm[i].x, fireBossArm[i].y, 100, 100);
+			}
+		if(transitionToIceLevel && !transitionToFinalStage)
+			{
+				//Drawing IceBoss
+				surface.drawImage(iceBoss.img,
+				iceBossFrameIndex * 200, 0, 200, 150,		// Source rectangle.
+				iceBoss.x, iceBoss.y, 200, 150);
+
+			}     	
+			for (i = 0; i < iceBossATK.length; i++)
+			{
+			surface.drawImage(iceBossATK[i].img,
+					iceBossFrameIndex * 200, 0, 200, 150,
+                    iceBossATK[i].x, iceBossATK[i].y, 200, 150);
+			}
+>>>>>>> cbfd914d817811fa9616348a2994179b39d2a9e7
 				
 			
 			for (i = 0; i < bulletArray.length; i++)

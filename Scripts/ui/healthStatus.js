@@ -9,14 +9,26 @@ function drain()
         if(width>20)
         {
             width-=20;
+            if(width > 60)
+                {
+                    divHealthP.style.backgroundColor = "green";
+                }
+            else if(width >= 40 && width <= 60)
+                {
+                    divHealthP.style.backgroundColor = "orange";
+                }
+          else if(width < 40)
+                {
+                    divHealthP.style.backgroundColor = "red";
+                }
             playerDamagedSound.play();
-            divHealthP.style.width = (width * 5) + 'px';
+            divHealthP.style.width = (width * 3) + 'px';
             divHealthP.innerHTML = width * 1 + '%';
         }
         else
         {
             width -= 20;
-            divHealthP.style.width = (width * 5) + 'px';
+            divHealthP.style.width = (width * 3) + 'px';
             divHealthP.innerHTML = width * 1 + '%';
             player.img = images[12];
 			playerAlive = false;

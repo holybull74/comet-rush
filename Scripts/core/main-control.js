@@ -6,8 +6,10 @@ var transitionTime = 0.0;
 var mainUpdateInterval;
 var divHealthBar = document.getElementById("healthBar");
 var divHealthP = document.getElementById("healthPercentage");
+var maxKenHealth = false;
 
-function initGame() {    
+function initGame() {   
+    maxKenHealth = true; 
     divHealthBar.style.visibility = "visible";
     divHealthP.style.visibility = "visible";
     introMusic.pause();
@@ -19,6 +21,7 @@ function initGame() {
     //loadIceLevel();        
     mainUpdateInterval = setInterval(update, 1000/frames);
     arriveToStage();
+    //teleportOut();
 }
 
 
@@ -33,12 +36,15 @@ function update() {
     for (var i = 0; i < fireWolf.length; i++)
         fireWolf[i].move();
     fireWolfCollision();
+<<<<<<< HEAD
     for (var i = 0; i < iceWalker.length; i++)
         iceWalker[i].move();
     iceWalkerCollision();
     for (var i = 0; i < iceBear.length; i++)
         iceBear[i].move();
     iceBearCollision();
+=======
+>>>>>>> cbfd914d817811fa9616348a2994179b39d2a9e7
     if(!transitionToIceLevel && !transitionToFinalStage)
         {
             moveBoss();
@@ -85,9 +91,13 @@ function screenTransition(stageSelection)
                    
                     clearInterval(fadeTransition);
                     themeSong.pause();
+<<<<<<< HEAD
                     generateIceMap();   
                     createIceBears();
                     createIceWalkers();              
+=======
+                    generateIceMap();                     
+>>>>>>> cbfd914d817811fa9616348a2994179b39d2a9e7
                     transitionToIceLevel = true;                    
                     iceThemeSong.play();
                     player.x = 300;
