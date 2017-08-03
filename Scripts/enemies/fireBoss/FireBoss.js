@@ -45,7 +45,7 @@ healthBarFrameImg.height = 40;
 
 
 
-var fireBoss={x:8400,y:450,dir:1,img: imagesB[0],width:100,height:250,onground:true,health:20};
+var fireBoss={x:8400,y:450,dir:1,img: imagesB[0],width:100,height:250,onground:true,health:10};
 var fireBossArm=[];
 
 var fireBossFrameIndex = 0; 	// Index of the Boss sprite to display via drawImage.
@@ -306,7 +306,7 @@ function fireBossCollision()
 			bulletArray.splice(i,1);
 			enemyIsDamaged.play();
 			countB++;
-			if(countB==1){fireBoss.health--; healthBarImage.width-=25;}
+			if(countB==1){fireBoss.health--; healthBarImage.width-=50;}
         }
     }else{
 		countB=0;
