@@ -101,14 +101,16 @@ function render()
 			
 			for (i = 0; i < bulletArray.length; i++)
 				{
-					surface.beginPath();
+
+					surface.drawImage(bulletArray[i].img, frameIndex*64, 0, 65 , 30 , bulletArray[i].x, bulletArray[i].y, 65, 30);
+					/*surface.beginPath();
 					surface.arc(bulletArray[i].x, bulletArray[i].y,	4, 0, 2*Math.PI);
 					surface.fillStyle = "white";
 					surface.fill();
 					surface.lineWidth = 2;
 					surface.strokeStyle = "red";
 					surface.stroke();
-					surface.closePath();
+					surface.closePath();*/
 				}
 			if(textDraw==true)
 			{

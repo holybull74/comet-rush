@@ -51,6 +51,13 @@ images[16].src = "./Assets/MainCharacter/mainCharacterJumpShootR.png";
 
 var playerHealthFrame = new Image();
 playerHealthFrame.src = "./Assets/UI/MaxHealthFrame.png";
+var playerBulletR = new Image();
+playerBulletR.src = "./Assets/MainCharacter/bulletSprite.png";
+var playerBulletL = new Image();
+playerBulletL.src = "./Assets/MainCharacter/bulletSpriteL.png";
+
+
+
 
 //creating Player object.....
 var player = {img: images[13], x:300, y:600, dir:1, idle:true, width:100, height:100 , speed: WORLDSPEED, sX :0, sY:0 , isJumping: false, onGround: false, damage: 0, health: 5, hit: false};
@@ -265,12 +272,12 @@ function createBullet()
 {
 	if(player.dir === 1)
 	{
-		var tempBullet = {x: (player.x + SIZE - 8), y:player.y + SIZE/2 + 5, bulletLife: 700 , speedDir: 0 , speed: 40};  
+		var tempBullet = {img: playerBulletR, x: (player.x + SIZE - 8), y:player.y + 40, bulletLife: 700 , speedDir: 0 , speed: 40};  
 	
 	}
 	else if(player.dir === -1)
 		{
-			var tempBullet = {x: (player.x - 8), y:player.y + SIZE/2 + 5, bulletLife: 700 , speedDir: 0, speed: 40};  
+			var tempBullet = {img: playerBulletL, x: (player.x - 8), y:player.y + 40, bulletLife: 700 , speedDir: 0, speed: 40};  
 		
 		}
 	 

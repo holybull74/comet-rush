@@ -321,6 +321,7 @@ function iceBossCollision()
 	}
 	if(iceBoss.health<=0 && iceBossAlive)
 	{
+		iceBoss.img = images[12];
 		iceBossAlive = false;
 		audioBoss.pause();
         bossVictory.play();
