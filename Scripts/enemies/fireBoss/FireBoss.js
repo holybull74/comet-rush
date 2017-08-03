@@ -150,7 +150,7 @@ function moveBoss()
 					bossArmAttack=true;
 					
 					fireBoss.img=imagesB[5];
-					
+				}	
 				countarm++;
 				if(countarm==1)createFireBossArm();
 					
@@ -355,4 +355,7 @@ function animateFireBoss()
 			fireBossFrameIndex = 0;
 	}
 	fireBossCurrentFrame++;
+
 }
+
+

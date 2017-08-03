@@ -50,6 +50,11 @@ function render()
 			player.x, player.y, 100, 100);	// Dest rectangle.
 
 		}
+		if(maxKenHealth)
+			{
+				surface.drawImage(playerHealthFrame, 0,0);
+				
+			}
 											
 		//Drawing FireWalker
 			//console.log("FireWalker Image: " + fireWalker.img);
