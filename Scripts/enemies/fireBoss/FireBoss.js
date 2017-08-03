@@ -276,7 +276,7 @@ function fireBossCollision()
 	}
 	if(fireBoss.health<=0 && fireBossAlive)
 	{
-		fireBoss.img = images[12];
+		
 		stageDeparture = true;
 		flashCount = 0;
 		fireBossAlive = false;
@@ -356,4 +356,3 @@ function animateFireBoss()
 	}
 	fireBossCurrentFrame++;
 }
-
