@@ -1,7 +1,10 @@
 //Fire Boss
 var textDraw=false;
 var bossHealthBarDraw=false;
-var bossArmAttackAnimation = false;
+var bossIceArmAttackAnimation = false;
+var bossIceSecondAttack = false;
+var bossIceOut = false;
+var bossIceIn = false;
 var iceBossAlive = true;
 var audioBoss=document.createElement("audio");
 audioBoss.setAttribute("src","./Assets/Sound/Fire/FireBoss.mp3");
@@ -13,15 +16,17 @@ var audioPlayerDeath = document.createElement("audio");
 audioPlayerDeath.setAttribute("src","./Assets/Sound/Effects/HeroDeath.wav");
 
 //Fire boss array of images
-var imagesC = [new Image(), new Image()];//, new Image(), new Image(), new Image(), new Image()];
+var imagesC = [new Image(), new Image(), new Image(), new Image(), new Image(), new Image(),new Image(), new Image(),new Image(), new Image()];
 imagesC[0].src = "./Assets/Enemy/IcePlanet/IceBossSpriteL.png";
 imagesC[1].src = "./Assets/Enemy/IcePlanet/IceBossSpriteR.png";
-
-
-var bossArmImgL = new Image();
-bossArmImgL.src = "./Assets/Enemy/FirePlanet/FireBossArmL.png";
-var bossArmImgR = new Image();
-bossArmImgR.src = "./Assets/Enemy/FirePlanet/FireBossArmR.png";
+imagesC[2].src = "./Assets/Enemy/IcePlanet/IceBossATKL.png";
+imagesC[3].src = "./Assets/Enemy/IcePlanet/IceBossATKR.png";
+imagesC[4].src = "./Assets/Enemy/IcePlanet/IceBossATK2PreparationSprite.png";
+imagesC[5].src = "./Assets/Enemy/IcePlanet/IceBossATK2PreparationSpriteR.png";
+imagesC[6].src = "./Assets/Enemy/IcePlanet/IceBossATK2OUTSpriteL.png";
+imagesC[7].src = "./Assets/Enemy/IcePlanet/IceBossATK2OUTSpriteR.png";
+imagesC[8].src = "./Assets/Enemy/IcePlanet/IceBossATK2L.png";
+imagesC[9].src = "./Assets/Enemy/IcePlanet/IceBossATK2R.png";
 
 
 healthBarFrameImg.src = "./Assets/UI/HealthFrame.png";
@@ -93,14 +98,51 @@ function moveiceBoss()
 		if(vectorX < 0)
 		{
 			
-			if(vectorX > -144 && vectorX < 0 )
-				{						
-					bossArmAttackAnimation = true;	
-					//iceBoss.img=imagesC[2];
+			if(vectorX >-144 && vectorX <0 )
+				{	
+					
+					bossIceArmAttackAnimation = true;
+					bossIceSecondAttack=false;
+					bossIceOut=false;
+					bossIceIn=false;
+					iceBoss.img=imagesC[2];
 				}
-			else if(vectorX < -144)
+			else if(vectorX >-244 && vectorX < -144 )
 				{
-					bossArmAttackAnimation = false;
+					bossIceOut=true;
+					bossIceIn=false;
+					bossIceArmAttackAnimation = false;
+					bossIceSecondAttack=false;
+					iceBoss.img=imagesC[6];
+				
+				}
+			else if(vectorX >-444 && vectorX < -244 )
+				{
+					bossIceOut=false;
+					bossIceIn=false;
+					bossIceArmAttackAnimation = false;
+					bossIceSecondAttack=true;
+					iceBoss.img=imagesC[8];	
+					if(iceBoss.dir==1)
+					{iceBoss.x-=8;}
+					if(iceBoss.dir==-1)
+					{iceBoss.x+=8;}
+				}
+			else if(vectorX > -544 && vectorX < -444)
+				{
+					bossIceArmAttackAnimation = false;
+					bossIceSecondAttack=false;
+					bossIceOut=false;
+					bossIceIn=true;
+					iceBoss.img=imagesC[4];
+				}
+			else if((vectorX < -544))
+				{
+					bossIceArmAttackAnimation = false;
+					bossIceSecondAttack=false;
+					bossIceOut=false;
+					bossIceIn=false;
+					
 				}
 
 		}
@@ -109,12 +151,48 @@ function moveiceBoss()
 			if(vectorX <144 && vectorX > 0 )
 				{	
 					
-					bossArmAttackAnimation = true;	
-					//iceBoss.img=imagesC[3];
+					bossIceArmAttackAnimation = true;
+					bossIceSecondAttack=false;
+					bossIceOut=false;
+					bossIceIn=false;
+					iceBoss.img=imagesC[3];
 				}
-			else if(vectorX > 144)
+			else if(vectorX <244 && vectorX > 144 )
 				{
-					bossArmAttackAnimation = false;
+					bossIceOut=true;
+					bossIceIn=false;
+					bossIceArmAttackAnimation = false;
+					bossIceSecondAttack=false;
+					iceBoss.img=imagesC[7];
+				
+				}
+			else if(vectorX <444 && vectorX > 244 )
+				{
+					bossIceOut=false;
+					bossIceIn=false;
+					bossIceArmAttackAnimation = false;
+					bossIceSecondAttack=true;
+					iceBoss.img=imagesC[9];		
+					if(iceBoss.dir==1)
+					{iceBoss.x-=8;}
+					if(iceBoss.dir==-1)
+					{iceBoss.x+=8;}
+				}
+			else if(vectorX < 544 && vectorX > 444)
+				{
+					bossIceArmAttackAnimation = false;
+					bossIceSecondAttack=false;
+					bossIceOut=false;
+					bossIceIn=true;
+					iceBoss.img=imagesC[5];
+				}
+			else if((vectorX > 544))
+				{
+					bossIceArmAttackAnimation = false;
+					bossIceSecondAttack=false;
+					bossIceOut=false;
+					bossIceIn=false;
+					
 				}
 		}
 			if(iceBossAlive)
