@@ -207,7 +207,10 @@ function iceBearCollision() {
                     enemyIsDamaged.play();
                 }
                 if (iceBear[j].HP <= 0)
-                    iceBear.splice(j, 1);
+                   { 
+                     iceBear.splice(j, 1);
+                     score += 10;
+                   }
             }
             //console.log("iceBear " + j + " HP: " + iceBear[j].HP);
         }

@@ -202,7 +202,10 @@ function fireWalkerCollision() {
                     enemyIsDamaged.play();
                 }
                 if (fireWalker[j].HP <= 0)
-                    fireWalker.splice(j, 1);
+                    {
+                        fireWalker.splice(j, 1);
+                        score += 10;
+                    }
             }
             //console.log("Firewalker " + j + " HP: " + fireWalker[j].HP);
         }

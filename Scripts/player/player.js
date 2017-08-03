@@ -11,6 +11,7 @@ var bulletTimer = 0;
 var flashCount = 0;
 var playerAlive = true;
 var jumpLimit = 1;
+var score = 0;
 
 
 // World variables
@@ -60,7 +61,7 @@ playerBulletL.src = "./Assets/MainCharacter/bulletSpriteL.png";
 
 
 //creating Player object.....
-var player = {img: images[13], x:300, y:600, dir:1, idle:true, width:100, height:100 , speed: WORLDSPEED, sX :0, sY:0 , isJumping: false, onGround: false, damage: 0, health: 5, hit: false};
+var player = {img: images[13], x:100, y:600, dir:1, idle:true, width:100, height:100 , speed: WORLDSPEED, sX :0, sY:0 , isJumping: false, onGround: false, damage: 0, health: 5, hit: false};
 
 	
 var frameIndex = 0; 	// Index of the player sprite to display via drawImage.

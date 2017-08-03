@@ -208,7 +208,10 @@ function iceWalkerCollision() {
                     enemyIsDamaged.play();
                 }
                 if (iceWalker[j].HP <= 0)
-                    iceWalker.splice(j, 1);
+                   {
+                     iceWalker.splice(j, 1);
+                     score += 10;
+                   }
             }
             //console.log("iceWalker " + j + " HP: " + iceWalker[j].HP);
         }

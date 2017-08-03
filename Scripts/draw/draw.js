@@ -49,6 +49,15 @@ function render()
 			frameIndex * 100, 0, 100, 100,		// Source rectangle.
 			player.x, player.y, 100, 100);	// Dest rectangle.
 
+				if(fireBoss.x <= 8700 &&  fireBoss.x >= 8400)
+			{
+				surface.font = "25px Arial";
+				surface.fillStyle = "White";
+				surface.fillText("Ok, remeber you move by pressing" , 200 , 450);
+				surface.fillText("Left: A , left arrow" , 200 , 475);
+				surface.fillText("Right: D , right arrow" , 200 , 500);
+			}  	
+
 		}
 		if(maxKenHealth)
 			{
@@ -116,16 +125,7 @@ function render()
 			}
 			for (i = 0; i < bulletArray.length; i++)
 				{
-
 					surface.drawImage(bulletArray[i].img, frameIndex*64, 0, 65 , 30 , bulletArray[i].x, bulletArray[i].y, 65, 30);
-					/*surface.beginPath();
-					surface.arc(bulletArray[i].x, bulletArray[i].y,	4, 0, 2*Math.PI);
-					surface.fillStyle = "white";
-					surface.fill();
-					surface.lineWidth = 2;
-					surface.strokeStyle = "red";
-					surface.stroke();
-					surface.closePath();*/
 				}
 			if(textDraw==true)
 			{
@@ -139,6 +139,46 @@ function render()
 			}
 
 			}
+
+			surface.font = "25px Arial";
+			surface.fillStyle = "White";
+			surface.fillText("Score: " + score , 1200 , 25 );
+
+			// Tutorial texts
+
+		
+
+			if(fireBoss.x <= 8300 &&  fireBoss.x >= 7600)
+			{
+				surface.font = "25px Arial";
+				surface.fillStyle = "White";
+				surface.fillText("Max if you forgot how to jump" , 400 , 450);
+				surface.fillText("Press Space" , 400 , 475);
+			}  	
+			
+			if(fireBoss.x <= 7500 &&  fireBoss.x >= 7300)
+			{
+				surface.font = "25px Arial";
+				surface.fillStyle = "White";
+				surface.fillText("Some sort of elemental Xenoform" , 400 , 450);
+				surface.fillText("just shoot it with X or K" , 400 , 475);
+			}  	
+
+			if(fireBoss.x <= 7100 &&  fireBoss.x >= 6900)
+			{
+				surface.font = "25px Arial";
+				surface.fillStyle = "White";
+				surface.fillText("If you did not notice that gave you some points" , 400 , 450);
+				surface.fillText("...for some reason...." , 400 , 475);
+			}  	
+
+			if(fireBoss.x <= 6700 &&  fireBoss.x >= 6500)
+			{
+				surface.font = "25px Arial";
+				surface.fillStyle = "White";
+				surface.fillText("Uhh look another one." , 400 , 450);
+				surface.fillText("Go get them points." , 400 , 475);
+			}  
 			
 			if(bossHealthBarDraw === true )
 			{

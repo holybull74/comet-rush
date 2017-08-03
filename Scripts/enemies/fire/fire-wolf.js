@@ -203,7 +203,11 @@ function fireWolfCollision() {
                     enemyIsDamaged.play();
                 }
                 if (fireWolf[j].HP <= 0)
-                    fireWolf.splice(j, 1);
+                    {
+                        fireWolf.splice(j, 1);
+                        score += 10;
+                    }
+                    
             }
             //console.log("fireWolf " + j + " HP: " + fireWolf[j].HP);
         }

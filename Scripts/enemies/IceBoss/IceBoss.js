@@ -321,6 +321,7 @@ function iceBossCollision()
 	}
 	if(iceBoss.health<=0 && iceBossAlive)
 	{
+		score += 100;
 		iceBossAlive = false;
 		audioBoss.pause();
         bossVictory.play();

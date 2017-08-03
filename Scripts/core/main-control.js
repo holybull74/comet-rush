@@ -57,6 +57,7 @@ function update() {
              moveiceBoss();
 	         iceBossCollision();
         }
+      
    
     render();
 }

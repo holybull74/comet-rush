@@ -275,6 +275,7 @@ function fireBossCollision()
 	}
 	if(fireBoss.health<=0 && fireBossAlive)
 	{
+		score += 100;
 		fireBoss.img = images[12];
 		stageDeparture = true;
 		flashCount = 0;
