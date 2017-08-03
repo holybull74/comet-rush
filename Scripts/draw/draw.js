@@ -164,7 +164,7 @@ function render()
 				surface.fillText("just shoot it with X or K" , 400 , 475);
 			}  	
 
-			if(fireBoss.x <= 7100 &&  fireBoss.x >= 6900)
+			if(fireBoss.x <= 7200 &&  fireBoss.x >= 6800)
 			{
 				surface.font = "25px Arial";
 				surface.fillStyle = "White";
