@@ -209,7 +209,7 @@ function moveiceBoss()
 		
 		if(iceBoss.dir==1)
 		{
-			if(!bossArmAttackAnimation)
+			if(!bossIceArmAttackAnimation && !bossIceSecondAttack && !bossIceIn && !bossIceOut)
 			{
 			  	iceBoss.img=imagesC[0];
 			}
@@ -223,7 +223,7 @@ function moveiceBoss()
 		}
 		if(iceBoss.dir==-1)
 		{
-			if(!bossArmAttackAnimation)
+			if(!bossIceArmAttackAnimation && !bossIceSecondAttack && !bossIceIn && !bossIceOut)
 			{
 				iceBoss.img=imagesC[1];
 			}
