@@ -6,8 +6,10 @@ var transitionTime = 0.0;
 var mainUpdateInterval;
 var divHealthBar = document.getElementById("healthBar");
 var divHealthP = document.getElementById("healthPercentage");
+var maxKenHealth = false;
 
-function initGame() {    
+function initGame() {   
+    maxKenHealth = true; 
     divHealthBar.style.visibility = "visible";
     divHealthP.style.visibility = "visible";
     introMusic.pause();

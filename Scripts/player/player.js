@@ -49,6 +49,9 @@ images[14].src = "./Assets/MainCharacter/TeleportSpriteOut.png";
 images[15].src = "./Assets/MainCharacter/mainCharacterJumpShootL.png";
 images[16].src = "./Assets/MainCharacter/mainCharacterJumpShootR.png";
 
+var playerHealthFrame = new Image();
+playerHealthFrame.src = "./Assets/UI/MaxHealthFrame.png";
+
 //creating Player object.....
 var player = {img: images[13], x:300, y:600, dir:1, idle:true, width:100, height:100 , speed: WORLDSPEED, sX :0, sY:0 , isJumping: false, onGround: false, damage: 0, health: 5, hit: false};
 
