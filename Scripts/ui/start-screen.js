@@ -13,10 +13,6 @@ var fadeOutDone = false;
 generateMap();
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> cbfd914d817811fa9616348a2994179b39d2a9e7
 //Sound control setting
 var playSounds = true;
 
