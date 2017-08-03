@@ -36,6 +36,12 @@ function update() {
     for (var i = 0; i < fireWolf.length; i++)
         fireWolf[i].move();
     fireWolfCollision();
+    for (var i = 0; i < iceWalker.length; i++)
+        iceWalker[i].move();
+    iceWalkerCollision();
+    for (var i = 0; i < iceBear.length; i++)
+        iceBear[i].move();
+    iceBearCollision();
     if(!transitionToIceLevel && !transitionToFinalStage)
         {
             moveBoss();
@@ -82,7 +88,9 @@ function screenTransition(stageSelection)
                    
                     clearInterval(fadeTransition);
                     themeSong.pause();
-                    generateIceMap();                     
+                    generateIceMap();   
+                    createIceBears();
+                    createIceWalkers();              
                     transitionToIceLevel = true;                    
                     iceThemeSong.play();
                     player.x = 300;

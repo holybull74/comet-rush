@@ -2,7 +2,6 @@
 var textDraw=false;
 var bossHealthBarDraw=false;
 var bossArmAttackAnimation = false;
-var bossArmAttack = false;
 var fireBossAlive = true;
 var fadeTransition = 0;
 var audioBoss=document.createElement("audio");
@@ -157,14 +156,6 @@ function moveBoss()
 					
 					
 				
-		}
-		else if((vectorX > 144 && vectorX < 444)||(vectorX > 544))
-		{
-			bossArmAttackAnimation = false;
-					bossArmAttack=false;
-					countarm=0;
-					
-		}
 		}
 		if(fireBossAlive)
 		{
