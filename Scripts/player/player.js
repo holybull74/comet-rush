@@ -468,17 +468,15 @@ function handleInput()
 
 function damageFlash(flashCount)
 {
-	console.log("FlashCount: " + flashCount);
+	
 	if(flashCount === 1 )
-		{
-			console.log("FlashCount inside no permit: " + flashCount);
+		{			
 			stageArrivalDrawPermit = false;
 			flashCount++;
 			setTimeout(function(){ damageFlash(flashCount)} , 200); 
 		}
 		else if(flashCount > 1)
 			{
-				console.log("FlashCount inside permit: " + flashCount);
 				stageArrivalDrawPermit = true;
 				flashCount++;
 			}
