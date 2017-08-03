@@ -50,10 +50,8 @@ function update() {
 function teleportOut()
 {    
     frameIndex = 0;
-    player.img = images[14];
-   // stageArrivalTimer = 0;        
+    player.img = images[14];        
     playerTeleportSound.play();
-    //arriveToStage();
     setTimeout(fadeInterval, 667);
 }
 
@@ -89,8 +87,7 @@ function screenTransition(stageSelection)
                     iceThemeSong.loop = true;
                     transitionTime = 0.0;  
                     stageArrivalTimer = 0;
-                    inTransition = false;   
-                    //stageArrivalDrawPermit = true;
+                    inTransition = false;                    
                     arriveToStage();               
 
                 }

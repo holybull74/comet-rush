@@ -453,10 +453,6 @@ function handleInput()
 		
 		if(player.damage!=0 || player.hit === true)
 		{
-			/*if (player.dir == 1)
-				player.img = images[10];
-			else
-				player.img = images[11];*/
 			if(flashCount === 0)
 				{  
 					flashCount++;

@@ -132,27 +132,7 @@ uiButton[2] = { x:435, y:535, width:531, height:120 };
 uiButton[3] = { x:462, y:656, width:467, height:120 };
 uiButton[4] = { x:0, y:800, width:100, height:100 };
 uiButton[5] = { x:300, y:500, width:100, height:100 };
-/*
-bgImage.onload = function(){
-    surface.drawImage(bgImage, 0, backgroundY);
-};
 
-playImage.onload = function(){
-    surface.drawImage(playImage, uiButton[0].x, uiButton[0].y);
-};
-
-instructImage.onload = function(){
-    surface.drawImage(instructImage, uiButton[1].x, uiButton[1].y);
-};
-
-settingsImage.onload = function(){
-    surface.drawImage(settingsImage, uiButton[2].x, uiButton[2].y);
-};
-
-creditsImage.onload = function(){
-    surface.drawImage(creditsImage, uiButton[3].x, uiButton[3].y);
-};
-*/
 timerId = setInterval(updateUI, 1000/frames); //Frame refresh rate
 
 canvas.addEventListener("mousemove", checkPos);

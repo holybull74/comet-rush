@@ -13,13 +13,10 @@ var audioPlayerDeath = document.createElement("audio");
 audioPlayerDeath.setAttribute("src","./Assets/Sound/Effects/HeroDeath.wav");
 
 //Fire boss array of images
-var imagesC = [new Image(), new Image()]//, new Image(), new Image(), new Image(), new Image()];
+var imagesC = [new Image(), new Image()];//, new Image(), new Image(), new Image(), new Image()];
 imagesC[0].src = "./Assets/Enemy/IcePlanet/IceBossSpriteL.png";
 imagesC[1].src = "./Assets/Enemy/IcePlanet/IceBossSpriteR.png";
-//imagesC[2].src = "./Assets/Enemy/FirePlanet/FireBossAttackSpriteL.png";
-//imagesC[3].src = "./Assets/Enemy/FirePlanet/FireBossAttackSpriteR.png";
-//imagesC[4].src = "./Assets/Enemy/FirePlanet/FireBossNoArmSpriteL.png";
-//imagesC[5].src = "./Assets/Enemy/FirePlanet/FireBossNoArmSpriteR.png";
+
 
 var bossArmImgL = new Image();
 bossArmImgL.src = "./Assets/Enemy/FirePlanet/FireBossArmL.png";

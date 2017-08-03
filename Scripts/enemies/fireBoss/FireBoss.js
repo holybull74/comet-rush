@@ -182,7 +182,7 @@ function fireBossCollision()
 				player.health--;
 				drain();
 			    setTimeout(playerRecovered, 2000);}
-			//console.log("Count"+count);
+	
         }
     }else
 	{
