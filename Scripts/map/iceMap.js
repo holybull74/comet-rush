@@ -107,13 +107,13 @@ function generateIceMap()
 
     singlePlatform.src = "./Assets/LevelTiles/IceLevel/singlePlatform.png";
 
-    fireWalkerImg[0].src = "./Assets/Enemy/IcePlanet/IceHumanoidSpriteR.png";
+  //  fireWalkerImg[0].src = "./Assets/Enemy/IcePlanet/IceHumanoidSpriteR.png";
 
-    fireWalkerImg[1].src = "./Assets/Enemy/IcePlanet/IceHumanoidSpriteL.png";
+    //fireWalkerImg[1].src = "./Assets/Enemy/IcePlanet/IceHumanoidSpriteL.png";
 
-    fireWolfImg[0].src = "./Assets/Enemy/IcePlanet/IceBearSpriteR.png";
+   // fireWolfImg[0].src = "./Assets/Enemy/IcePlanet/IceBearSpriteR.png";
 
-    fireWolfImg[1].src = "./Assets/Enemy/IcePlanet/IceBearSpriteL.png";
+   // fireWolfImg[1].src = "./Assets/Enemy/IcePlanet/IceBearSpriteL.png";
 
     healthBarImage.src="./Assets/UI/HealthIce.png";
 

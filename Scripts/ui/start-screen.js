@@ -13,6 +13,7 @@ var fadeOutDone = false;
 generateMap();
 
 
+
 //Sound control setting
 var playSounds = true;
 

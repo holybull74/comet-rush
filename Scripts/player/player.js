@@ -142,9 +142,7 @@ function collision()
 			    var vectorX = (player.x + SIZE - 65) - (map[r][c].x + (SIZE/2));
 				var vectorY = (player.y + (player.height/2)) - (map[r][c].y + (SIZE/2));
 
-				//var vectorX = (player.x + (player.width/2) - 10) - (map[r][c].x + (SIZE/2));
-				//var vectorY = (player.y + (player.height/2)) - (map[r][c].y + (SIZE/2));
-				
+												
 				var boxWidth = ((player.width/2) - 10) + SIZE/2;
 
 				if(Math.abs(vectorX) < boxWidth && Math.abs(vectorY) < SIZE)

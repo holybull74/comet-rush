@@ -19,6 +19,7 @@ function initGame() {
     //loadIceLevel();        
     mainUpdateInterval = setInterval(update, 1000/frames);
     arriveToStage();
+    //teleportOut();
 }
 
 
