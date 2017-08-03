@@ -219,6 +219,7 @@ function reconcileDamage(){
 function playerRecovered(){
     //console.log("recovered...");
     player.hit = false;
+    flashCount = 0;
 }
 
 function endGame()

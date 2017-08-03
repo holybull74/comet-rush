@@ -170,7 +170,11 @@ function iceBossCollision()
 		{
 
 			countP++;
-			if(countP==1){ player.damage++;player.health--;drain();}
+			if(countP==1){ 
+				player.damage++;
+				player.health--;
+				drain();
+				setTimeout(playerRecovered, 2000);}
 			//console.log("Count"+count);
         }
     }else

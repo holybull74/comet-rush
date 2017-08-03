@@ -8,6 +8,7 @@ var stageArrivalDrawPermit = false;
 var stageArrivalTimer = 0;
 var bulletCount = 0;
 var bulletTimer = 0;
+var flashCount = 0;
 var playerAlive = true;
 var jumpLimit = 1;
 
@@ -449,14 +450,38 @@ function handleInput()
 		{
 			player.x = 0;
 		}
+		
 		if(player.damage!=0 || player.hit === true)
 		{
-			if (player.dir == 1)
+			/*if (player.dir == 1)
 				player.img = images[10];
 			else
-				player.img = images[11];
+				player.img = images[11];*/
+			if(flashCount === 0)
+				{  
+					flashCount++;
+					damageFlash(flashCount);
+				}
 		}
 	}
+}
+
+function damageFlash(flashCount)
+{
+	console.log("FlashCount: " + flashCount);
+	if(flashCount === 1 )
+		{
+			console.log("FlashCount inside no permit: " + flashCount);
+			stageArrivalDrawPermit = false;
+			flashCount++;
+			setTimeout(function(){ damageFlash(flashCount)} , 200); 
+		}
+		else if(flashCount > 1)
+			{
+				console.log("FlashCount inside permit: " + flashCount);
+				stageArrivalDrawPermit = true;
+				flashCount++;
+			}
 }
 
 //Animating the player images....

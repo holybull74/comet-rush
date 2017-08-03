@@ -177,7 +177,11 @@ function fireBossCollision()
 		{
 
 			countP++;
-			if(countP==1){ player.damage++;player.health--;drain();}
+			if(countP==1){
+				player.damage++;
+				player.health--;
+				drain();
+			    setTimeout(playerRecovered, 2000);}
 			//console.log("Count"+count);
         }
     }else
@@ -189,6 +193,7 @@ function fireBossCollision()
 	{
 		
 		stageDeparture = true;
+		flashCount = 0;
 		fireBossAlive = false;
 		audioBoss.pause();
 		bossVictory.play();
