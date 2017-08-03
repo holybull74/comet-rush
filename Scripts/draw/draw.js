@@ -54,54 +54,53 @@ function render()
 			{
 				surface.drawImage(playerHealthFrame, 0,0);
 				
-			}
-											
-		//Drawing FireWalker
-			//console.log("FireWalker Image: " + fireWalker.img);
-		for (var i = 0; i < fireWalker.length; i++) {
-			surface.drawImage(fireWalker[i].img,
-				fireWalker[i].sourceX, fireWalker[i].sourceY, fireWalker[i].size, fireWalker[i].size,
-				fireWalker[i].x, fireWalker[i].y, fireWalker[i].size, fireWalker[i].size);
-		}
-
-		//Drawing FireWolf
-			//console.log("FireWolf Image: " + fireWolf.img);
-		for (var i = 0; i < fireWolf.length; i++)
-			surface.drawImage(fireWolf[i].img,
-				fireWolf[i].sourceX, fireWolf[i].sourceY, fireWolf[i].size, fireWolf[i].size,
-				fireWolf[i].x, fireWolf[i].y, fireWolf[i].size, fireWolf[i].size);
-
-		//Drawing IceWalker
-			//console.log("IceWalker Image: " + iceWalker.img);
-		for (var i = 0; i < iceWalker.length; i++) {
-			surface.drawImage(iceWalker[i].img,
-				iceWalker[i].sourceX, iceWalker[i].sourceY, iceWalker[i].size, iceWalker[i].size,
-				iceWalker[i].x, iceWalker[i].y, iceWalker[i].size, iceWalker[i].size);
-		}
-
-		//Drawing IceBear
-			//console.log("IceBear Image: " + iceBear.img);
-		for (var i = 0; i < iceBear.length; i++)
-			surface.drawImage(iceBear[i].img,
-				iceBear[i].sourceX, iceBear[i].sourceY, iceBear[i].size, iceBear[i].size,
-				iceBear[i].x, iceBear[i].y, iceBear[i].size, iceBear[i].size);
+			}				
 		//Drawing FireBoss
 		if(!transitionToIceLevel && !transitionToFinalStage)
 			{
+				//Drawing FireWalker
+			//console.log("FireWalker Image: " + fireWalker.img);
+				for (var i = 0; i < fireWalker.length; i++) {
+					surface.drawImage(fireWalker[i].img,
+						fireWalker[i].sourceX, fireWalker[i].sourceY, fireWalker[i].size, fireWalker[i].size,
+						fireWalker[i].x, fireWalker[i].y, fireWalker[i].size, fireWalker[i].size);
+				}
+
+				//Drawing FireWolf
+			//console.log("FireWolf Image: " + fireWolf.img);
+				for (var i = 0; i < fireWolf.length; i++)
+					surface.drawImage(fireWolf[i].img,
+						fireWolf[i].sourceX, fireWolf[i].sourceY, fireWolf[i].size, fireWolf[i].size,
+						fireWolf[i].x, fireWolf[i].y, fireWolf[i].size, fireWolf[i].size);
+
 				surface.drawImage(fireBoss.img,
 				fireBossFrameIndex * 100, 0, 100, 250,		// Source rectangle.
 				fireBoss.x, fireBoss.y, 100, 250);
 			}
 		if(transitionToIceLevel && !transitionToFinalStage)
 			{
+				//Drawing IceWalker
+			//console.log("IceWalker Image: " + iceWalker.img);
+				for (var i = 0; i < iceWalker.length; i++) {
+					surface.drawImage(iceWalker[i].img,
+						iceWalker[i].sourceX, iceWalker[i].sourceY, iceWalker[i].size, iceWalker[i].size,
+						iceWalker[i].x, iceWalker[i].y, iceWalker[i].size, iceWalker[i].size);
+				}
+
+				//Drawing IceBear
+			//console.log("IceBear Image: " + iceBear.img);
+				for (var i = 0; i < iceBear.length; i++)
+					surface.drawImage(iceBear[i].img,
+						iceBear[i].sourceX, iceBear[i].sourceY, iceBear[i].size, iceBear[i].size,
+						iceBear[i].x, iceBear[i].y, iceBear[i].size, iceBear[i].size);
+
+
 				//Drawing IceBoss
 				surface.drawImage(iceBoss.img,
 				iceBossFrameIndex * 200, 0, 200, 150,		// Source rectangle.
 				iceBoss.x, iceBoss.y, 200, 150);
 
-			}     	
-
-				
+			}     					
 			
 			for (i = 0; i < bulletArray.length; i++)
 				{

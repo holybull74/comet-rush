@@ -29,26 +29,31 @@ function update() {
     
     handleInput();  
     collision();      
-    scrollMap();
-    for (var i = 0; i < fireWalker.length; i++)
-        fireWalker[i].move();
-    fireWalkerCollision();
-    for (var i = 0; i < fireWolf.length; i++)
-        fireWolf[i].move();
-    fireWolfCollision();
-    for (var i = 0; i < iceWalker.length; i++)
-        iceWalker[i].move();
-    iceWalkerCollision();
-    for (var i = 0; i < iceBear.length; i++)
-        iceBear[i].move();
-    iceBearCollision();
+    scrollMap();   
+    
     if(!transitionToIceLevel && !transitionToFinalStage)
         {
+            for (var i = 0; i < fireWalker.length; i++)
+                fireWalker[i].move();
+
+            fireWalkerCollision();
+            for (var i = 0; i < fireWolf.length; i++)
+                fireWolf[i].move();
+
+            fireWolfCollision();
             moveBoss();
             fireBossCollision();
         }  
     if(transitionToIceLevel && !transitionToFinalStage)
         {
+            for (var i = 0; i < iceWalker.length; i++)
+                 iceWalker[i].move();
+
+             iceWalkerCollision();
+             for (var i = 0; i < iceBear.length; i++)
+                 iceBear[i].move();
+
+             iceBearCollision();
              moveiceBoss();
 	         iceBossCollision();
         }

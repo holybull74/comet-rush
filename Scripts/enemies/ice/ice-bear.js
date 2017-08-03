@@ -44,7 +44,7 @@ var iceBearProto = {
         }
     },
     move: function () {
-        console.log("Player x: " + player.x + " iceBear x: " + this.x + " Total Scroll: " + this.scrollCount + " Direction: " + this.dir);
+       // console.log("Player x: " + player.x + " iceBear x: " + this.x + " Total Scroll: " + this.scrollCount + " Direction: " + this.dir);
         var netSpeed;
         if (isPressed == true) {
             if (player.x >= 300 || (end == true && player.x > 1300)) {

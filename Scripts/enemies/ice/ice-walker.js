@@ -1,6 +1,12 @@
 //Ice-walker
-console.log("Executing Ice Walker Script");
+//console.log("Executing Ice Walker Script");
 var iceWalker = [];
+//Assign iceWalker images L/R
+var iceWalkerImg = [new Image, new Image];
+//iceWalkerImg.addEventListener("load", loadHandler, false);
+iceWalkerImg[0].src = "./Assets/Enemy/IcePlanet/IceHumanoidSpriteR.png";
+iceWalkerImg[1].src = "./Assets/Enemy/IcePlanet/IceHumanoidSpriteL.png";
+
 var iceWalkerProto = {
     img: null,
     size: 100,
@@ -44,7 +50,7 @@ var iceWalkerProto = {
         }
     },
     move: function () {
-        console.log("Player x: " + player.x + " iceWalker x: " + this.x + " Total Scroll: " + this.scrollCount + " Direction: " + this.dir);
+        //console.log("Player x: " + player.x + " iceWalker x: " + this.x + " Total Scroll: " + this.scrollCount + " Direction: " + this.dir);
         var netSpeed;
         if (isPressed == true) {
             if (player.x >= 300 || (end == true && player.x > 1300)) {
@@ -167,11 +173,7 @@ function createIceWalkers() {
     } 
 }
 
-//Assign iceWalker images L/R
-var iceWalkerImg = [new Image, new Image];
-//iceWalkerImg.addEventListener("load", loadHandler, false);
-iceWalkerImg[0].src = "./Assets/Enemy/IcePlanet/IceHumanoidSpriteR.png";
-iceWalkerImg[1].src = "./Assets/Enemy/IcePlanet/IceHumanoidSpriteL.png";
+
 //iceWalker.img = iceWalkerImg;
 
 //function loadHandler() {
