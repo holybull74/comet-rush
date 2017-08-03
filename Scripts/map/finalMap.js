@@ -15,8 +15,6 @@ function generateFinalMap()
 	
     botRight.src = "./Assets/LevelTiles/FinalLevel/BottRight.png";
 	
-    middle.src = "./Assets/LevelTiles/IceLevel/middle.png";
-	
     rightPlatform.src = "./Assets/LevelTiles/IceLevel/rightPlatform.png";
 	
     leftPlatform.src = "./Assets/LevelTiles/IceLevel/leftPlatform.png";
