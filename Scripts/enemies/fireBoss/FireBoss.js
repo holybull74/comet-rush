@@ -2,6 +2,7 @@
 var textDraw=false;
 var bossHealthBarDraw=false;
 var bossArmAttackAnimation = false;
+var bossArmAttack = false;
 var fireBossAlive = true;
 var fadeTransition = 0;
 var audioBoss=document.createElement("audio");
@@ -22,6 +23,10 @@ imagesB[3].src = "./Assets/Enemy/FirePlanet/FireBossAttackSpriteR.png";
 imagesB[4].src = "./Assets/Enemy/FirePlanet/FireBossNoArmSpriteL.png";
 imagesB[5].src = "./Assets/Enemy/FirePlanet/FireBossNoArmSpriteR.png";
 
+var armImages=[new Image(), new Image()];
+armImages[0].src = "./Assets/Enemy/FirePlanet/FireBossArmL.png";
+armImages[1].src = "./Assets/Enemy/FirePlanet/FireBossArmR.png";
+
 var bossArmImgL = new Image();
 bossArmImgL.src = "./Assets/Enemy/FirePlanet/FireBossArmL.png";
 var bossArmImgR = new Image();
@@ -41,6 +46,7 @@ healthBarFrameImg.height = 40;
 
 
 var fireBoss={x:8400,y:450,dir:1,img: imagesB[0],width:100,height:250,onground:true,health:20};
+var fireBossArm=[];
 
 var fireBossFrameIndex = 0; 	// Index of the Boss sprite to display via drawImage.
 var fireBossCurrentFrame = 0; 	// Counter for the Boss frames.
@@ -51,6 +57,7 @@ var idIntB = setInterval(updateB, 70);
 function updateB()
 {	
 	animateFireBoss();
+	moveFireBossArm();
 }
 
 function moveBoss()
@@ -109,9 +116,24 @@ function moveBoss()
 					bossArmAttackAnimation = true;	
 					fireBoss.img=imagesB[2];
 				}
-			else if(vectorX < -144)
+			 if(vectorX > -544 && vectorX < -444)
 				{
 					bossArmAttackAnimation = false;
+					bossArmAttack=true;
+					countarm++;
+					fireBoss.img=imagesB[4];
+					if(countarm==1)
+					createFireBossArm();
+					
+			
+				}
+				else if((vectorX < -144 && vectorX > -444)||(vectorX < -544))
+				{
+					bossArmAttackAnimation = false;
+					bossArmAttack=false;
+					 countarm=0;
+					
+					
 				}
 
 		}
@@ -123,10 +145,26 @@ function moveBoss()
 					bossArmAttackAnimation = true;	
 					fireBoss.img=imagesB[3];
 				}
-			else if(vectorX > 144)
+			else if(vectorX < 544 && vectorX > 444)
 				{
 					bossArmAttackAnimation = false;
-				}
+					bossArmAttack=true;
+					
+					fireBoss.img=imagesB[5];
+					
+				countarm++;
+				if(countarm==1)createFireBossArm();
+					
+					
+				
+		}
+		else if((vectorX > 144 && vectorX < 444)||(vectorX > 544))
+		{
+			bossArmAttackAnimation = false;
+					bossArmAttack=false;
+					countarm=0;
+					
+		}
 		}
 		if(fireBossAlive)
 		{
@@ -135,21 +173,21 @@ function moveBoss()
 		
 		if(fireBoss.dir==1 && fireBossAlive)
 		{
-			if(!bossArmAttackAnimation)
+			if(!bossArmAttackAnimation && !bossArmAttack)
 			{
 			  	fireBoss.img=imagesB[0];
 			}
 
 			fireBoss.x-=8;
 
-			if(fireBoss.x<100)
+			if(fireBoss.x<0)
 			{
 				fireBoss.dir=-1;
 			}
 		}
 		if(fireBoss.dir==-1 && fireBossAlive)
 		{
-			if(!bossArmAttackAnimation)
+			if(!bossArmAttackAnimation  && !bossArmAttack)
 			{
 				fireBoss.img=imagesB[1];
 			}
@@ -164,6 +202,61 @@ function moveBoss()
 	}
 }
 
+function createFireBossArm()
+{
+	
+	if(fireBoss.img === imagesB[4])
+	{
+		var tempBullet = {x: (fireBoss.x +SIZE), y:fireBoss.y +Math.floor(Math.random()*100 +1) +SIZE ,img:armImages[0], bulletLife: 700 , speedDir: 0 , speed: 60};  
+	
+	}
+	else if(fireBoss.img === imagesB[5])
+		{
+			var tempBullet = {x: (fireBoss.x +SIZE), y:fireBoss.y +Math.floor(Math.random()*100+1) +SIZE  ,img:armImages[1], bulletLife: 700 , speedDir: 0, speed: 60};  
+		
+		}
+	 
+	fireBossArm.push(tempBullet);
+}
+
+function moveFireBossArm()
+{
+	var i = 0; 
+
+	while(fireBossArm[i] != undefined)
+	{
+		if (fireBossArm[i].bulletLife <= 0 || fireBossArm[i].x < 0 )
+		{
+			fireBossArm.splice(i,1);
+			break;
+		}
+
+		if(fireBoss.img === imagesB[5] && fireBossArm[i].speedDir === 0)	
+		{
+			fireBossArm[i].speedDir = 1;
+		}
+		if (fireBoss.img === imagesB[4] && fireBossArm[i].speedDir === 0)
+		{	
+			fireBossArm[i].speedDir = -1;				
+		}
+
+		if(fireBossArm[i].speedDir === 1)	
+		{
+			fireBossArm[i].x +=fireBossArm[i].speed;
+			fireBossArm[i].bulletLife -= fireBossArm[i].speed;
+	
+		}
+		if (fireBossArm[i].speedDir === -1 )
+		{		
+			fireBossArm[i].x -= fireBossArm[i].speed;
+			fireBossArm[i].bulletLife -= fireBossArm[i].speed;
+			
+		}
+
+	i++;
+	
+	}  
+}
 
 var countP=0; //Counts how many time collision happens between player and Fire Boss
 var countB=0; //Counts how many time collision happens between bullet and Fire Boss
@@ -217,6 +310,20 @@ function fireBossCollision()
         }
     }else{
 		countB=0;
+	}
+	}
+	for (i = 0; i < fireBossArm.length; i++)
+	{
+	if ((fireBossArm[i].x + SIZE > player.x ) && (fireBossArm[i].x <  player.x +  player.width+10)) {
+       
+        if ((fireBossArm[i].y + SIZE >  player.y ) && (fireBossArm[i].y <  player.y +  player.height)) {
+			fireBossArm.splice(i,1);
+			countR++;
+			if(countR==1){ player.damage++;player.health--;drain();}
+        }
+    }else{
+		countR=0;
+		player.damage=0;
 	}
 	}
 	for (var r =0; r < map.length ; r++)
