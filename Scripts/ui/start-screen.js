@@ -9,8 +9,9 @@ var backgroundY = 0;
 var speed = 1;
 var fadeOutDone = false;
 
-//Generating Level Arrays
+//Generating Fire Level Arrays
 generateMap();
+
 
 //Sound control setting
 var playSounds = true;
@@ -18,6 +19,7 @@ var playSounds = true;
 //Audio
 var introMusic = new Audio();
 var themeSong = new Audio();
+var iceThemeSong = new Audio();                   
 var bossVictory = new Audio();
 var enemyIsDamaged = new Audio();
 
@@ -55,6 +57,8 @@ var backBtn=new Image();
 var instructBg=new Image();
 var soundBtn=new Image();
 var settingBg=new Image();
+var fireBossWarning = new Image();
+var iceBossWarning = new Image();
 
 //Frame variables
 var frames = 30;
@@ -87,15 +91,19 @@ backBtn.src="./Assets/UI/BackBtn.png";
 instructBg.src="./Assets/UI/Controls.png";
 soundBtn.src="./Assets/UI/soundBtn.png";
 settingBg.src="./Assets/UI/settingBg.png";
+fireBossWarning.src = "./Assets/UI/WarningRedSpriteSheet.png";
+iceBossWarning.src = "./Assets/UI/WarningBlueSpriteSheet.png";
 
 //Audio source & initialization
 introMusic.src = "./Assets/Sound/Castlevania(MainScreen).mp3";
 themeSong.src = "./Assets/Sound/Fire/FireStage2.mp3";
+iceThemeSong.src = "./Assets/Sound/Ice/IceStage1.mp3";
 bossVictory.src = "./Assets/Sound/StageClear.mp3";
 enemyIsDamaged.src = "./Assets/Sound/Effects/enemyDamage.wav";
 bossVictory.load();
 introMusic.load();
 themeSong.load();
+iceThemeSong.load();
 enemyIsDamaged.load();
 introMusic.play();
 introMusic.loop = true; 
@@ -124,26 +132,6 @@ uiButton[2] = { x:435, y:535, width:531, height:120 };
 uiButton[3] = { x:462, y:656, width:467, height:120 };
 uiButton[4] = { x:0, y:800, width:100, height:100 };
 uiButton[5] = { x:300, y:500, width:100, height:100 };
-
-bgImage.onload = function(){
-    surface.drawImage(bgImage, 0, backgroundY);
-};
-
-playImage.onload = function(){
-    surface.drawImage(playImage, uiButton[0].x, uiButton[0].y);
-};
-
-instructImage.onload = function(){
-    surface.drawImage(instructImage, uiButton[1].x, uiButton[1].y);
-};
-
-settingsImage.onload = function(){
-    surface.drawImage(settingsImage, uiButton[2].x, uiButton[2].y);
-};
-
-creditsImage.onload = function(){
-    surface.drawImage(creditsImage, uiButton[3].x, uiButton[3].y);
-};
 
 timerId = setInterval(updateUI, 1000/frames); //Frame refresh rate
 
@@ -301,7 +289,7 @@ function fadeOut(menuChoice) //Fades out screen on click of either options
     surface.fillStyle = "rgba(0,0,0, 0.2)";
     surface.fillRect(0, 0, canvas.width, canvas.height);
     time += 0.1;
-    if (time >= 2) 
+    if (time >= 3) 
     { //Gives fade out illusion
         if (menuChoice === 0) 
         {    

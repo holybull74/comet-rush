@@ -1,7 +1,7 @@
-//Fire-walker
-//console.log("Executing Fire Walker Script");
-var fireWalker = [];
-var fireWalkerProto = {
+//Ice-walker
+console.log("Executing Ice Walker Script");
+var iceWalker = [];
+var iceWalkerProto = {
     img: null,
     size: 100,
     dir: 0,
@@ -11,16 +11,17 @@ var fireWalkerProto = {
     scrollCount: 0,
     sourceX: 0,
     sourceY: 0,
-    //spawnPoint: 0,
-    x: 0,
+    spawnPointX: 0,
+    spawnPointY: 0,
+    x: 8400,
     y: 600,
-    DAMAGE: 1,
-    HP: 2,
-    SPEED: 9,
+    DAMAGE: 2,
+    HP: 3,
+    SPEED: 10,
     updateAnimation: function () {
         // console.log("current frame: " + this.currentFrame + "frame index: " + this.frameIndex + "sourceX: " + this.sourceX);
         if (this.dir == 0) {
-            this.img = fireWalkerImg[0];
+            this.img = iceWalkerImg[0];
             this.currentFrame++;
             if (this.currentFrame == this.maxFrames) {
                 this.frameIndex++;
@@ -31,7 +32,7 @@ var fireWalkerProto = {
             }
         }
         else {
-            this.img = fireWalkerImg[1];
+            this.img = iceWalkerImg[1];
             this.currentFrame++;
             if (this.currentFrame == this.maxFrames) {
                 this.frameIndex++;
@@ -43,7 +44,7 @@ var fireWalkerProto = {
         }
     },
     move: function () {
-        // console.log("Player x: " + player.x + " Firewalker x: " + this.x + " Total Scroll: " + this.scrollCount + " Direction: " + this.dir);
+        console.log("Player x: " + player.x + " iceWalker x: " + this.x + " Total Scroll: " + this.scrollCount + " Direction: " + this.dir);
         var netSpeed;
         if (isPressed == true) {
             if (player.x >= 300 || (end == true && player.x > 1300)) {
@@ -56,7 +57,7 @@ var fireWalkerProto = {
                         for (var c = 0; c < map[0].length; c++) {
                             if (map[r][c].aRock === true && ((this.x + this.size > map[r][c].x) && (this.x + this.size <= map[r][c].x + 20))) {
                                 if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)) {
-                                    //console.log("Firewalker hit right wall");
+                                    //console.log("iceWalker hit right wall");
                                     //if (this.x >= this.spawnPoint + 300)
                                     this.dir = 1;
                                 }
@@ -72,7 +73,7 @@ var fireWalkerProto = {
                         for (var c = 0; c < map[0].length; c++) {
                             if (map[r][c].aRock === true && ((this.x < map[r][c].x + SIZE) && (this.x >= map[r][c].x + SIZE - 20))) {
                                 if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)) {
-                                    //console.log("Firewalker hit left wall");
+                                    //console.log("iceWalker hit left wall");
                                     //if (this.x >= this.spawnPoint + 300)
                                     this.dir = 0;
                                 }
@@ -89,7 +90,7 @@ var fireWalkerProto = {
                         for (var c = 0; c < map[0].length; c++) {
                             if (map[r][c].aRock === true && ((this.x + this.size > map[r][c].x) && (this.x + this.size <= map[r][c].x + 20))) {
                                 if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)) {
-                                    //console.log("Firewalker hit right wall");
+                                    //console.log("iceWalker hit right wall");
                                     //if (this.x >= this.spawnPoint + 300)
                                     this.dir = 1;
                                 }
@@ -104,7 +105,7 @@ var fireWalkerProto = {
                         for (var c = 0; c < map[0].length; c++) {
                             if (map[r][c].aRock === true && ((this.x < map[r][c].x + SIZE) && (this.x >= map[r][c].x + SIZE - 20))) {
                                 if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)) {
-                                    // console.log("Firewalker hit left wall");
+                                    // console.log("iceWalker hit left wall");
                                     //if (this.x >= this.spawnPoint + 300)
                                     this.dir = 0;
                                 }
@@ -122,7 +123,7 @@ var fireWalkerProto = {
                     for (var c = 0; c < map[0].length; c++) {
                         if (map[r][c].aRock === true && ((this.x + this.size > map[r][c].x) && (this.x + this.size <= map[r][c].x + 20))) {
                             if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)) {
-                                // console.log("Firewalker hit right wall");
+                                // console.log("iceWalker hit right wall");
                                 //if (this.x >= this.spawnPoint + 300)
                                 this.dir = 1;
                             }
@@ -137,7 +138,7 @@ var fireWalkerProto = {
                     for (var c = 0; c < map[0].length; c++) {
                         if (map[r][c].aRock === true && ((this.x < map[r][c].x + SIZE) && (this.x >= map[r][c].x + SIZE - 20))) {
                             if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)) {
-                                // console.log("Firewalker hit left wall");
+                                // console.log("iceWalker hit left wall");
                                 //if (this.x >= this.spawnPoint + 300)
                                 this.dir = 0;
                             }
@@ -149,68 +150,71 @@ var fireWalkerProto = {
     }
 };
 
-createFireWalkers();
+//createIceWalkers();
 
-function createFireWalkers() {
-    var fireWalkerSpawnpoints = [4100, 5400];
-    var newFireWalker;
-    //Create the FireWalkers for the level w/ spawn points
-    for (var i = 0; i < fireWalkerSpawnpoints.length; i++) {
-        newFireWalker = Object.create(fireWalkerProto);
-        newFireWalker.spawnPoint = fireWalkerSpawnpoints[i];
-        newFireWalker.x = newFireWalker.spawnPoint;
-        fireWalker.push(newFireWalker);
+function createIceWalkers() {
+    var iceWalkerSpawnpointsX = [4800, 7600, 8300, 12800, 15100, 15900, 17600, 18400, 21800];
+    var iceWalkerSpawnpointsY = [600, 600, 600, 600, 500, 600, 600, 600, 600];
+    var newiceWalker;
+    //Create the iceWalkers for the level w/ spawn points
+    for (var i = 0; i < iceWalkerSpawnpointsX.length; i++) {
+        newiceWalker = Object.create(iceWalkerProto);
+        newiceWalker.spawnPointX = iceWalkerSpawnpointsX[i];
+        newiceWalker.spawnPointY = iceWalkerSpawnpointsY[i];
+        newiceWalker.x = newiceWalker.spawnPointX;
+        newiceWalker.y = newiceWalker.spawnPointY;
+        iceWalker.push(newiceWalker);
     } 
 }
 
-//Assign FireWalker images L/R
-var fireWalkerImg = [new Image, new Image];
-//fireWalkerImg.addEventListener("load", loadHandler, false);
-fireWalkerImg[0].src = "./Assets/Enemy/FirePlanet/fireEnemySpriteSheetR.png";
-fireWalkerImg[1].src = "./Assets/Enemy/FirePlanet/fireEnemySpriteSheetL.png";
-//fireWalker.img = fireWalkerImg;
+//Assign iceWalker images L/R
+var iceWalkerImg = [new Image, new Image];
+//iceWalkerImg.addEventListener("load", loadHandler, false);
+iceWalkerImg[0].src = "./Assets/Enemy/IcePlanet/IceHumanoidSpriteR.png";
+iceWalkerImg[1].src = "./Assets/Enemy/IcePlanet/IceHumanoidSpriteL.png";
+//iceWalker.img = iceWalkerImg;
 
 //function loadHandler() {
-    updateFWAnimation();
+    updateIWAnimation();
 //}
 
-function updateFWAnimation() {
-        setTimeout(updateFWAnimation, 100);
-        for (var i = 0; i < fireWalker.length; i ++)
-            fireWalker[i].updateAnimation();
+function updateIWAnimation() {
+        setTimeout(updateIWAnimation, 100);
+        for (var i = 0; i < iceWalker.length; i ++)
+            iceWalker[i].updateAnimation();
     }
 
-function fireWalkerCollision() {
+function iceWalkerCollision() {
     //console.log("Player hit: " + player.hit);
     //console.log("Player health: " + player.health);
-    for (var j = 0; j < fireWalker.length; j++) {
-        if ((player.x > fireWalker[j].x - SIZE) && (player.x < fireWalker[j].x + fireWalker[j].size)) {
+    for (var j = 0; j < iceWalker.length; j++) {
+        if ((player.x > iceWalker[j].x - SIZE) && (player.x < iceWalker[j].x + iceWalker[j].size)) {
             //It's within x-range, check y-range
-            //console.log("player/fireWalker in x-range..");
-            if ((player.y > fireWalker[j].y - fireWalker[j].size) && (player.y < fireWalker[j].y + fireWalker[j].size)) {
-                //It's in both ranges so fireWalker and player have collided
-                //console.log("player/fireWalker in y-range..");
+            //console.log("player/iceWalker in x-range..");
+            if ((player.y > iceWalker[j].y - iceWalker[j].size) && (player.y < iceWalker[j].y + iceWalker[j].size)) {
+                //It's in both ranges so iceWalker and player have collided
+                //console.log("player/iceWalker in y-range..");
                 if (player.hit === false)
                     reconcileDamage();
             }
         }
         for (var i = 0; i < bulletArray.length; i++) {
-            if ((bulletArray[i].x + 10 > fireWalker[j].x) && (bulletArray[i].x < fireWalker[j].x + fireWalker[j].size + 10)) {
-                if ((bulletArray[i].y + 10 > fireWalker[j].y) && (bulletArray[i].y < fireWalker[j].y + fireWalker[j].size)) {
+            if ((bulletArray[i].x + 10 > iceWalker[j].x) && (bulletArray[i].x < iceWalker[j].x + iceWalker[j].size + 10)) {
+                if ((bulletArray[i].y + 10 > iceWalker[j].y) && (bulletArray[i].y < iceWalker[j].y + iceWalker[j].size)) {
                     bulletArray.splice(i, 1);
-                    fireWalker[j].HP--
+                    iceWalker[j].HP--
                     enemyIsDamaged.play();
                 }
-                if (fireWalker[j].HP <= 0)
-                    fireWalker.splice(j, 1);
+                if (iceWalker[j].HP <= 0)
+                    iceWalker.splice(j, 1);
             }
-            //console.log("Firewalker " + j + " HP: " + fireWalker[j].HP);
+            //console.log("iceWalker " + j + " HP: " + iceWalker[j].HP);
         }
     }
 }
 
 function reconcileDamage(){
-    player.health -= fireWalkerProto.DAMAGE;
+    player.health -= iceWalkerProto.DAMAGE;
     drain();
     player.hit = true;
     setTimeout(playerRecovered, 2000);

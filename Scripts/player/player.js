@@ -3,10 +3,12 @@ var playerAnimationIntervalID;
 var leftPressed = false;
 var rightPressed = false;
 var stageArrival = true;
+var stageDeparture = false;
 var stageArrivalDrawPermit = false;
 var stageArrivalTimer = 0;
 var bulletCount = 0;
 var bulletTimer = 0;
+var flashCount = 0;
 var playerAlive = true;
 var jumpLimit = 1;
 
@@ -77,6 +79,8 @@ function arriveToStage()
 		//A set interval to animate the player images...
 		stageArrivalDrawPermit = true;
 		playerTeleportSound.play();
+		frameIndex = 0;
+		player.img = images[13];
 		playerAnimationIntervalID = setInterval(playerAnimationUpdate, 70);
 		
 		
@@ -110,6 +114,7 @@ function scrollMap()
 			for (var col = 0; col < map[0].length; col++)
 			{
 				map[row][col].x -= WORLDSPEED;
+				
 				//if the end of the map reaches on the screen change the end varialbe to true and stop scrolling.....
 				if (map[map.length - 1][map[0].length - 1].x == 1304)
 				{
@@ -118,6 +123,7 @@ function scrollMap()
 				}
 			}
 		}
+		
 	}
 }
 
@@ -194,6 +200,24 @@ function collision()
 						}
 					}	
 				}
+
+				
+				for (i = 0; i < bulletArray.length; i++)
+					{
+						if(map[r][c].x > 0)
+						{
+							if ((bulletArray[i].x >= map[r][c].x  &&  bulletArray[i].x <= map[r][c].x + SIZE )) 
+							{					
+								if ((bulletArray[i].y <= map[r][c].y + SIZE ) && (bulletArray[i].y >= map[r][c].y)) 
+								{
+									bulletArray.splice(i,1);
+									
+								}
+							}
+						}
+					}
+				
+
 			}
 			if(map[r][c].lava)
 			{
@@ -260,6 +284,7 @@ function moveBullets()
 		if (bulletArray[i].bulletLife <= 0 || bulletArray[i].x < 0 )
 		{
 			bulletArray.splice(i,1);
+			break;
 			
 		}
 
@@ -291,7 +316,7 @@ function moveBullets()
 //To set the right image from Array images for the player with the right key
 function handleInput()
 {
-	if(!stageArrival && playerAlive)
+	if(!stageArrival && playerAlive && !stageDeparture)
 	{
 		
 			// Space, is the player jumping?
@@ -425,14 +450,32 @@ function handleInput()
 		{
 			player.x = 0;
 		}
+		
 		if(player.damage!=0 || player.hit === true)
 		{
-			if (player.dir == 1)
-				player.img = images[10];
-			else
-				player.img = images[11];
+			if(flashCount === 0)
+				{  
+					flashCount++;
+					damageFlash(flashCount);
+				}
 		}
 	}
+}
+
+function damageFlash(flashCount)
+{
+	
+	if(flashCount === 1 )
+		{			
+			stageArrivalDrawPermit = false;
+			flashCount++;
+			setTimeout(function(){ damageFlash(flashCount)} , 200); 
+		}
+		else if(flashCount > 1)
+			{
+				stageArrivalDrawPermit = true;
+				flashCount++;
+			}
 }
 
 //Animating the player images....

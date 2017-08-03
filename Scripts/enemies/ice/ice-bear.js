@@ -1,6 +1,6 @@
-//console.log("Executing FireWolf script...");
-var fireWolf = [];
-var fireWolfProto = {
+//console.log("Executing iceBear script...");
+var iceBear = [];
+var iceBearProto = {
     img: null,
     size: 100,
     dir: 0, //pointing left
@@ -10,16 +10,17 @@ var fireWolfProto = {
     scrollCount: 0,
     sourceX: 0,
     sourceY: 0,
-    spawnPoint: 0,
-    x: 0,
+    spawnPointX: 0,
+    spawnPointY: 0,
+    x: 8400,
     y: 600,
     DAMAGE: 1,
-    HP: 1,
-    SPEED: 5,
+    HP: 2,
+    SPEED: 8,
     updateAnimation: function() {
        // console.log("current frame: " + this.currentFrame + "frame index: " + this.frameIndex + "sourceX: " + this.sourceX);
         if (this.dir == 0){
-            this.img = fireWolfImg[0];
+            this.img = iceBearImg[0];
             this.currentFrame++;
             if (this.currentFrame == this.maxFrames){
                 this.frameIndex++;
@@ -30,7 +31,7 @@ var fireWolfProto = {
             }
         }
         else {
-            this.img = fireWolfImg[1];
+            this.img = iceBearImg[1];
             this.currentFrame++;
             if (this.currentFrame == this.maxFrames)
             {
@@ -43,7 +44,7 @@ var fireWolfProto = {
         }
     },
     move: function () {
-        //console.log("Player x: " + player.x + " fireWolf x: " + this.x + " Total Scroll: " + this.scrollCount + " Direction: " + this.dir);
+        console.log("Player x: " + player.x + " iceBear x: " + this.x + " Total Scroll: " + this.scrollCount + " Direction: " + this.dir);
         var netSpeed;
         if (isPressed == true) {
             if (player.x >= 300 || (end == true && player.x > 1300)) {
@@ -56,7 +57,7 @@ var fireWolfProto = {
 		                for (var c =0 ; c < map[0].length ; c ++) {
 			                if (map[r][c].aRock === true && ((this.x + this.size > map[r][c].x) && (this.x + this.size <= map[r][c].x + 20))) {
                                 if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
-                                    //console.log("fireWolf hit right wall");
+                                    //console.log("iceBear hit right wall");
                                     //if (this.x >= this.spawnPoint + 300)
                                     this.dir = 1;
                                 }        
@@ -72,7 +73,7 @@ var fireWolfProto = {
 		                for (var c =0 ; c < map[0].length ; c ++) {
 			                if (map[r][c].aRock === true && ((this.x < map[r][c].x + SIZE) && (this.x >= map[r][c].x + SIZE - 20))) {
                                 if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
-                                    //console.log("fireWolf hit left wall");
+                                    //console.log("iceBear hit left wall");
                                     //if (this.x >= this.spawnPoint + 300)
                                     this.dir = 0;
                                 }     
@@ -89,7 +90,7 @@ var fireWolfProto = {
 		                for (var c =0 ; c < map[0].length ; c ++) {
 			                if (map[r][c].aRock === true && ((this.x + this.size > map[r][c].x) && (this.x + this.size <= map[r][c].x + 20))) {
                                 if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
-                                    //console.log("fireWolf hit right wall");
+                                    //console.log("iceBear hit right wall");
                                     //if (this.x >= this.spawnPoint + 300)
                                     this.dir = 1;
                                 }                      
@@ -104,7 +105,7 @@ var fireWolfProto = {
 		                for (var c =0 ; c < map[0].length ; c ++) {
 			                if (map[r][c].aRock === true && ((this.x < map[r][c].x + SIZE) && (this.x >= map[r][c].x + SIZE - 20))) {
                                 if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
-                                   // console.log("fireWolf hit left wall");
+                                   // console.log("iceBear hit left wall");
                                     //if (this.x >= this.spawnPoint + 300)
                                     this.dir = 0;
                                 }           
@@ -122,7 +123,7 @@ var fireWolfProto = {
                     for (var c = 0; c < map[0].length; c++) {
                         if (map[r][c].aRock === true && ((this.x + this.size > map[r][c].x) && (this.x + this.size <= map[r][c].x + 20))) {
                             if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
-                               // console.log("fireWolf hit right wall");
+                               // console.log("iceBear hit right wall");
                                 //if (this.x >= this.spawnPoint + 300)
                                 this.dir = 1;
                             }              
@@ -137,7 +138,7 @@ var fireWolfProto = {
                     for (var c = 0; c < map[0].length; c++) {
                         if (map[r][c].aRock === true && ((this.x < map[r][c].x + SIZE) && (this.x >= map[r][c].x + SIZE - 20))) {
                             if ((this.y + this.size > map[r][c].y) && (this.y < map[r][c].y + SIZE)){
-                               // console.log("fireWolf hit left wall");
+                               // console.log("iceBear hit left wall");
                                 //if (this.x >= this.spawnPoint + 300)
                                 this.dir = 0;
                             }
@@ -149,63 +150,66 @@ var fireWolfProto = {
     }
 };
 
-createFireWolves();
+//createIceBears();
 
-function createFireWolves() {
-    var fireWolfSpawnpoints = [1900, 2300];
-    var newFireWolf;
-    //Create the FireWolves for the level w/ spawn points
-    for (var i = 0; i < fireWolfSpawnpoints.length; i++) {
-        newFireWolf = Object.create(fireWolfProto);
-        newFireWolf.spawnPoint = fireWolfSpawnpoints[i];
-        newFireWolf.x = newFireWolf.spawnPoint;
-        fireWolf.push(newFireWolf);
-    } 
+function createIceBears() {
+    var iceBearSpawnpointsX = [1100, 1900, 3500, 5900, 10000, 14000, 16700, 20200, 22500];
+    var iceBearSpawnpointsY = [600, 600, 600, 600, 200, 600, 600, 600, 600]
+    var newiceBear;
+    //Create the IceBears for the level w/ spawn points
+    for (var i = 0; i < iceBearSpawnpointsX.length; i++) {
+        newiceBear = Object.create(iceBearProto);
+        newiceBear.spawnPointX = iceBearSpawnpointsX[i];
+        newiceBear.spawnPointY = iceBearSpawnpointsY[i];
+        newiceBear.x = newiceBear.spawnPointX;
+        newiceBear.y = newiceBear.spawnPointY;
+        iceBear.push(newiceBear);
+    }
 }
 
-//Assign FireWolf images L/R
-var fireWolfImg = [new Image, new Image];
-//fireWolfImg.addEventListener("load", loadHandler, false);
-fireWolfImg[0].src = "./Assets/Enemy/FirePlanet/FireWolfSpriteR.png";
-fireWolfImg[1].src = "./Assets/Enemy/FirePlanet/FireWolfSpriteL.png";
-//fireWolf.img = fireWolfImg;
+//Assign iceBear images L/R
+var iceBearImg = [new Image, new Image];
+//iceBearImg.addEventListener("load", loadHandler, false);
+iceBearImg[0].src = "./Assets/Enemy/IcePlanet/IceBearSpriteR.png";
+iceBearImg[1].src = "./Assets/Enemy/IcePlanet/IceBearSpriteL.png";
+//iceBear.img = iceBearImg;
 
 //function loadHandler() {
-    updateWolfAnimation();
+    updateBearAnimation();
 //}
 
-function updateWolfAnimation()
+function updateBearAnimation()
 {
-    setTimeout(updateWolfAnimation, 100);
-    for (var i = 0; i < fireWolf.length; i ++)
-        fireWolf[i].updateAnimation();
+    setTimeout(updateBearAnimation, 100);
+    for (var i = 0; i < iceBear.length; i ++)
+        iceBear[i].updateAnimation();
 }
 
-function fireWolfCollision() {
+function iceBearCollision() {
     //console.log("Player hit: " + player.hit);
     //console.log("Player health: " + player.health);
-    for (var j = 0; j < fireWolf.length; j++) {
-        if ((player.x > fireWolf[j].x - SIZE) && (player.x < fireWolf[j].x + fireWolf[j].size)) {
+    for (var j = 0; j < iceBear.length; j++) {
+        if ((player.x > iceBear[j].x - SIZE) && (player.x < iceBear[j].x + iceBear[j].size)) {
             //It's within x-range, check y-range
-            //console.log("player/fireWolf in x-range..");
-            if ((player.y > fireWolf[j].y - fireWolf[j].size) && (player.y < fireWolf[j].y + fireWolf[j].size)) {
-                //It's in both ranges so fireWolf and player have collided
-                //console.log("player/fireWolf in y-range..");
+            //console.log("player/iceBear in x-range..");
+            if ((player.y > iceBear[j].y - iceBear[j].size) && (player.y < iceBear[j].y + iceBear[j].size)) {
+                //It's in both ranges so iceBear and player have collided
+                //console.log("player/iceBear in y-range..");
                 if (player.hit === false)
                     reconcileDamage();
             }
         }
         for (var i = 0; i < bulletArray.length; i++) {
-            if ((bulletArray[i].x + 10 > fireWolf[j].x) && (bulletArray[i].x < fireWolf[j].x + fireWolf[j].size + 10)) {
-                if ((bulletArray[i].y + 10 > fireWolf[j].y) && (bulletArray[i].y < fireWolf[j].y + fireWolf[j].size)) {
+            if ((bulletArray[i].x + 10 > iceBear[j].x) && (bulletArray[i].x < iceBear[j].x + iceBear[j].size + 10)) {
+                if ((bulletArray[i].y + 10 > iceBear[j].y) && (bulletArray[i].y < iceBear[j].y + iceBear[j].size)) {
                     bulletArray.splice(i, 1);
-                    fireWolf[j].HP--
+                    iceBear[j].HP--
                     enemyIsDamaged.play();
                 }
-                if (fireWolf[j].HP <= 0)
-                    fireWolf.splice(j, 1);
+                if (iceBear[j].HP <= 0)
+                    iceBear.splice(j, 1);
             }
-            //console.log("fireWolf " + j + " HP: " + fireWolf[j].HP);
+            //console.log("iceBear " + j + " HP: " + iceBear[j].HP);
         }
     }
 }
