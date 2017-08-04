@@ -54,8 +54,8 @@ function render()
 				surface.font = "25px Arial";
 				surface.fillStyle = "White";
 				surface.fillText("Ok, remeber you move by pressing" , 200 , 450);
-				surface.fillText("Left: A , left arrow" , 200 , 475);
-				surface.fillText("Right: D , right arrow" , 200 , 500);
+				surface.fillText("Left: A or left arrow" , 200 , 475);
+				surface.fillText("Right: D or right arrow" , 200 , 500);
 			}  	
 
 		}

@@ -60,6 +60,7 @@ function update() {
       
    
     render();
+    
 }
 
 function teleportOut()
