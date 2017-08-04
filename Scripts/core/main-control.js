@@ -126,4 +126,11 @@ function gameEnd()
 {  
    clearInterval(mainUpdateInterval);
    renderGameOver();
+   setTimeout(closeTab,5000);
+
+}
+
+function closeTab()
+{   
+    open(location, '_self').close(); 
 }

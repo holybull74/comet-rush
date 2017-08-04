@@ -168,7 +168,7 @@ function render()
 			{
 				surface.font = "25px Arial";
 				surface.fillStyle = "White";
-				surface.fillText("If you did not notice that gave you some points" , 400 , 450);
+				surface.fillText("Killing a Xenoform will give you some points" , 400 , 450);
 				surface.fillText("...for some reason...." , 400 , 475);
 			}  	
 
