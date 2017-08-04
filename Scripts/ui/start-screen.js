@@ -305,7 +305,8 @@ function fadeOut(menuChoice) //Fades out screen on click of either options
             canvas.removeEventListener("mousemove", checkPos);
             canvas.removeEventListener("mouseup", checkClick);           
             clearInterval(fadeId);    
-            initGame();    
+            initGame();
+            Game_Timer();    
         }
 		if(menuChoice===1)
 		{

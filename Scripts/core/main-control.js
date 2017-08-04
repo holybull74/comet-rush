@@ -3,6 +3,7 @@ var transitionToIceLevel = false;
 var transitionToFinalStage = false;
 var gameOver = false;
 var transitionTime = 0.0;
+var gameTimer = 0;
 var mainUpdateInterval;
 var divHealthBar = document.getElementById("healthBar");
 var divHealthP = document.getElementById("healthPercentage");
@@ -17,11 +18,9 @@ function initGame() {
     {
        themeSong.play();
        themeSong.loop = true;
-    } 
-    //loadIceLevel();        
+    }        
     mainUpdateInterval = setInterval(update, 1000/frames);
-    arriveToStage();
-    //teleportOut();
+    arriveToStage();   
 }
 
 
@@ -134,4 +133,10 @@ function gameEnd()
 function closeTab()
 {   
     open(location, '_self').close(); 
+}
+
+function Game_Timer()
+{
+	gameTimer++;
+	setTimeout(Game_Timer, 1000);
 }

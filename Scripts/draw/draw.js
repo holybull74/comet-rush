@@ -139,15 +139,17 @@ function render()
 			}
 
 			}
-
+			//Score
 			surface.font = "25px Arial";
 			surface.fillStyle = "White";
 			surface.fillText("Score: " + score , 1200 , 25 );
 
+			//timer
+			surface.font = "25px Arial";
+			surface.fillStyle = "White";
+			surface.fillText("Timer: " + gameTimer , 700 , 25 );
+
 			// Tutorial texts
-
-		
-
 			if(fireBoss.x <= 8300 &&  fireBoss.x >= 7600)
 			{
 				surface.font = "25px Arial";
