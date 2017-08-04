@@ -124,6 +124,14 @@ playerDamagedSound.load();
 playerOnGroundSound.load();
 playerTeleportSound.load();
 
+//credit image objects
+var creditBlock = { x: 600, y: 300, img: null };
+var creditBlockImg = new Image;
+creditBlockImg.src = "./Assets/UI/CreditBlock.jpg";
+creditBlock.img = creditBlockImg;
+
+var creditInt; //to scroll credits
+
 //Initializing button position and size in arrays
 var uiButton = [];
 uiButton[0] = { x:560, y:292, width:280, height:120 };
@@ -264,6 +272,7 @@ function checkClick(mouseEvent)
 					case 3:
 						clearInterval(timerId);
 						fadeId3 = setInterval(function(){fadeOut(3)}, 1000/frames);
+						creditInt=setInterval(scrollCredits, 50);
 						
 					break;
 					case 4:
@@ -322,14 +331,18 @@ function fadeOut(menuChoice) //Fades out screen on click of either options
 		{
 			           
             clearInterval(fadeId3);
-			timerId = setInterval(updateUI, 1000/frames);
-			alert("The Credits are coming soon!!!");
+			//timerId = setInterval(updateUI, 1000/frames);
+			surface.drawImage(bgImage, 0, backgroundY);
+			
+			
+			surface.drawImage(backBtn, uiButton[4].x, uiButton[4].y);
 			
 		} 
          if(menuChoice===4)
 		{
 			           
             clearInterval(fadeId4);
+			clearInterval(creditInt);	
 			timerId = setInterval(updateUI, 1000/frames);
 		}   
         if(menuChoice===5)
@@ -349,6 +362,20 @@ function fadeOut(menuChoice) //Fades out screen on click of either options
     }
 }
 
+function scrollCredits() {
+   
+   
+    if (creditBlock.y >= -400) {
+        creditBlock.y -= 2;
+		
+        //Draw Credits
+        surface.drawImage(creditBlock.img, creditBlock.x, creditBlock.y);
+    }
+    else {
+        creditBlock.y = 900;
+        
+    }
+}
 
 
 
