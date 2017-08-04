@@ -3,23 +3,23 @@ const COLS = 14;
 
 function generateFinalMap()
 {
-    topLeft.src = "./Assets/LevelTiles/FinalLevel/TopLeft.png";
+    topLeft.src = "./Assets/LevelTiles/FinalStage/TopLeft.png";
 	
-    botLeft.src = "./Assets/LevelTiles/FinalLevel/BottLeft.png";
+    botLeft.src = "./Assets/LevelTiles/FinalStage/BottLeft.png";
 	
-    topMid.src = "./Assets/LevelTiles/FinalLevel/TopMid.png";
+    topMid.src = "./Assets/LevelTiles/FinalStage/TopMid.png";
 	
-    center.src = "./Assets/LevelTiles/FinalLevel/Center.png";
+    center.src = "./Assets/LevelTiles/FinalStage/Center.png";
 	
-    topRight.src = "./Assets/LevelTiles/FinalLevel/TopRight.png";
+    topRight.src = "./Assets/LevelTiles/FinalStage/TopRight.png";
 	
-    botRight.src = "./Assets/LevelTiles/FinalLevel/BottRight.png";
+    botRight.src = "./Assets/LevelTiles/FinalStage/BottRight.png";
 	
-    rightPlatform.src = "./Assets/LevelTiles/IceLevel/rightPlatform.png";
+    rightPlatform.src = "./Assets/LevelTiles/FinalStage/rightPlatform.png";
 	
-    leftPlatform.src = "./Assets/LevelTiles/IceLevel/leftPlatform.png";
+    leftPlatform.src = "./Assets/LevelTiles/FinalStage/leftPlatform.png";
 	
-    background.src = "./Assets/LevelTiles/IceLevel/backgroundSprite.png";
+    background.src = "./Assets/LevelTiles/FinalStage/backgroundSprite.png";
 	
     healthBarImage.src="./Assets/UI/HealthFire.png";
 	
