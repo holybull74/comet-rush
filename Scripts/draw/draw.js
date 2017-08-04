@@ -85,6 +85,12 @@ function render()
 				surface.drawImage(fireBoss.img,
 				fireBossFrameIndex * 100, 0, 100, 250,		// Source rectangle.
 				fireBoss.x, fireBoss.y, 100, 250);
+				//Drawing Fire Boss Arm
+				for (i = 0; i < fireBossArm.length; i++)
+				{
+					surface.drawImage(fireBossArm[i].img,
+                    fireBossArm[i].x, fireBossArm[i].y, 100, 100);
+				}
 			}
 		if(transitionToIceLevel && !transitionToFinalStage)
 			{
@@ -108,21 +114,18 @@ function render()
 				surface.drawImage(iceBoss.img,
 				iceBossFrameIndex * 200, 0, 200, 150,		// Source rectangle.
 				iceBoss.x, iceBoss.y, 200, 150);
+				
+				//Drawing Ice Boss shell
+				for (i = 0; i < iceBossATK.length; i++)
+				{
+					surface.drawImage(iceBossATK[i].img,
+					iceBossFrameIndex * 200, 0, 200, 150,
+                    iceBossATK[i].x, iceBossATK[i].y, 200, 150);
+				}
 
 			}  
-			//Drawing Ice Boss shell
-			for (i = 0; i < iceBossATK.length; i++)
-			{
-			surface.drawImage(iceBossATK[i].img,
-			iceBossFrameIndex * 200, 0, 200, 150,
-                     iceBossATK[i].x, iceBossATK[i].y, 200, 150);
-			}
-			//Drawing Fire Boss Arm
-			for (i = 0; i < fireBossArm.length; i++)
-			{
-			surface.drawImage(fireBossArm[i].img,
-                     fireBossArm[i].x, fireBossArm[i].y, 100, 100);
-			}
+			
+			
 			for (i = 0; i < bulletArray.length; i++)
 				{
 					surface.drawImage(bulletArray[i].img, frameIndex*64, 0, 65 , 30 , bulletArray[i].x, bulletArray[i].y, 65, 30);

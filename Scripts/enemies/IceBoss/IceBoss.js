@@ -7,8 +7,8 @@ var bossIceOut = false;
 var bossIceIn = false;
 var iceBossAlive = true;
 var countATK=0;
-var audioBoss=document.createElement("audio");
-audioBoss.setAttribute("src","./Assets/Sound/Fire/FireBoss.mp3");
+var audioIceBoss=document.createElement("audio");
+audioIceBoss.setAttribute("src","./Assets/Sound/IceBoss_theme.mp3");
 
 var audioIntoBoss=document.createElement("audio");
 audioIntoBoss.setAttribute("src","./Assets/Sound/BossIntro.mp3");
@@ -93,8 +93,8 @@ function moveiceBoss()
 			if(playSounds)
 			{
 				audioIntoBoss.pause();
-				audioBoss.play();
-				audioBoss.loop = true;
+				audioIceBoss.play();
+				audioIceBoss.loop = true;
 			}
 			textDraw=false;		
 		}
