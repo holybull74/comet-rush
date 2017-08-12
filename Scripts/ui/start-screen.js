@@ -8,6 +8,11 @@ var surface = canvas.getContext("2d");
 var backgroundY = 0;
 var speed = 1;
 var fadeOutDone = false;
+var splashScreens = true;
+var splash1 = true;
+var splash2 = false;
+var splashHolder = false;
+var splashTransitionTime = 0.0;
 
 //Generating Fire Level Arrays
 generateMap();
@@ -46,6 +51,8 @@ var time = 0.0;
 //Image objects
 var bgImage = new Image();
 var logoImage = new Image();
+var studioLogo = new Image();
+var engineLogo = new Image();
 var playImage = new Image();
 playImage.setAttribute("id", "play");
 //console.log("Img: " + playImage);
@@ -82,6 +89,8 @@ var maxLogoFrames = 3;
 //Image source locations
 bgImage.src = "./Assets/UI/Background.png";
 logoImage.src ="./Assets/UI/CometRushLogoSprite.png";
+studioLogo.src = "./Assets/UI/Splash1.png";
+engineLogo.src = "./Assets/UI/Splash2.png";
 playImage.src = "./Assets/UI/play.png";
 instructImage.src = "./Assets/UI/instructions.png";
 settingsImage.src = "./Assets/UI/settings.png";
@@ -105,7 +114,7 @@ introMusic.load();
 themeSong.load();
 iceThemeSong.load();
 enemyIsDamaged.load();
-introMusic.play();
+//introMusic.play();
 introMusic.loop = true; 
 
 
@@ -148,10 +157,50 @@ canvas.addEventListener("mouseup", checkClick);
 
 function updateUI()
 {   
-    clear();
-    move();
-    draw();
-    animateLogo();
+    if(splashScreens)
+    {
+        if(splash1)
+        {
+           surface.drawImage(studioLogo, 0, 0);
+           setTimeout(function(){ splash1 = false; }, 3000);
+        }
+        else if(!splash1 && !splash2 )
+        {
+           splashTransition();
+        }
+        else if(splash2)
+        {
+           surface.drawImage(engineLogo, 0, 0);
+           setTimeout(function(){ splashTransitionTime = 0.0; splash2 = false; splashHolder = true; }, 2000);
+        }
+
+    }
+
+    if(!splashScreens)
+        {
+             clear();
+             move();
+             draw();
+             animateLogo();
+        }  
+}
+
+function splashTransition()
+{
+    surface.fillStyle = "rgba(0,0,0, 0.2)";
+    surface.fillRect(0, 0, canvas.width, canvas.height);
+    splashTransitionTime += 0.1;
+
+        if (splashTransitionTime >= 3 && !splashHolder) 
+        {
+            splash2 = true;
+        }
+        else if (splashTransitionTime >= 1 &&  splashHolder) 
+        {
+            splashScreens = false;
+            introMusic.play();
+        }
+
 }
 
 
