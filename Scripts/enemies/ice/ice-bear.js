@@ -153,8 +153,8 @@ var iceBearProto = {
 //createIceBears();
 
 function createIceBears() {
-    var iceBearSpawnpointsX = [1100, 1900, 3500, 5900, 10000, 14000, 16700, 20200, 22500];
-    var iceBearSpawnpointsY = [600, 600, 600, 600, 200, 600, 600, 600, 600]
+    var iceBearSpawnpointsX = [ 1100,  1900,  3500,  5900, 10000, 14000, 16700, 20200, 22500];
+    var iceBearSpawnpointsY = [  600,   600,   600,   600,   200,   600,   600,   600,   600]
     var newiceBear;
     //Create the IceBears for the level w/ spawn points
     for (var i = 0; i < iceBearSpawnpointsX.length; i++) {

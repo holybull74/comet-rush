@@ -159,8 +159,8 @@ var iceWalkerProto = {
 //createIceWalkers();
 
 function createIceWalkers() {
-    var iceWalkerSpawnpointsX = [4800, 7600, 8300, 12800, 15100, 15900, 17600, 18400, 21800];
-    var iceWalkerSpawnpointsY = [600, 600, 600, 600, 500, 600, 600, 600, 600];
+    var iceWalkerSpawnpointsX = [ 4800,  7600,  8300, 12800, 15100, 15900, 17600, 21800];
+    var iceWalkerSpawnpointsY = [  600,   600,   600,   600,   500,   600,   600,   600];
     var newiceWalker;
     //Create the iceWalkers for the level w/ spawn points
     for (var i = 0; i < iceWalkerSpawnpointsX.length; i++) {
