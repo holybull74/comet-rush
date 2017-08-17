@@ -94,14 +94,17 @@ function screenTransition(stageSelection)
                    
                     clearInterval(fadeTransition);
                     themeSong.pause();
-                    generateIceMap();   
+                    generateIceMap();
                     createIceBears();
                     createIceWalkers();              
-                    transitionToIceLevel = true;                    
-                    iceThemeSong.play();
+                    transitionToIceLevel = true;
                     player.x = 300;
                     player.y = 600;
-                    iceThemeSong.loop = true;
+					if(playSounds)
+					{
+						iceThemeSong.play();
+						iceThemeSong.loop = true;
+					}
                     transitionTime = 0.0;  
                     stageArrivalTimer = 0;
                     inTransition = false;                    
