@@ -128,7 +128,14 @@ function render()
 			surface.drawImage(finalBoss.img,
 					          finalBoss.x, finalBoss.y, 300, 240);
 							  
-			
+			//Drawing Final Boss Bullet
+			for (i = 0; i < finalBossBullet.length; i++)
+				{
+					surface.drawImage(finalBossBullet[i].img,
+					0,finalBossBulletFrameIndex * 65, 30, 65,
+                    finalBossBullet[i].x, finalBossBullet[i].y, 30, 65);
+				}
+				
 			for (i = 0; i < bulletArray.length; i++)
 				{
 					surface.drawImage(bulletArray[i].img, frameIndex*64, 0, 65 , 30 , bulletArray[i].x, bulletArray[i].y, 65, 30);

@@ -4,16 +4,8 @@
 //var bossArmAttackAnimation = false;
 //var fireBossAlive = true;
 //var fadeTransition = 0;
-//var audioBoss=document.createElement("audio");
-//audioBoss.setAttribute("src","./Assets/Sound/Fire/FireBoss.mp3");
 
-//var audio=document.createElement("audio");
-//audio.setAttribute("src","./Assets/Sound/BossIntro.mp3");
-//audio.Play();
-//audio.Pause();
-//var audioPlayerDeath = document.createElement("audio");
-//audioPlayerDeath.setAttribute("src","./Assets/Sound/Effects/HeroDeath.wav");
-
+var countFinalBossBullet=0;
 //Fire boss array of images
 var imagesF = [new Image(), new Image(), new Image()];
 imagesF[0].src = "./Assets/Enemy/SentientShip/SentientShipF.png";
@@ -30,17 +22,22 @@ healthBarImage.height=40;
 healthBarFrameImg.width = 500;
 healthBarFrameImg.height = 40;
 
-
+var finalBossBullet = [];
+var finalBossBulletImg = new Image();
+finalBossBulletImg.src = "./Assets/Enemy/SentientShip/verticalBullet.png";
 
 var finalBoss={x:100,y:100,dir:1,img: imagesF[0],width:200,height:140,onground:true,health:10};
 
+var finalBossBulletFrameIndex = 0; 	// Index of the Boss sprite to display via drawImage.
+var finalBossBulletCurrentFrame = 0; 	// Counter for the Boss frames.
+var finalBossBulletMaxFrames = 3; 		// The number of frames in a single boss sprite is drawn.
 
 var idIntF = setInterval(updateF, 70);
 
 function updateF()
 {	
-	//animateFireBoss();
-	//moveFireBossArm();
+	animateFinalBossBullet();
+	moveFinalBossBullet();
 }
 
 function moveFinalBoss()
@@ -56,11 +53,13 @@ function moveFinalBoss()
 			if(vectorX > -144 && vectorX < 0 )
 				{						
 					finalBoss.img=imagesF[0];
+					countFinalBossBullet++;
+					if(countFinalBossBullet<4)createFinalBossBullet();
 				}
-			 if( vectorX < -444)
+			 if( vectorX < -144)
 				{
 					finalBoss.img=imagesF[2];
-					
+					countFinalBossBullet=0;
 			
 				}
 				
@@ -72,11 +71,13 @@ function moveFinalBoss()
 					
 					
 					finalBoss.img=imagesF[0];
+					countFinalBossBullet++;
+					if(countFinalBossBullet<4)createFinalBossBullet();
 				}
-			else if(vectorX > 444)
+			else if(vectorX > 144)
 				{
 					
-					
+					countFinalBossBullet=0;
 					finalBoss.img=imagesF[1];
 				}	
 							
@@ -94,7 +95,7 @@ function moveFinalBoss()
 				finalBoss.dir=-1;
 			}
 		}
-		if(finalBoss.dir==-1)// && fireBossAlive)
+		if(finalBoss.dir==-1)
 		{
 			finalBoss.x+=8;
 			
@@ -106,57 +107,37 @@ function moveFinalBoss()
 		}
 	}
 }
-/*
-function createFireBossArm()
+
+function createFinalBossBullet()
 {
 	
-	if(fireBoss.img === imagesB[4])
-	{
-		var tempBullet = {x: (fireBoss.x +SIZE), y:fireBoss.y +150 ,img:armImages[0], bulletLife: 700 , speedDir: 0 , speed: 60};  
 	
-	}
-	else if(fireBoss.img === imagesB[5])
-		{
-			var tempBullet = {x: (fireBoss.x +SIZE), y:fireBoss.y +150  ,img:armImages[1], bulletLife: 700 , speedDir: 0, speed: 60};  
-		
-		}
-	 
-	fireBossArm.push(tempBullet);
+		var tempBullet = {x: (finalBoss.x +Math.floor(Math.random()*100+1)), y:finalBoss.y +150 ,img:finalBossBulletImg, bulletLife: 700 , speedDir: 0 , speed: 60};  
+	
+		 
+	finalBossBullet.push(tempBullet);
 }
 
-function moveFireBossArm()
+function moveFinalBossBullet()
 {
 	var i = 0; 
 
-	while(fireBossArm[i] != undefined)
+	while(finalBossBullet[i] != undefined)
 	{
-		if (fireBossArm[i].bulletLife <= 0 || fireBossArm[i].x < 0 )
+		if (finalBossBullet[i].bulletLife <= 0 || finalBossBullet[i].x < 0 )
 		{
-			fireBossArm.splice(i,1);
+			finalBossBullet.splice(i,1);
 			break;
 		}
 
-		if(fireBoss.img === imagesB[5] && fireBossArm[i].speedDir === 0)	
+		
+		if(finalBossBullet[i].speedDir === 0)	
 		{
-			fireBossArm[i].speedDir = 1;
-		}
-		if (fireBoss.img === imagesB[4] && fireBossArm[i].speedDir === 0)
-		{	
-			fireBossArm[i].speedDir = -1;				
-		}
-
-		if(fireBossArm[i].speedDir === 1)	
-		{
-			fireBossArm[i].x +=fireBossArm[i].speed;
-			fireBossArm[i].bulletLife -= fireBossArm[i].speed;
+			finalBossBullet[i].y +=finalBossBullet[i].speed;
+			finalBossBullet[i].bulletLife -= finalBossBullet[i].speed;
 	
 		}
-		if (fireBossArm[i].speedDir === -1 )
-		{		
-			fireBossArm[i].x -= fireBossArm[i].speed;
-			fireBossArm[i].bulletLife -= fireBossArm[i].speed;
-			
-		}
+		
 
 	i++;
 	
@@ -168,11 +149,11 @@ var countB=0; //Counts how many time collision happens between bullet and Fire B
 var countR=0;
 
 
-function fireBossCollision()
+function finalBossCollision()
 {
-	if ((player.x + player.width > fireBoss.x ) && (player.x < fireBoss.x + fireBoss.width+10))
+	if ((player.x + player.width > finalBoss.x ) && (player.x < finalBoss.x + finalBoss.width+10))
 	{
-        if ((player.y + player.height > fireBoss.y ) && (player.y < fireBoss.y + fireBoss.height))
+        if ((player.y + player.height > finalBoss.y ) && (player.y < finalBoss.y + finalBoss.height))
 		{
 
 			countP++;
@@ -188,10 +169,10 @@ function fireBossCollision()
 		countP=0;
 		player.damage=0;
 	}
-	if(fireBoss.health<=0 && fireBossAlive)
+	if(finalBoss.health<=0 )
 	{
-		score += 100;
-		fireBoss.img = images[12];
+		/*score += 100;
+		finalBoss.img = images[12];
 		stageDeparture = true;
 		flashCount = 0;
 		fireBossAlive = false;
@@ -199,33 +180,29 @@ function fireBossCollision()
 		bossVictory.play();
 		bossHealthBarDraw = false;
 		end = false;
-		setTimeout(teleportOut, 5000);
-	}
-	if(player.health<=0)
-	{
-		//alert("GameOver");
+		setTimeout(teleportOut, 5000);*/
 	}
 	for (i = 0; i < bulletArray.length; i++)
 	{
-	if ((bulletArray[i].x + 10 > fireBoss.x ) && (bulletArray[i].x < fireBoss.x + fireBoss.width+10)) {
+	if ((bulletArray[i].x + 10 > finalBoss.x ) && (bulletArray[i].x < finalBoss.x + finalBoss.width+10)) {
        
-        if ((bulletArray[i].y + 10 > fireBoss.y ) && (bulletArray[i].y < fireBoss.y + fireBoss.height)) {
+        if ((bulletArray[i].y + 10 > finalBoss.y ) && (bulletArray[i].y < finalBoss.y + finalBoss.height)) {
 			bulletArray.splice(i,1);
 			enemyIsDamaged.play();
 			countB++;
-			if(countB==1){fireBoss.health--; healthBarImage.width-=50;}
+			if(countB==1){finalBoss.health--; healthBarImage.width-=50;}
         }
     }else{
 		countB=0;
 	}
 	}
 		
-	for (i = 0; i < fireBossArm.length; i++)
+	for (i = 0; i < finalBossBullet.length; i++)
 	{
-	if ((fireBossArm[i].x + SIZE > player.x ) && (fireBossArm[i].x <  player.x +  player.width+10)) {
+	if ((finalBossBullet[i].x + 30 > player.x ) && (finalBossBullet[i].x <  player.x +  player.width+10)) {
        
-        if ((fireBossArm[i].y + SIZE >  player.y ) && (fireBossArm[i].y <  player.y +  player.height)) {
-			fireBossArm.splice(i,1);
+        if ((finalBossBullet[i].y + 65 >  player.y ) && (finalBossBullet[i].y <  player.y +  player.height)) {
+			finalBossBullet.splice(i,1);
 			countR++;
 			if(countR==1){ player.damage++;player.health--;drain();}
         }
@@ -234,32 +211,21 @@ function fireBossCollision()
 		player.damage=0;
 	}
 	}
-	for (var r =0; r < map.length ; r++)
-	{
-		for (var c =0 ; c < map[0].length ; c ++)
-		{
-			if(map[r][c].aRock&&end==true)
-			{
-				var mapMid=(map[r][c].x + (SIZE/2));
-				var bossMid=(fireBoss.x + (fireBoss.width/2));
-				var distance=Math.abs(bossMid-mapMid);
-											
-				if((fireBoss.x<=map[r][c].x+SIZE)&&(fireBoss.x+fireBoss.width>=map[r][c].x)&&(distance>=0 && distance<=100))
-					
-				{
-								
-					if(r==2){fireBoss.y=450;}
-					if(r==1){fireBoss.y=350;}
-					if(r==0){fireBoss.y=250;}
-							
-				}
-				
-			}
-		}
-	}
+	
 }
 
-*/
 
+//Animating the Final Boss Bullet images....
+function animateFinalBossBullet()
+{
+		if (finalBossBulletCurrentFrame === finalBossBulletMaxFrames)
+	{
+		finalBossBulletFrameIndex++;
+		finalBossBulletCurrentFrame = 0;
+		if (finalBossBulletFrameIndex == 4)
+			finalBossBulletFrameIndex = 0;
+	}
+	finalBossBulletCurrentFrame++;
+}
 
 
