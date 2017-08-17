@@ -24,7 +24,8 @@ var playSounds = true;
 //Audio
 var introMusic = new Audio();
 var themeSong = new Audio();
-var iceThemeSong = new Audio();                   
+var iceThemeSong = new Audio();   
+var finalThemeSong = new Audio();                
 var bossVictory = new Audio();
 var enemyIsDamaged = new Audio();
 
@@ -109,12 +110,14 @@ iceBossWarning.src = "./Assets/UI/WarningBlueSpriteSheet.png";
 introMusic.src = "./Assets/Sound/Castlevania(MainScreen).mp3";
 themeSong.src = "./Assets/Sound/Fire/FireStage2.mp3";
 iceThemeSong.src = "./Assets/Sound/Ice/IceStage1.mp3";
+finalThemeSong.src = "./Assets/Sound/FinalStage/HeartOfEnker(FinalStage).mp3"
 bossVictory.src = "./Assets/Sound/StageClear.mp3";
 enemyIsDamaged.src = "./Assets/Sound/Effects/enemyDamage.wav";
 bossVictory.load();
 introMusic.load();
 themeSong.load();
 iceThemeSong.load();
+finalThemeSong.load();
 enemyIsDamaged.load();
 //introMusic.play();
 introMusic.loop = true; 
