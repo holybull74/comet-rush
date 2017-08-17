@@ -49,11 +49,11 @@ function render()
 			frameIndex * 100, 0, 100, 100,		// Source rectangle.
 			player.x, player.y, 100, 100);	// Dest rectangle.
 
-				if(fireBoss.x <= 8700 &&  fireBoss.x >= 8400)
+				if(fireBoss.x <= 8800 &&  fireBoss.x >= 8400)
 			{
 				surface.font = "25px Arial";
 				surface.fillStyle = "White";
-				surface.fillText("Ok, remeber you move by pressing" , 200 , 450);
+				surface.fillText("Important: to move press" , 200 , 450);
 				surface.fillText("Left: A or left arrow" , 200 , 475);
 				surface.fillText("Right: D or right arrow" , 200 , 500);
 			}  	
@@ -123,19 +123,21 @@ function render()
                     iceBossATK[i].x, iceBossATK[i].y, 200, 150);
 				}
 
-			}  
-			//Drawing Final Boss
-			surface.drawImage(finalBoss.img,
-					          finalBoss.x, finalBoss.y, 300, 240);
-							  
-			//Drawing Final Boss Bullet
-			for (i = 0; i < finalBossBullet.length; i++)
-				{
-					surface.drawImage(finalBossBullet[i].img,
-					0,finalBossBulletFrameIndex * 65, 30, 65,
-                    finalBossBullet[i].x, finalBossBullet[i].y, 30, 65);
+			}
+			
+			if(!transitionToIceLevel && transitionToFinalStage)
+			{
+				//Drawing Final Boss
+				surface.drawImage(finalBoss.img,
+				finalBoss.x, finalBoss.y, 300, 240);
+								  
+				//Drawing Final Boss Bullet
+				for (i = 0; i < finalBossBullet.length; i++) {
+						surface.drawImage(finalBossBullet[i].img,
+						0,finalBossBulletFrameIndex * 65, 30, 65,
+						finalBossBullet[i].x, finalBossBullet[i].y, 30, 65);
 				}
-				
+			}
 			for (i = 0; i < bulletArray.length; i++)
 				{
 					surface.drawImage(bulletArray[i].img, frameIndex*64, 0, 65 , 30 , bulletArray[i].x, bulletArray[i].y, 65, 30);
@@ -163,36 +165,36 @@ function render()
 			surface.fillText("Timer: " + gameTimer , 700 , 25 );
 
 			// Tutorial texts
-			if(fireBoss.x <= 8300 &&  fireBoss.x >= 7600)
+			if(fireBoss.x <= 8350 &&  fireBoss.x >= 7550)
 			{
 				surface.font = "25px Arial";
 				surface.fillStyle = "White";
-				surface.fillText("Max if you forgot how to jump" , 400 , 450);
+				surface.fillText("Max remember, to jump" , 400 , 450);
 				surface.fillText("Press Space" , 400 , 475);
 			}  	
 			
-			if(fireBoss.x <= 7500 &&  fireBoss.x >= 7300)
+			if(fireBoss.x <= 7400 &&  fireBoss.x >= 7300)
 			{
 				surface.font = "25px Arial";
 				surface.fillStyle = "White";
-				surface.fillText("Some sort of elemental Xenoform" , 400 , 450);
-				surface.fillText("just shoot it with X or K" , 400 , 475);
+				surface.fillText("It's an elemental Xenoform!" , 400 , 450);
+				surface.fillText("To shoot press X or K" , 400 , 475);
 			}  	
 
 			if(fireBoss.x <= 7200 &&  fireBoss.x >= 6800)
 			{
 				surface.font = "25px Arial";
 				surface.fillStyle = "White";
-				surface.fillText("Killing a Xenoform will give you some points" , 400 , 450);
-				surface.fillText("...for some reason...." , 400 , 475);
+				surface.fillText("Killing a Xenoform will give you points" , 400 , 450);
+				surface.fillText("They are the enemy - do the earth a favour" , 400 , 475);
 			}  	
 
 			if(fireBoss.x <= 6700 &&  fireBoss.x >= 6500)
 			{
 				surface.font = "25px Arial";
 				surface.fillStyle = "White";
-				surface.fillText("Uhh look another one." , 400 , 450);
-				surface.fillText("Go get them points." , 400 , 475);
+				surface.fillText("Look, another one!" , 400 , 450);
+				surface.fillText("They deserve no mercy." , 400 , 475);
 			}  
 			
 			if(bossHealthBarDraw === true )
