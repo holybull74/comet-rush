@@ -26,7 +26,7 @@ var finalBossBullet = [];
 var finalBossBulletImg = new Image();
 finalBossBulletImg.src = "./Assets/Enemy/SentientShip/verticalBullet.png";
 
-var finalBoss={x:100,y:100,dir:1,img: imagesF[0],width:200,height:140,onground:true,health:10};
+var finalBoss={x:100,y:100,dir:1,img: imagesF[0],width:300,height:240,onground:true,health:10};
 
 var finalBossBulletFrameIndex = 0; 	// Index of the Boss sprite to display via drawImage.
 var finalBossBulletCurrentFrame = 0; 	// Counter for the Boss frames.
