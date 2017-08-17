@@ -110,7 +110,7 @@ function screenTransition(stageSelection)
                 }
             if(stageSelection === 2) // Load Final Stage
                 {
-
+					moveFinalBoss(); 
                 }
             
         }

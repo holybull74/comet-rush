@@ -124,7 +124,10 @@ function render()
 				}
 
 			}  
-			
+			//Drawing Final Boss
+			surface.drawImage(finalBoss.img,
+					          finalBoss.x, finalBoss.y, 300, 240);
+							  
 			
 			for (i = 0; i < bulletArray.length; i++)
 				{
