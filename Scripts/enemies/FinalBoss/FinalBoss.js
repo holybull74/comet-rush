@@ -5,6 +5,9 @@
 //var fireBossAlive = true;
 //var fadeTransition = 0;
 
+var BossLaser=document.createElement("audio");
+BossLaser.setAttribute("src","./Assets/Sound/Boss_Laser.wav");
+
 var countFinalBossBullet=0;
 //Fire boss array of images
 var imagesF = [new Image(), new Image(), new Image()];
@@ -54,7 +57,10 @@ function moveFinalBoss()
 				{						
 					finalBoss.img=imagesF[0];
 					countFinalBossBullet++;
-					if(countFinalBossBullet<4)createFinalBossBullet();
+					if(countFinalBossBullet<4)
+					{ BossLaser.play();
+					 createFinalBossBullet();
+					}
 				}
 			 if( vectorX < -144)
 				{
@@ -72,7 +78,10 @@ function moveFinalBoss()
 					
 					finalBoss.img=imagesF[0];
 					countFinalBossBullet++;
-					if(countFinalBossBullet<4)createFinalBossBullet();
+					if(countFinalBossBullet<4)
+					{ BossLaser.play();
+					 createFinalBossBullet();
+					}
 				}
 			else if(vectorX > 144)
 				{
