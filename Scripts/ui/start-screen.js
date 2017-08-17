@@ -62,6 +62,7 @@ var creditsImage = new Image();
 var cometImage = new Image();
 var backBtn=new Image();
 var instructBg=new Image();
+var creditBg=new Image();
 var soundBtn=new Image();
 var settingBg=new Image();
 var fireBossWarning = new Image();
@@ -98,6 +99,7 @@ creditsImage.src = "./Assets/UI/credits.png";
 cometImage.src = "./Assets/UI/fireball.png";
 backBtn.src="./Assets/UI/BackBtn.png";
 instructBg.src="./Assets/UI/Controls.png";
+creditBg.src="./Assets/UI/CreditBg.png";
 soundBtn.src="./Assets/UI/soundBtn.png";
 settingBg.src="./Assets/UI/settingBg.png";
 fireBossWarning.src = "./Assets/UI/WarningRedSpriteSheet.png";
@@ -134,7 +136,7 @@ playerOnGroundSound.load();
 playerTeleportSound.load();
 
 //credit image objects
-var creditBlock = { x: 600, y: 300, img: null };
+var creditBlock = { x: 450, y: 300, img: null };
 var creditBlockImg = new Image;
 creditBlockImg.src = "./Assets/UI/CreditBlock.jpg";
 creditBlock.img = creditBlockImg;
@@ -382,7 +384,7 @@ function fadeOut(menuChoice) //Fades out screen on click of either options
 			           
             clearInterval(fadeId3);
 			//timerId = setInterval(updateUI, 1000/frames);
-			surface.drawImage(bgImage, 0, backgroundY);
+			surface.drawImage(creditBg, 0, 0);
 			
 			
 			surface.drawImage(backBtn, uiButton[4].x, uiButton[4].y);
@@ -415,7 +417,7 @@ function fadeOut(menuChoice) //Fades out screen on click of either options
 function scrollCredits() {
    
    
-    if (creditBlock.y >= -400) {
+    if (creditBlock.y >= -650) {
         creditBlock.y -= 2;
 		
         //Draw Credits
