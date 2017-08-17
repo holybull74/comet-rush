@@ -309,7 +309,7 @@ function fireBossCollision()
 	{
 	if ((fireBossArm[i].x + SIZE > player.x ) && (fireBossArm[i].x <  player.x +  player.width+10)) {
        
-        if ((fireBossArm[i].y + SIZE >  player.y ) && (fireBossArm[i].y <  player.y +  player.height)) {
+        if ((fireBossArm[i].y + 60 >  player.y ) && (fireBossArm[i].y +40 <  player.y +  player.height)) {
 			fireBossArm.splice(i,1);
 			countR++;
 			if(countR==1){ player.damage++;player.health--;drain();}
