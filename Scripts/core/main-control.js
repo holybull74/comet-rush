@@ -87,38 +87,49 @@ function screenTransition(stageSelection)
     surface.fillRect(0, 0, canvas.width, canvas.height);
     transitionTime += 0.1;
 
-        if (transitionTime >= 5) 
-        {
-            if(stageSelection === 1) // Load stage 1 ice level
-                {
-                   
-                    clearInterval(fadeTransition);
-                    themeSong.pause();
-                    generateIceMap();
-                    createIceBears();
-                    createIceWalkers();              
-                    transitionToIceLevel = true;
-                    player.x = 300;
-                    player.y = 600;
-					if(playSounds)
-					{
-						iceThemeSong.play();
-						iceThemeSong.loop = true;
-					}
-                    transitionTime = 0.0;  
-                    stageArrivalTimer = 0;
-                    inTransition = false;                    
-                    arriveToStage();               
-
-                }
-            if(stageSelection === 2) // Load Final Stage
-                {
-					moveFinalBoss(); 
-					finalBossCollision();
-                }
-            
+    if (transitionTime >= 5) 
+    {
+        if(stageSelection === 1) // Load stage 1 ice level
+        {       
+            clearInterval(fadeTransition);
+            themeSong.pause();
+            generateIceMap();
+            createIceBears();
+            createIceWalkers();              
+            transitionToIceLevel = true;
+            player.x = 300;
+            player.y = 600;
+			if(playSounds)
+			{
+				iceThemeSong.play();
+				iceThemeSong.loop = true;
+			}
+            transitionTime = 0.0;  
+            stageArrivalTimer = 0;
+            inTransition = false;                    
+            arriveToStage();               
         }
-
+        if(stageSelection === 2) // Load Final Stage
+        {
+			clearInterval(fadeTransition);
+			iceThemeSong.pause();
+			generateFinalMap();
+			moveFinalBoss(); 
+			finalBossCollision();
+			transitionToFinalStage = true;
+			player.x = 300;
+			player.y = 600;
+			if(playSounds)
+			{
+				finalThemeSong.play();
+				finalThemeSong.loop = true;
+			}
+            transitionTime = 0.0;  
+            stageArrivalTimer = 0;
+            inTransition = false;                    
+            arriveToStage();
+        }
+    }
 }
 
 // New
