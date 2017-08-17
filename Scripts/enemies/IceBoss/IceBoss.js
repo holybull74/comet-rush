@@ -343,9 +343,9 @@ function iceBossCollision()
 	}
 	for (i = 0; i < iceBossATK.length; i++)
 	{
-	if ((iceBossATK[i].x + SIZE > player.x ) && (iceBossATK[i].x <  player.x +  player.width+10)) {
+	if ((iceBossATK[i].x + 200 > player.x ) && (iceBossATK[i].x+45 <  player.x +  player.width+10)) {
        
-        if ((iceBossATK[i].y + SIZE >  player.y ) && (iceBossATK[i].y <  player.y +  player.height)) {
+        if ((iceBossATK[i].y + SIZE +50 >  player.y ) && (iceBossATK[i].y <  player.y +  player.height)) {
 			iceBossATK.splice(i,1);
 			countR++;
 			if(countR==1){ player.damage++;player.health--;drain();}
