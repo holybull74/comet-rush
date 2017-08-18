@@ -72,22 +72,24 @@ function update() {
 
 function teleportOut()
 {    
-    divHealthBar.style.visibility = "hidden";
-   	divHealthP.style.visibility = "hidden";
+    
     frameIndex = 0;
     player.img = images[14];        
     playerTeleportSound.play();
     setTimeout(fadeInterval, 667);
+    setTimeout(divHealthBarVisibility,2500);
 }
 
 function fadeInterval()
 {
-  
+    
     stageArrivalDrawPermit = false;
     clearInterval(playerAnimationIntervalID);
     stageArrival = true;
     stageDeparture = false;
-    inTransition = true;        
+    inTransition = true;   
+    divHealthBar.style.visibility = "hidden";
+   	divHealthP.style.visibility = "hidden";      
     fadeTransition = setInterval(function(){screenTransition()}, 1000/frames);
 }
 
@@ -164,4 +166,10 @@ function Game_Timer()
 {
 	gameTimer++;
 	setTimeout(Game_Timer, 1000);
+}
+
+function divHealthBarVisibility()
+{
+   divHealthBar.style.visibility = "visible";
+   divHealthP.style.visibility = "visible";
 }

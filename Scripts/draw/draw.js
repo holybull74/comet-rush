@@ -62,8 +62,7 @@ function render()
 		if(maxKenHealth)
 			{
 				surface.drawImage(playerHealthFrame, 0,0);
-				divHealthBar.style.visibility = "visible";
-   				divHealthP.style.visibility = "visible";
+				
 				
 			}				
 		//Drawing FireBoss
