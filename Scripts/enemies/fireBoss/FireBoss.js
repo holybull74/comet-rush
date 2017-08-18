@@ -284,7 +284,10 @@ function fireBossCollision()
 		bossVictory.play();
 		bossHealthBarDraw = false;
 		end = false;
+		
 		setTimeout(teleportOut, 5000);
+		regenHealth();
+		
 	}
 	if(player.health<=0)
 	{

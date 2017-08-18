@@ -1,6 +1,8 @@
 /**
  * Created by andre on 7/10/2017.
  */
+var healthEffect=document.createElement("audio");
+healthEffect.setAttribute("src","./Assets/Sound/healthUP.wav");
 
 var width = 100;
 
@@ -40,4 +42,10 @@ function drain()
         }
     }
 
-
+function regenHealth()
+{
+	width=100;
+	divHealthP.style.width=(width*3)+'px';
+	divHealthP.innerHTML=width+'%';
+	healthEffect.play();
+}
