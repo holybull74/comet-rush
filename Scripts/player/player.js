@@ -118,7 +118,7 @@ function playerAnimationUpdate()
 function scrollMap()
 {
 	//Scroll the map if player.x>= 300 & isPressed == True
-	if (playerAlive && isPressed && player.x >= 300)
+	if (playerAlive && isPressed && player.x >= 300 && !transitionToFinalStage)
 	{
 		for (var row = 0; row < map.length; row++)
 		{
