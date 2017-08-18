@@ -29,6 +29,7 @@ var finalThemeSong = new Audio();
 var bossVictory = new Audio();
 var enemyIsDamaged = new Audio();
 var andre = new Audio();
+var caleb = new Audio();
 
 // Player's sound effects
 var jumpSound = new Audio();
@@ -38,7 +39,7 @@ var playerDamagedSound = new Audio();
 var playerOnGroundSound = new Audio();
 var playerTeleportSound = new Audio();
 var andre = new Audio();
-
+var caleb = new Audio();
 
 //Mouse variable initialization
 var mouseX;
@@ -115,7 +116,8 @@ iceThemeSong.src = "./Assets/Sound/Ice/IceStage1.mp3";
 finalThemeSong.src = "./Assets/Sound/FinalStage/HeartOfEnker(FinalStage).mp3"
 bossVictory.src = "./Assets/Sound/StageClear.mp3";
 enemyIsDamaged.src = "./Assets/Sound/Effects/enemyDamage.wav";
-andre.src = "./Assets/Sound/FinalStage/DeepInSpace(FinalStage).mp3";
+andre.src = "./Assets/Sound/EvilLaugh.mp3";
+caleb.src = "./Assets/Sound/FinalStage/DeepInSpace(FinalStage).mp3";
 bossVictory.load();
 introMusic.load();
 themeSong.load();

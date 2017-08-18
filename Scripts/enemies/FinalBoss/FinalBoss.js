@@ -27,7 +27,7 @@ var finalBossBullet = [];
 var finalBossBulletImg = new Image();
 finalBossBulletImg.src = "./Assets/Enemy/SentientShip/verticalBullet.png";
 
-var finalBoss={x:100,y:100,dir:1,img: imagesF[0],width:300,height:240,onground:true,health:10};
+var finalBoss={x:500,y:100,dir:1,img: imagesF[0],width:300,height:240,onground:true,health:10};
 
 var finalBossBulletFrameIndex = 0; 	// Index of the Boss sprite to display via drawImage.
 var finalBossBulletCurrentFrame = 0; 	// Counter for the Boss frames.
@@ -56,7 +56,7 @@ function moveFinalBoss()
 				{						
 					finalBoss.img=imagesF[0];
 					countFinalBossBullet++;
-					if(countFinalBossBullet<4)
+					if(countFinalBossBullet==1)
 					{ BossLaser.play();
 					 createFinalBossBullet();
 					}
@@ -77,7 +77,7 @@ function moveFinalBoss()
 					
 					finalBoss.img=imagesF[0];
 					countFinalBossBullet++;
-					if(countFinalBossBullet<4)
+					if(countFinalBossBullet==1)
 					{ BossLaser.play();
 					 createFinalBossBullet();
 					}
@@ -195,7 +195,12 @@ function finalBossCollision()
 			bulletArray.splice(i,1);
 			enemyIsDamaged.play();
 			countB++;
-			if(countB==1){finalBoss.health--; healthBarImage.width-=50;}
+			if(countB==1)
+			{
+				finalBoss.health--; 
+				healthBarImage.width-=50;
+				if(healthBarImage.width==250)regenHealth();
+			}
         }
     }else{
 		countB=0;
