@@ -124,7 +124,7 @@ function screenTransition()
             generateFinalMap();
             finalArea = true;			
 			transitionToFinalStage = true;
-			player.x = 300;
+			player.x = 100;
 			player.y = 600;
 			if(playSounds)
 			{
