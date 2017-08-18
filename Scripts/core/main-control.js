@@ -133,7 +133,8 @@ function screenTransition()
 			}
             transitionTime = 0.0;  
             stageArrivalTimer = 0;
-            inTransition = false;                    
+            inTransition = false;    
+            end = true;                
             arriveToStage();
         }
     }
