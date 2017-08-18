@@ -18,7 +18,7 @@ imagesF[2].src = "./Assets/Enemy/SentientShip/SentientShipL.png";
 
 var healthBarImage=new Image();
 var healthBarFrameImg = new Image();
-healthBarImage.src="./Assets/UI/HealthFire.png";
+healthBarImage.src="./Assets/UI/HealthFinal.png";
 healthBarFrameImg.src = "./Assets/UI/HealthFrame.png";
 healthBarImage.width=500;
 healthBarImage.height=40;
@@ -47,6 +47,7 @@ function moveFinalBoss()
 {
 	if((isPressed==false&&end==true)||(isPressed==true&&end==true))
 	{
+		bossHealthBarDraw=true;
 		//Distance from the center of the player to the center of the boss on X
 		var vectorX =  (player.x + SIZE/2) - (finalBoss.x + finalBoss.width/2);
 		
