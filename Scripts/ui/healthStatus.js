@@ -5,6 +5,7 @@ var healthEffect=document.createElement("audio");
 healthEffect.setAttribute("src","./Assets/Sound/healthUP.wav");
 
 var width = 100;
+var regenWidth = 100;
 
 function drain()
     {
@@ -44,8 +45,8 @@ function drain()
 
 function regenHealth()
 {
-	width=100;
-	divHealthP.style.width=(width*3)+'px';
-	divHealthP.innerHTML=width+'%';
+	width = 100;
+	divHealthP.style.width=(width * 3.4) + "px";
+	divHealthP.innerHTML=width + '%';
 	healthEffect.play();
 }
