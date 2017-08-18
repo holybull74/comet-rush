@@ -329,7 +329,7 @@ function iceBossCollision()
 		audioIceBoss.pause();
 		bossVictory.play();
 		bossHealthBarDraw = false;
-		end = false;
+		end = true;
 		stageSelection = 2;
 		setTimeout(teleportOut, 5000);
        
