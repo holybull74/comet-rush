@@ -5,7 +5,15 @@ var healthEffect=document.createElement("audio");
 healthEffect.setAttribute("src","./Assets/Sound/healthUP.wav");
 
 var width = 100;
-var regenWidth = 100;
+
+function regenHealth()
+{
+	width = 100;
+	divHealthP.style.width = (width * 3.4) + "px";
+	divHealthP.innerHTML = width + '%';
+	divHealthP.style.backgroundColor = "green";
+	healthEffect.play();
+}
 
 function drain()
     {
@@ -25,13 +33,13 @@ function drain()
                     divHealthP.style.backgroundColor = "red";
                 }
             playerDamagedSound.play();
-            divHealthP.style.width = (width * 3) + 'px';
+            divHealthP.style.width = (width * 3.4) + "px";
             divHealthP.innerHTML = width * 1 + '%';
         }
         else
         {
             width -= 20;
-            divHealthP.style.width = (width * 3) + 'px';
+            divHealthP.style.width = (width * 3.4) + "px";
             divHealthP.innerHTML = width * 1 + '%';
             player.img = images[12];
 			playerAlive = false;
@@ -43,10 +51,4 @@ function drain()
         }
     }
 
-function regenHealth()
-{
-	width = 100;
-	divHealthP.style.width=(width * 3.4) + "px";
-	divHealthP.innerHTML=width + '%';
-	healthEffect.play();
-}
+
