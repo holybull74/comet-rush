@@ -53,7 +53,7 @@ function render()
 			{
 				surface.font = "25px Arial";
 				surface.fillStyle = "White";
-				surface.fillText("Important: to move press" , 200 , 450);
+				surface.fillText("Hey Max lets do some streches, to move press" , 200 , 450);
 				surface.fillText("Left: A or left arrow" , 200 , 475);
 				surface.fillText("Right: D or right arrow" , 200 , 500);
 			}  	
@@ -125,7 +125,7 @@ function render()
 
 			}
 			
-			if(!transitionToIceLevel && transitionToFinalStage)
+			if(transitionToIceLevel && transitionToFinalStage)
 			{
 				//Drawing Final Boss
 				surface.drawImage(finalBoss.img,
@@ -169,7 +169,7 @@ function render()
 			{
 				surface.font = "25px Arial";
 				surface.fillStyle = "White";
-				surface.fillText("Max remember, to jump" , 400 , 450);
+				surface.fillText("By the way, if you forgot how to jump press" , 400 , 450);
 				surface.fillText("Press Space" , 400 , 475);
 			}  	
 			
@@ -177,7 +177,7 @@ function render()
 			{
 				surface.font = "25px Arial";
 				surface.fillStyle = "White";
-				surface.fillText("It's an elemental Xenoform!" , 400 , 450);
+				surface.fillText("What! an elemental Xenoform! lets kill it" , 400 , 450);
 				surface.fillText("To shoot press X or K" , 400 , 475);
 			}  	
 
@@ -186,7 +186,7 @@ function render()
 				surface.font = "25px Arial";
 				surface.fillStyle = "White";
 				surface.fillText("Killing a Xenoform will give you points" , 400 , 450);
-				surface.fillText("They are the enemy - do the earth a favour" , 400 , 475);
+				surface.fillText("For some reason..." , 400 , 475);
 			}  	
 
 			if(fireBoss.x <= 6700 &&  fireBoss.x >= 6500)
@@ -194,7 +194,7 @@ function render()
 				surface.font = "25px Arial";
 				surface.fillStyle = "White";
 				surface.fillText("Look, another one!" , 400 , 450);
-				surface.fillText("They deserve no mercy." , 400 , 475);
+				surface.fillText("Go get them points." , 400 , 475);
 			}  
 			
 			if(bossHealthBarDraw === true )

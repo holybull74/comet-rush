@@ -1,5 +1,5 @@
-const ROWS = 7;
-const COLS = 291;
+ROWS = 7;
+COLS = 291;
 
 /*//crating objects for all map tiles
 var topLeft = new Image();

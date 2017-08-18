@@ -321,11 +321,18 @@ function iceBossCollision()
 	}
 	if(iceBoss.health<=0 && iceBossAlive)
 	{
-		score += 100;
 		iceBossAlive = false;
-		audioBoss.pause();
-        bossVictory.play();
-       // setTimeout(toIceLevel, 1000);
+		score += 100;
+		iceBoss.img = images[12];
+		stageDeparture = true;
+		flashCount = 0;
+		audioIceBoss.pause();
+		bossVictory.play();
+		bossHealthBarDraw = false;
+		end = false;
+		stageSelection = 2;
+		setTimeout(teleportOut, 5000);
+       
 	}
 	for (i = 0; i < bulletArray.length; i++)
 	{

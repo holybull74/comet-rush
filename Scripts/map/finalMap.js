@@ -1,5 +1,5 @@
-const ROWS = 5;
-const COLS = 14;
+FINALROWS = 5;
+FINALCOLS = 14;
 
 function generateFinalMap()
 {
@@ -36,9 +36,9 @@ function generateFinalMap()
 		[2 , 4, 6,0, 0, 0,0, 0, 0,0, 2, 4, 4,6]
 	];
 
-    for (var row = 0; row < ROWS; row++)
+    for (var row = 0; row < FINALROWS; row++)
     {
-        for (var col = 0; col < COLS; col++)
+        for (var col = 0; col < FINALCOLS; col++)
         {
             var tempTile = {};
             tempTile.x=col*SIZE;

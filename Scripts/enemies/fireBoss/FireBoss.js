@@ -284,12 +284,13 @@ function fireBossCollision()
 		bossVictory.play();
 		bossHealthBarDraw = false;
 		end = false;
+		stageSelection = 1;
 		setTimeout(teleportOut, 5000);
 	}
-	if(player.health<=0)
+	/*if(player.health<=0)
 	{
 		//alert("GameOver");
-	}
+	}*/
 	for (i = 0; i < bulletArray.length; i++)
 	{
 	if ((bulletArray[i].x + 10 > fireBoss.x ) && (bulletArray[i].x < fireBoss.x + fireBoss.width+10)) {

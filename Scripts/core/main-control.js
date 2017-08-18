@@ -1,13 +1,16 @@
 var inTransition = false;
+var finalArea = false;
 var transitionToIceLevel = false;
 var transitionToFinalStage = false;
 var gameOver = false;
 var transitionTime = 0.0;
 var gameTimer = 0;
 var mainUpdateInterval;
+var stageSelection = 0;
 var divHealthBar = document.getElementById("healthBar");
 var divHealthP = document.getElementById("healthPercentage");
 var maxKenHealth = false;
+
 
 function initGame() {   
     maxKenHealth = true; 
@@ -56,7 +59,12 @@ function update() {
              moveiceBoss();
 	         iceBossCollision();
         }
-      
+      if(finalArea)
+        {
+            moveFinalBoss(); 
+			finalBossCollision();
+        } 
+
    
     render();
     
@@ -78,10 +86,10 @@ function fadeInterval()
     stageArrival = true;
     stageDeparture = false;
     inTransition = true;        
-    fadeTransition = setInterval(function(){screenTransition(1)}, 1000/frames);
+    fadeTransition = setInterval(function(){screenTransition()}, 1000/frames);
 }
 
-function screenTransition(stageSelection)
+function screenTransition()
 {
     surface.fillStyle = "rgba(0,0,0, 0.2)";
     surface.fillRect(0, 0, canvas.width, canvas.height);
@@ -113,12 +121,11 @@ function screenTransition(stageSelection)
         {
 			clearInterval(fadeTransition);
 			iceThemeSong.pause();
-			generateFinalMap();
-			moveFinalBoss(); 
-			finalBossCollision();
+            generateFinalMap();
+            finalArea = true;			
 			transitionToFinalStage = true;
-			player.x = 300;
-			player.y = 600;
+			player.x = 0;
+			player.y = 200;
 			if(playSounds)
 			{
 				finalThemeSong.play();

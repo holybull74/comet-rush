@@ -1,7 +1,7 @@
 //Map
 const SIZE=100;
-const FROWS = 4;
-const FCOLS = 85;
+FROWS = 4;
+FCOLS = 85;
 
 // Indexes and counters for animations
 var frameLavaIndex = 0; 	// Index of the Lava sprite to display via drawImage.
