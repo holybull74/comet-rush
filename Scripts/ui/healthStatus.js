@@ -11,6 +11,7 @@ function regenHealth()
 	width = 100;
 	divHealthP.style.width = (width * 3.4) + "px";
 	divHealthP.innerHTML = width + '%';
+	divHealthP.style.backgroundColor = "green";
 	healthEffect.play();
 }
 
