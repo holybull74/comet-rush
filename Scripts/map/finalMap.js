@@ -21,7 +21,7 @@ function generateFinalMap()
 	
     background.src = "./Assets/LevelTiles/FinalStage/backgroundSprite.png";
 	
-    healthBarImage.src="./Assets/UI/HealthFire.png";
+    healthBarImage.src="./Assets/UI/HealthFinal.png";
 	
     healthBarImage.width=500;
 	

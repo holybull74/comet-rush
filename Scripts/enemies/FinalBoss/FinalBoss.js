@@ -18,10 +18,7 @@ imagesF[2].src = "./Assets/Enemy/SentientShip/SentientShipL.png";
 
 var healthBarImage=new Image();
 var healthBarFrameImg = new Image();
-healthBarImage.src="./Assets/UI/HealthFinal.png";
-healthBarFrameImg.src = "./Assets/UI/HealthFrame.png";
-healthBarImage.width=500;
-healthBarImage.height=40;
+healthBarFrameImg.src = "./Assets/UI/HealthFrame.png";  
 healthBarFrameImg.width = 500;
 healthBarFrameImg.height = 40;
 
