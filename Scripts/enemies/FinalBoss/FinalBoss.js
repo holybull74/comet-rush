@@ -5,6 +5,8 @@
 //var fireBossAlive = true;
 //var fadeTransition = 0;
 
+var finalBossAlive = true;
+
 var BossLaser=document.createElement("audio");
 BossLaser.setAttribute("src","./Assets/Sound/Boss_Laser.wav");
 
@@ -41,7 +43,7 @@ function updateF()
 
 function moveFinalBoss()
 {
-	if((isPressed==false&&end==true)||(isPressed==true&&end==true))
+	if(((isPressed==false&&end==true)||(isPressed==true&&end==true))&&finalBossAlive)
 	{
 		bossHealthBarDraw=true;
 		//Distance from the center of the player to the center of the boss on X
@@ -116,10 +118,11 @@ function moveFinalBoss()
 
 function createFinalBossBullet()
 {
-	
+	if(finalBossAlive)
+	{
 	
 		var tempBullet = {x: (finalBoss.x +Math.floor(Math.random()*100+1)), y:finalBoss.y +150 ,img:finalBossBulletImg, bulletLife: 700 , speedDir: 0 , speed: 60};  
-	
+	}
 		 
 	finalBossBullet.push(tempBullet);
 }
@@ -128,7 +131,7 @@ function moveFinalBossBullet()
 {
 	var i = 0; 
 
-	while(finalBossBullet[i] != undefined)
+	while(finalBossBullet[i] != undefined &&finalBossAlive)
 	{
 		if (finalBossBullet[i].bulletLife <= 0 || finalBossBullet[i].x < 0 )
 		{
@@ -177,16 +180,12 @@ function finalBossCollision()
 	}
 	if(finalBoss.health<=0 )
 	{
-		/*score += 100;
+		finalBossAlive=false;
 		finalBoss.img = images[12];
-		stageDeparture = true;
-		flashCount = 0;
-		fireBossAlive = false;
-		audioBoss.pause();
+		score += 100;		
+		finalThemeSong.pause();
 		bossVictory.play();
-		bossHealthBarDraw = false;
-		end = false;
-		setTimeout(teleportOut, 5000);*/
+		setTimeout(gameWin, 5000);
 	}
 	for (i = 0; i < bulletArray.length; i++)
 	{

@@ -213,3 +213,10 @@ function renderGameOver()
    	divHealthP.style.visibility = "hidden";
     surface.drawImage(gameOverbg,0,0, 1400, 900);
 }
+
+function renderYouWin()
+{
+	divHealthBar.style.visibility = "hidden";
+   	divHealthP.style.visibility = "hidden";
+    surface.drawImage(gameWinbg,0,0, 1400, 900);
+}

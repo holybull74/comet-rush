@@ -67,6 +67,9 @@ background.src = "./Assets/LevelTiles/FireLevel/backgroundSprite.png";
 var gameOverbg = new Image();
 gameOverbg.src = "./Assets/UI/GameOver.png";
 
+var gameWinbg = new Image();
+gameWinbg.src = "./Assets/UI/VictoryScreen.png";
+
 var rightSideWithCorner = new Image();
 rightSideWithCorner.src = "./Assets/LevelTiles/FireLevel/rightSideWithCorner.png";
 

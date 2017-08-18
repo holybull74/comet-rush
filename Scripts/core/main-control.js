@@ -157,6 +157,13 @@ function gameEnd()
 
 }
 
+function gameWin()
+{  
+   clearInterval(mainUpdateInterval);
+   renderYouWin();
+   andre.play();
+}
+
 function closeTab()
 {   
     open(location, '_self').close(); 
