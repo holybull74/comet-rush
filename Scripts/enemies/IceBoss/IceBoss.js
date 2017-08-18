@@ -333,6 +333,10 @@ function iceBossCollision()
 		stageSelection = 2;
 		setTimeout(teleportOut, 5000);
        
+		audioBoss.pause();
+        bossVictory.play();
+		regenHealth();
+       // setTimeout(toIceLevel, 1000);
 	}
 	for (i = 0; i < bulletArray.length; i++)
 	{
