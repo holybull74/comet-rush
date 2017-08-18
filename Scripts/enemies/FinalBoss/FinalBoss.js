@@ -16,11 +16,10 @@ imagesF[1].src = "./Assets/Enemy/SentientShip/SentientShipR.png";
 imagesF[2].src = "./Assets/Enemy/SentientShip/SentientShipL.png";
 
 
-var healthBarImage=new Image();
-var healthBarFrameImg = new Image();
-healthBarFrameImg.src = "./Assets/UI/HealthFrame.png";  
-healthBarFrameImg.width = 500;
-healthBarFrameImg.height = 40;
+
+//healthBarFrameImg.src = "./Assets/UI/HealthFrame.png";  
+//healthBarFrameImg.width = 500;
+//healthBarFrameImg.height = 40;
 
 var finalBossBullet = [];
 var finalBossBulletImg = new Image();
