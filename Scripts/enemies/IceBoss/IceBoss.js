@@ -99,7 +99,7 @@ function moveiceBoss()
 			textDraw=false;		
 		}
 	}	
-	if((isPressed==false&&end==true)||(isPressed==true&&end==true))
+	if(((isPressed==false&&end==true)||(isPressed==true&&end==true)) && iceBossAlive)
 	{
 		//Distance from the center of the player to the center of the boss on X
 		var vectorX =  (player.x + SIZE/2) - (iceBoss.x + iceBoss.width/2);
@@ -242,12 +242,12 @@ function moveiceBoss()
 function createIceBossATK()
 {
 	
-	if(iceBoss.img === imagesC[8])
+	if(iceBoss.img === imagesC[8] && iceBossAlive)
 	{
 		var tempBullet = {x: (iceBoss.x ), y:iceBoss.y ,img:bossIceATK[0], bulletLife: 700 , speedDir: 0 , speed: 60};  
 	
 	}
-	else if(iceBoss.img === imagesC[9])
+	else if(iceBoss.img === imagesC[9] && iceBossAlive)
 		{
 			var tempBullet = {x: (iceBoss.x), y:iceBoss.y  ,img:bossIceATK[1], bulletLife: 700 , speedDir: 0, speed: 60};  
 		
@@ -260,7 +260,7 @@ function moveIceBossATK()
 {
 	var i = 0; 
 
-	while(iceBossATK[i] != undefined)
+	while(iceBossATK[i] != undefined && iceBossAlive)
 	{
 		if (iceBossATK[i].bulletLife <= 0 || iceBossATK[i].x < 0 )
 		{
