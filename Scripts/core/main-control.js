@@ -72,6 +72,8 @@ function update() {
 
 function teleportOut()
 {    
+    divHealthBar.style.visibility = "hidden";
+   	divHealthP.style.visibility = "hidden";
     frameIndex = 0;
     player.img = images[14];        
     playerTeleportSound.play();
