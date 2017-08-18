@@ -42,7 +42,7 @@ function generateFinalMap()
         {
             var tempTile = {};
             tempTile.x=col*SIZE;
-            tempTile.y=(2+row)*SIZE;
+            tempTile.y=(4+row)*SIZE;
             tempTile.aRock=false; //If the image is a tile
             tempTile.empty=false; //If there is an empty image
             tempTile.lava=false; // If the image is lava

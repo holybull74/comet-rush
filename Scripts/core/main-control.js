@@ -124,8 +124,8 @@ function screenTransition()
             generateFinalMap();
             finalArea = true;			
 			transitionToFinalStage = true;
-			player.x = 0;
-			player.y = 200;
+			player.x = 300;
+			player.y = 600;
 			if(playSounds)
 			{
 				finalThemeSong.play();
